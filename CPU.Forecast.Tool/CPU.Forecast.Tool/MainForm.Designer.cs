@@ -28,16 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraEditors.TileItemElement tileItemElement10 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement1 = new DevExpress.XtraEditors.TileItemElement();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            DevExpress.XtraEditors.TileItemElement tileItemElement11 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement12 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement13 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement14 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement15 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement16 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement17 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement18 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement2 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement3 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement4 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement5 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement6 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement7 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement8 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement9 = new DevExpress.XtraEditors.TileItemElement();
             this.TableMainContent = new System.Windows.Forms.TableLayoutPanel();
             this.tileBar2 = new DevExpress.XtraBars.Navigation.TileBar();
             this.btnNewGroup = new DevExpress.XtraBars.Navigation.TileBarGroup();
@@ -69,6 +69,10 @@
             this.colModel = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPart = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colQuantity = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumn1 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn2 = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumn3 = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tpMaximunCost = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.dgvMaximun = new DevExpress.XtraGrid.GridControl();
             this.gvMaximun = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -86,13 +90,21 @@
             this.gvPlan = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colModelPlan = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colPlan = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.tpMenorCosto = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.tsBotton = new System.Windows.Forms.ToolStrip();
+            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridView3 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridView4 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridView5 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.button1 = new System.Windows.Forms.Button();
             this.TableMainContent.SuspendLayout();
             this.tsTopMain.SuspendLayout();
             this.PanelPrincipal.SuspendLayout();
             this.tpTypeDevice.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTypeDevices)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvTypeDevices)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.tpMaximunCost.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMaximun)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvMaximun)).BeginInit();
@@ -102,6 +114,12 @@
             this.tpPlans.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlan)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvPlan)).BeginInit();
+            this.tpMenorCosto.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView5)).BeginInit();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // TableMainContent
@@ -160,9 +178,9 @@
             this.btnNew.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(45)))), ((int)(((byte)(54)))));
             this.btnNew.AppearanceItem.Normal.Options.UseBackColor = true;
             this.btnNew.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement10.Image = ((System.Drawing.Image)(resources.GetObject("tileItemElement10.Image")));
-            tileItemElement10.Text = "New";
-            this.btnNew.Elements.Add(tileItemElement10);
+            tileItemElement1.Image = ((System.Drawing.Image)(resources.GetObject("tileItemElement1.Image")));
+            tileItemElement1.Text = "New";
+            this.btnNew.Elements.Add(tileItemElement1);
             this.btnNew.Id = 0;
             this.btnNew.ItemSize = DevExpress.XtraBars.Navigation.TileBarItemSize.Medium;
             this.btnNew.Name = "btnNew";
@@ -178,9 +196,9 @@
             this.btnUpdate.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(45)))), ((int)(((byte)(54)))));
             this.btnUpdate.AppearanceItem.Normal.Options.UseBackColor = true;
             this.btnUpdate.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement11.Image = ((System.Drawing.Image)(resources.GetObject("tileItemElement11.Image")));
-            tileItemElement11.Text = "Update";
-            this.btnUpdate.Elements.Add(tileItemElement11);
+            tileItemElement2.Image = ((System.Drawing.Image)(resources.GetObject("tileItemElement2.Image")));
+            tileItemElement2.Text = "Update";
+            this.btnUpdate.Elements.Add(tileItemElement2);
             this.btnUpdate.Id = 1;
             this.btnUpdate.ItemSize = DevExpress.XtraBars.Navigation.TileBarItemSize.Medium;
             this.btnUpdate.Name = "btnUpdate";
@@ -196,9 +214,9 @@
             this.btnDelete.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(45)))), ((int)(((byte)(54)))));
             this.btnDelete.AppearanceItem.Normal.Options.UseBackColor = true;
             this.btnDelete.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement12.Image = ((System.Drawing.Image)(resources.GetObject("tileItemElement12.Image")));
-            tileItemElement12.Text = "Delete";
-            this.btnDelete.Elements.Add(tileItemElement12);
+            tileItemElement3.Image = ((System.Drawing.Image)(resources.GetObject("tileItemElement3.Image")));
+            tileItemElement3.Text = "Delete";
+            this.btnDelete.Elements.Add(tileItemElement3);
             this.btnDelete.Id = 2;
             this.btnDelete.ItemSize = DevExpress.XtraBars.Navigation.TileBarItemSize.Medium;
             this.btnDelete.Name = "btnDelete";
@@ -214,9 +232,9 @@
             this.tbLoad.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(45)))), ((int)(((byte)(54)))));
             this.tbLoad.AppearanceItem.Normal.Options.UseBackColor = true;
             this.tbLoad.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement13.Image = ((System.Drawing.Image)(resources.GetObject("tileItemElement13.Image")));
-            tileItemElement13.Text = "Load";
-            this.tbLoad.Elements.Add(tileItemElement13);
+            tileItemElement4.Image = ((System.Drawing.Image)(resources.GetObject("tileItemElement4.Image")));
+            tileItemElement4.Text = "Load";
+            this.tbLoad.Elements.Add(tileItemElement4);
             this.tbLoad.Id = 4;
             this.tbLoad.ItemSize = DevExpress.XtraBars.Navigation.TileBarItemSize.Medium;
             this.tbLoad.Name = "tbLoad";
@@ -255,12 +273,12 @@
             this.tbTypeDevices.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(115)))), ((int)(((byte)(128)))));
             this.tbTypeDevices.AppearanceItem.Normal.Options.UseBackColor = true;
             this.tbTypeDevices.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement14.Image = ((System.Drawing.Image)(resources.GetObject("tileItemElement14.Image")));
-            tileItemElement14.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleLeft;
-            tileItemElement14.ImageToTextAlignment = DevExpress.XtraEditors.TileControlImageToTextAlignment.Left;
-            tileItemElement14.Text = "Types of  Devices";
-            tileItemElement14.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            this.tbTypeDevices.Elements.Add(tileItemElement14);
+            tileItemElement5.Image = ((System.Drawing.Image)(resources.GetObject("tileItemElement5.Image")));
+            tileItemElement5.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleLeft;
+            tileItemElement5.ImageToTextAlignment = DevExpress.XtraEditors.TileControlImageToTextAlignment.Left;
+            tileItemElement5.Text = "Types of  Devices";
+            tileItemElement5.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            this.tbTypeDevices.Elements.Add(tileItemElement5);
             this.tbTypeDevices.Id = 4;
             this.tbTypeDevices.ItemSize = DevExpress.XtraBars.Navigation.TileBarItemSize.Wide;
             this.tbTypeDevices.Name = "tbTypeDevices";
@@ -272,9 +290,9 @@
             this.tbMaximunCosts.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(86)))), ((int)(((byte)(110)))), ((int)(((byte)(117)))));
             this.tbMaximunCosts.AppearanceItem.Normal.Options.UseBackColor = true;
             this.tbMaximunCosts.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement15.Text = "Maximum Costs";
-            tileItemElement15.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            this.tbMaximunCosts.Elements.Add(tileItemElement15);
+            tileItemElement6.Text = "Maximum Costs";
+            tileItemElement6.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            this.tbMaximunCosts.Elements.Add(tileItemElement6);
             this.tbMaximunCosts.Id = 8;
             this.tbMaximunCosts.ItemSize = DevExpress.XtraBars.Navigation.TileBarItemSize.Wide;
             this.tbMaximunCosts.Name = "tbMaximunCosts";
@@ -291,9 +309,9 @@
             this.tbMaintence.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(45)))), ((int)(((byte)(54)))));
             this.tbMaintence.AppearanceItem.Normal.Options.UseBackColor = true;
             this.tbMaintence.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement16.Text = "Components Maintenance";
-            tileItemElement16.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            this.tbMaintence.Elements.Add(tileItemElement16);
+            tileItemElement7.Text = "Components Maintenance";
+            tileItemElement7.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            this.tbMaintence.Elements.Add(tileItemElement7);
             this.tbMaintence.Id = 5;
             this.tbMaintence.ItemSize = DevExpress.XtraBars.Navigation.TileBarItemSize.Wide;
             this.tbMaintence.Name = "tbMaintence";
@@ -311,9 +329,9 @@
             this.tbPlans.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(140)))), ((int)(((byte)(104)))));
             this.tbPlans.AppearanceItem.Normal.Options.UseBackColor = true;
             this.tbPlans.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement17.Text = "Plans by Model";
-            tileItemElement17.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            this.tbPlans.Elements.Add(tileItemElement17);
+            tileItemElement8.Text = "Plans by Model";
+            tileItemElement8.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            this.tbPlans.Elements.Add(tileItemElement8);
             this.tbPlans.Id = 7;
             this.tbPlans.ItemSize = DevExpress.XtraBars.Navigation.TileBarItemSize.Wide;
             this.tbPlans.Name = "tbPlans";
@@ -324,9 +342,9 @@
             this.tbEstimate.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(98)))), ((int)(((byte)(118)))));
             this.tbEstimate.AppearanceItem.Normal.Options.UseBackColor = true;
             this.tbEstimate.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement18.Text = "Estimate";
-            tileItemElement18.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            this.tbEstimate.Elements.Add(tileItemElement18);
+            tileItemElement9.Text = "Estimate";
+            tileItemElement9.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            this.tbEstimate.Elements.Add(tileItemElement9);
             this.tbEstimate.Id = 11;
             this.tbEstimate.ItemSize = DevExpress.XtraBars.Navigation.TileBarItemSize.Wide;
             this.tbEstimate.Name = "tbEstimate";
@@ -372,6 +390,7 @@
             this.PanelPrincipal.Controls.Add(this.tpMaximunCost);
             this.PanelPrincipal.Controls.Add(this.tpMaintenceCompo);
             this.PanelPrincipal.Controls.Add(this.tpPlans);
+            this.PanelPrincipal.Controls.Add(this.tpMenorCosto);
             this.PanelPrincipal.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PanelPrincipal.ForeColor = System.Drawing.Color.Peru;
             this.PanelPrincipal.Location = new System.Drawing.Point(8, 153);
@@ -380,10 +399,11 @@
             this.tpTypeDevice,
             this.tpMaximunCost,
             this.tpMaintenceCompo,
-            this.tpPlans});
+            this.tpPlans,
+            this.tpMenorCosto});
             this.PanelPrincipal.RegularSize = new System.Drawing.Size(888, 341);
-            this.PanelPrincipal.SelectedPage = this.tpMaintenceCompo;
-            this.PanelPrincipal.SelectedPageIndex = 0;
+            this.PanelPrincipal.SelectedPage = this.tpPlans;
+            this.PanelPrincipal.SelectedPageIndex = 4;
             this.PanelPrincipal.Size = new System.Drawing.Size(888, 341);
             this.PanelPrincipal.TabIndex = 1;
             this.PanelPrincipal.Text = "tabPane1";
@@ -408,7 +428,9 @@
             this.dgvTypeDevices.Size = new System.Drawing.Size(870, 296);
             this.dgvTypeDevices.TabIndex = 0;
             this.dgvTypeDevices.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvTypeDevices});
+            this.gvTypeDevices,
+            this.gridView1,
+            this.gridView5});
             // 
             // gvTypeDevices
             // 
@@ -463,6 +485,36 @@
             this.colQuantity.Visible = true;
             this.colQuantity.VisibleIndex = 4;
             // 
+            // gridView1
+            // 
+            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumn1,
+            this.gridColumn2,
+            this.gridColumn3});
+            this.gridView1.GridControl = this.dgvTypeDevices;
+            this.gridView1.Name = "gridView1";
+            // 
+            // gridColumn1
+            // 
+            this.gridColumn1.Caption = "gridColumn1";
+            this.gridColumn1.Name = "gridColumn1";
+            this.gridColumn1.Visible = true;
+            this.gridColumn1.VisibleIndex = 0;
+            // 
+            // gridColumn2
+            // 
+            this.gridColumn2.Caption = "gridColumn2";
+            this.gridColumn2.Name = "gridColumn2";
+            this.gridColumn2.Visible = true;
+            this.gridColumn2.VisibleIndex = 1;
+            // 
+            // gridColumn3
+            // 
+            this.gridColumn3.Caption = "gridColumn3";
+            this.gridColumn3.Name = "gridColumn3";
+            this.gridColumn3.Visible = true;
+            this.gridColumn3.VisibleIndex = 2;
+            // 
             // tpMaximunCost
             // 
             this.tpMaximunCost.Appearance.BackColor = System.Drawing.Color.White;
@@ -481,7 +533,8 @@
             this.dgvMaximun.Size = new System.Drawing.Size(870, 296);
             this.dgvMaximun.TabIndex = 0;
             this.dgvMaximun.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvMaximun});
+            this.gvMaximun,
+            this.gridView4});
             // 
             // gvMaximun
             // 
@@ -527,7 +580,8 @@
             this.dgvMaintenceCompo.Size = new System.Drawing.Size(870, 296);
             this.dgvMaintenceCompo.TabIndex = 0;
             this.dgvMaintenceCompo.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvMaintenceCompo});
+            this.gvMaintenceCompo,
+            this.gridView3});
             // 
             // gvMaintenceCompo
             // 
@@ -589,7 +643,8 @@
             this.dgvPlan.Size = new System.Drawing.Size(870, 296);
             this.dgvPlan.TabIndex = 0;
             this.dgvPlan.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvPlan});
+            this.gvPlan,
+            this.gridView2});
             // 
             // gvPlan
             // 
@@ -615,6 +670,13 @@
             this.colPlan.Visible = true;
             this.colPlan.VisibleIndex = 1;
             // 
+            // tpMenorCosto
+            // 
+            this.tpMenorCosto.Caption = "Lower cost per unit";
+            this.tpMenorCosto.Controls.Add(this.tableLayoutPanel1);
+            this.tpMenorCosto.Name = "tpMenorCosto";
+            this.tpMenorCosto.Size = new System.Drawing.Size(870, 296);
+            // 
             // tsBotton
             // 
             this.tsBotton.Location = new System.Drawing.Point(5, 586);
@@ -622,6 +684,50 @@
             this.tsBotton.Size = new System.Drawing.Size(894, 25);
             this.tsBotton.TabIndex = 3;
             this.tsBotton.Text = "toolStrip1";
+            // 
+            // gridView2
+            // 
+            this.gridView2.GridControl = this.dgvPlan;
+            this.gridView2.Name = "gridView2";
+            // 
+            // gridView3
+            // 
+            this.gridView3.GridControl = this.dgvMaintenceCompo;
+            this.gridView3.Name = "gridView3";
+            // 
+            // gridView4
+            // 
+            this.gridView4.GridControl = this.dgvMaximun;
+            this.gridView4.Name = "gridView4";
+            // 
+            // gridView5
+            // 
+            this.gridView5.GridControl = this.dgvTypeDevices;
+            this.gridView5.Name = "gridView5";
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.798995F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90.201F));
+            this.tableLayoutPanel1.Controls.Add(this.button1, 0, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(20, 16);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(796, 225);
+            this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // button1
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.button1, 2);
+            this.button1.Location = new System.Drawing.Point(0, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 0;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -653,6 +759,7 @@
             this.tpTypeDevice.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTypeDevices)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvTypeDevices)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.tpMaximunCost.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMaximun)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvMaximun)).EndInit();
@@ -662,6 +769,12 @@
             this.tpPlans.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvPlan)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvPlan)).EndInit();
+            this.tpMenorCosto.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView5)).EndInit();
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -694,17 +807,21 @@
         private DevExpress.XtraBars.Navigation.TabNavigationPage tpTypeDevice;
         private DevExpress.XtraGrid.GridControl dgvTypeDevices;
         private DevExpress.XtraGrid.Views.Grid.GridView gvTypeDevices;
-        private DevExpress.XtraBars.Navigation.TabNavigationPage tpMaximunCost;
-        private DevExpress.XtraBars.Navigation.TabNavigationPage tpMaintenceCompo;
         private DevExpress.XtraGrid.Columns.GridColumn colTypeDevice;
         private DevExpress.XtraGrid.Columns.GridColumn colDescription;
         private DevExpress.XtraGrid.Columns.GridColumn colModel;
         private DevExpress.XtraGrid.Columns.GridColumn colPart;
         private DevExpress.XtraGrid.Columns.GridColumn colQuantity;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn2;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumn3;
+        private DevExpress.XtraBars.Navigation.TabNavigationPage tpMaximunCost;
         private DevExpress.XtraGrid.GridControl dgvMaximun;
         private DevExpress.XtraGrid.Views.Grid.GridView gvMaximun;
         private DevExpress.XtraGrid.Columns.GridColumn colModelCost;
         private DevExpress.XtraGrid.Columns.GridColumn colMaximunCost;
+        private DevExpress.XtraBars.Navigation.TabNavigationPage tpMaintenceCompo;
         private DevExpress.XtraGrid.GridControl dgvMaintenceCompo;
         private DevExpress.XtraGrid.Views.Grid.GridView gvMaintenceCompo;
         private DevExpress.XtraGrid.Columns.GridColumn colParCode;
@@ -716,5 +833,12 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gvPlan;
         private DevExpress.XtraGrid.Columns.GridColumn colModelPlan;
         private DevExpress.XtraGrid.Columns.GridColumn colPlan;
+        private DevExpress.XtraBars.Navigation.TabNavigationPage tpMenorCosto;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView3;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView4;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView5;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Button button1;
     }
 }

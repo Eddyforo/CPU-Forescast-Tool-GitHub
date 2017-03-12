@@ -6,24 +6,24 @@ using DevExpress.XtraGrid.Views.Grid;
 using System.Data;
 using System.Data.OleDb;
 using System.Collections.Generic;
+using DevExpress.XtraGrid.Views.Card;
 
 namespace CPU.Forecast.Tool
 {
     public partial class MainForm : XtraForm
     {
 
-        public static DataTable dtTypeDevice;
+        public static DataTable dtTypeDevices;
         public static DataTable dtMaximunCost;
         public static DataTable dtComponents;
         public static DataTable dtPlan;
+        //public static DataTable dtMaestro;
+        //public static DataTable dtDetalle;
+
         DataTable dtEstimate;
         Clases.Forecast clsTransacc;
 
         
-
-        // Clases.TypeDevices TD = new Clases.TypeDevices();
-
-
         public MainForm()
         {
             InitializeComponent();
@@ -106,7 +106,7 @@ namespace CPU.Forecast.Tool
             //se cargan los datagrid's
             CargarGrid();
 
-            clsTransacc.LoadDatosTabla(dtTypeDevice, dtComponents, dtMaximunCost, dtPlan);
+            clsTransacc.LoadDatosTabla(dtTypeDevices, dtComponents, dtMaximunCost, dtPlan);
         }
 
         private void CargarGrid()
@@ -121,29 +121,83 @@ namespace CPU.Forecast.Tool
             dgvMaintenceCompo.DataSource = CreaMaintenceCompo();
 
             dgvPlan.DataSource = CreaPlans();
+
+
+            //DataSet dtSet = new DataSet("TYPE_DEVICE");
+            //dtSet.Tables.Add(dtTypeDevices);
+            //dtSet.Tables.Add(dtComponents);
+
+            //DataRelation dtRelation;
+            //DataColumn custCol = dtSet.Tables["TYPE_DEVICE"].Columns["PART"];
+            //DataColumn orderCol = dtSet.Tables["COMPONENTS"].Columns["PART_CODE"];
+            //dtRelation = new DataRelation("CustOrderRelation ", custCol, orderCol);
+            //dtSet.Tables["COMPONENTS"].ParentRelations.Add(dtRelation);
+            ////dgvLowerCostUnit. SetDataBinding(dtSet, "TYPE_DEVICE");
+
+
+            //dgvLowerCostUnit.DataSource = dtSet.Tables["COMPONENTS"];
+            
             
         }
 
+        //private DataTable CreatablaMaestro()
+        //{
+            
+        //    dtMaestro = new DataTable("PLAN");
+
+        //    dtMaestro.Columns.Add(new DataColumn("PLAN", typeof(string)));
+        //    dtMaestro.Columns.Add(new DataColumn("MODEL", typeof(string)));
+
+        //    dtMaestro.Rows.Add("1", "2");
+        //   // dtMaestro.Rows.Add("1", "2");
+        //    dtMaestro.Rows.Add("1", "3");
+        //    //dtMaestro.Rows.Add("1", "3");
+        //    dtMaestro.Rows.Add("1", "4");
+
+
+
+        //    return dtMaestro;
+        //}
+
+        //private DataTable CreatablaDetalle()
+        //{
+        //    dtDetalle = new DataTable("MODELO");
+
+        //    dtDetalle.Columns.Add(new DataColumn("DESCRIPTION", typeof(string)));
+        //    dtDetalle.Columns.Add(new DataColumn("MODEL", typeof(string)));
+        //    dtDetalle.Columns.Add(new DataColumn("PART", typeof(string)));
+        //    dtDetalle.Columns.Add(new DataColumn("QUANTITY", typeof(Int32)));
+
+        //    dtDetalle.Rows.Add("Prueba","2","adaa",5);
+        //    dtDetalle.Rows.Add("Prueba1", "2", "adaa1", 51);
+        //    dtDetalle.Rows.Add("Prueba2", "3", "adaa2", 52);
+        //    dtDetalle.Rows.Add("Prueba3", "3", "adaa3", 53);
+        //    dtDetalle.Rows.Add("Prueba4", "4", "adaa4", 54);
+
+
+        //    return dtDetalle;
+        //}
+
         private DataTable CreatablaTipos()
         {
-            dtTypeDevice = new DataTable("TYPE_DEVICE");
+            dtTypeDevices = new DataTable("TYPE_DEVICE");
 
-            dtTypeDevice.Columns.Add(new DataColumn("TYPE_DEVICE", typeof(string)));
-            dtTypeDevice.Columns.Add(new DataColumn("DESCRIPTION", typeof(string)));
-            dtTypeDevice.Columns.Add(new DataColumn("MODEL", typeof(string)));
-            dtTypeDevice.Columns.Add(new DataColumn("PART", typeof(string)));
-            dtTypeDevice.Columns.Add(new DataColumn("QUANTITY", typeof(Int32)));
+            dtTypeDevices.Columns.Add(new DataColumn("TYPE_DEVICE", typeof(string)));
+            dtTypeDevices.Columns.Add(new DataColumn("DESCRIPTION", typeof(string)));
+            dtTypeDevices.Columns.Add(new DataColumn("MODEL", typeof(string)));
+            dtTypeDevices.Columns.Add(new DataColumn("PART", typeof(string)));
+            dtTypeDevices.Columns.Add(new DataColumn("QUANTITY", typeof(Int32)));
 
             DataColumn[] keys = new DataColumn[3];
 
-            keys[0] = dtTypeDevice.Columns["TYPE_DEVICE"];
-            keys[1] = dtTypeDevice.Columns["MODEL"];
-            keys[2] = dtTypeDevice.Columns["PART"];
+            keys[0] = dtTypeDevices.Columns["TYPE_DEVICE"];
+            keys[1] = dtTypeDevices.Columns["MODEL"];
+            keys[2] = dtTypeDevices.Columns["PART"];
 
-            dtTypeDevice.PrimaryKey = keys;
+            dtTypeDevices.PrimaryKey = keys;
             
 
-            return dtTypeDevice;
+            return dtTypeDevices;
         }
 
         private DataTable CreaMaintenceCompo()
@@ -244,7 +298,7 @@ namespace CPU.Forecast.Tool
             if (bOk)
             {
 
-                bOk = clsTransacc.UpdateDB(dtTypeDevice, dtComponents, dtMaximunCost, dtPlan);
+                bOk = clsTransacc.UpdateDB(dtTypeDevices, dtComponents, dtMaximunCost, dtPlan);
             }
 
             if (!bOk)
@@ -268,14 +322,14 @@ namespace CPU.Forecast.Tool
             //foreach (DataTable table in dgvTypeDevices.DataSource)
             //{
             // Test if the table has errors. If not, skip it.
-            if (dtTypeDevice.HasErrors)
+            if (dtTypeDevices.HasErrors)
             {
                 // Get an array of all rows with errors.
-                rowsInError = dtTypeDevice.GetErrors();
+                rowsInError = dtTypeDevices.GetErrors();
                 // Print the error of each column in each row.
                 for (int i = 0; i < rowsInError.Length; i++)
                 {
-                    foreach (DataColumn column in dtTypeDevice.Columns)
+                    foreach (DataColumn column in dtTypeDevices.Columns)
                     {
                         sError = column.ColumnName + " " + rowsInError[i].GetColumnError(column);
                         bOk = false;
@@ -331,7 +385,7 @@ namespace CPU.Forecast.Tool
             load.ShowDialog();
             
 
-            dgvTypeDevices.DataSource = dtTypeDevice;
+            dgvTypeDevices.DataSource = dtTypeDevices;
             dgvMaintenceCompo.DataSource = dtComponents;
             
         }

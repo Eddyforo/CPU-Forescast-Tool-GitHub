@@ -297,7 +297,7 @@ namespace CPU.Forecast.Tool
                         string part = item[Clases.constantes.PART].ToString();
                         int quantity = (int)item[Clases.constantes.QUANTITY];
                         string model = item[Clases.constantes.MODEL].ToString();
-                        MainForm.dtTypeDevice.Rows.Add(type, description, model, part, quantity);
+                        MainForm.dtTypeDevices.Rows.Add(type, description, model, part, quantity);
                     }
                     else if (Clases.EnumTablas.COMPONENTS == Clases.sTablasLoad)
                     {
