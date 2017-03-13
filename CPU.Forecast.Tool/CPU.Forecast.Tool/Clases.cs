@@ -13,17 +13,11 @@ namespace CPU.Forecast.Tool
 
         public class TypeDevices
         {
-            string Sql;
-
             private string type_devices;
             private string description;
             private string model;
             private string part;
             private int quantity;
-
-            private string sInsert;
-            private string sUpdate;
-            private string sDelete;
 
             public string Type_devices
             {
@@ -89,20 +83,7 @@ namespace CPU.Forecast.Tool
                     quantity = value;
                 }
             }
-
-            public void CargaTypeDevices()
-            {
-                sInsert = " INSERT INTO TYPE_DEVICES (TYPE_DEVICE , DESCRIPTION ,MODEL, PART  ,QUANTITY) "+
-                        "VALUES ("+ Type_devices + "," + Description + "," + Model + ","+ Part + ","+ Quantity +" )";
-
-                sUpdate = "";
-
-                Sql = " SELECT TYPE_DEVICE , DESCRIPTION ,MODEL, PART  ,QUANTITY FROM TYPE_DEVICES";  
-            }
-
-            
-
-            
+ 
         }
 
         public class MaintenceComponents

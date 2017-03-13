@@ -55,6 +55,7 @@ namespace CPU.Forecast.Tool
         public static void addError( string sPrmError, string sPrmDecripcion) {
             SError = sPrmError;
             SDescripcionError = sPrmDecripcion;
+            ShowError();
         }
 
         public static void ShowError()

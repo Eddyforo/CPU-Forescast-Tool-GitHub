@@ -7,6 +7,9 @@ using System.Data;
 using System.Data.OleDb;
 using System.Collections.Generic;
 using DevExpress.XtraGrid.Views.Card;
+using System.Collections.Concurrent;
+using System.Linq;
+using System.Collections;
 
 namespace CPU.Forecast.Tool
 {
@@ -390,6 +393,174 @@ namespace CPU.Forecast.Tool
             
         }
 
-     
+        private void PanelPrincipal_SelectedPageChanged(object sender, DevExpress.XtraBars.Navigation.SelectedPageChangedEventArgs e)
+        {
+            if (e.Page.Caption == "Lower cost per unit")
+            {
+                tbCalculate.Enabled = true;
+            }
+            else
+            {
+                tbCalculate.Enabled = false;
+            }
+        }
+
+        private void tbCalculate_ItemClick(object sender, TileItemEventArgs e)
+        {
+            bool bOk = true;
+
+            bOk = validarGridLlenos();
+
+            if (bOk)
+            {
+               bOk = calcularCosto();
+            }           
+        }
+
+        private bool validarGridLlenos()
+        {
+            bool bOk = true;
+
+            if (dtTypeDevices.Rows.Count < 1) 
+            {
+                bOk = false;
+                Error.addError("Types of devices is empty","In order to calculate, we needs almost one row in the table: types of devices");
+            }
+
+            if (bOk && dtComponents.Rows.Count < 1)
+            {
+                bOk = false;
+
+                Error.addError("Components is empty", "In order to calculate, we needs almost one row in the table of components");
+            }
+
+            if (bOk && dtPlan.Rows.Count < 1)
+            {
+                bOk = false;
+
+                Error.addError("Plan is empty", "In order to calculate, we needs almost one row in the table of plans");
+            }
+
+            return bOk;
+        }
+
+        private bool calcularCosto()
+        {
+            bool bOk = true;
+
+            decimal nPercent = Convert.ToDecimal( txtPercent.EditValue);
+            decimal nCantTotalPart = 0;
+            decimal nCantPartPorPorcen = 0; // la cantidad de partes necesarias para cumplir con el porcentaje definido
+
+            //lista de datos en la tablas
+            List<Clases.TypeDevices> listaTypeDevice = new List<Clases.TypeDevices>();
+            List<Clases.MaintenceComponents> listaComponents = new List<Clases.MaintenceComponents>();
+            List<Clases.Plan> listaPlan = new List<Clases.Plan>();
+
+            //lista de tipos por modelo , se usa para saber como estan conformados los modelos
+            List<Clases.TypeDevices> lTypePerModel = new List<Clases.TypeDevices>();
+
+
+            // se usa para seleccionar todas las partes del mismo tipo para luego sugerirlos
+            List<Clases.MaintenceComponents> lCompoPerParts = new List<Clases.MaintenceComponents>();
+
+
+            // paso de datatales a listas
+            listaTypeDevice = (from DataRow row in dtTypeDevices.Rows
+                                    select new Clases.TypeDevices
+                                    {
+                                        Type_devices = row[Clases.constantes.TYPE_DEVICE].ToString(),
+                                        Description = row[Clases.constantes.DESCRIPTION].ToString(),
+                                        Model = row[Clases.constantes.MODEL].ToString(),
+                                        Part = row[Clases.constantes.PART].ToString(),
+                                        Quantity = (int)row[Clases.constantes.QUANTITY]
+                                    }).ToList();
+
+            listaComponents = (from DataRow row in dtComponents.Rows
+                               select new Clases.MaintenceComponents
+                               {
+                                   SPartCode = row[Clases.constantes.PART_CODE].ToString(),
+                                   SDescription = row[Clases.constantes.DESCRIPTION].ToString(),
+                                   NCost = (decimal)row[Clases.constantes.COST],
+                                   NStock = (int)row[Clases.constantes.PART]
+                               }).ToList();
+
+            listaPlan = (from DataRow row in dtPlan.Rows
+                               select new Clases.Plan
+                               {
+                                   SModel = row[Clases.constantes.MODEL].ToString(),
+                                   NPlan = (int)row[Clases.constantes.PLANS]
+                               }).ToList();
+
+
+            //Comienza el proceso
+            foreach (Clases.Plan lPlanActual in listaPlan)
+            {
+                
+                //filtro por modelo
+                lTypePerModel = (from Clases.TypeDevices x in listaTypeDevice
+                                 where x.Model == lPlanActual.SModel
+                                 orderby x.Model
+                                 select new Clases.TypeDevices
+                                 {
+                                     Type_devices = x.Type_devices.ToString(),
+                                     Description = x.Description.ToString(),
+                                     Model = x.Model.ToString(),
+                                     Part = x.Part.ToString(),
+                                     Quantity = x.Quantity
+                                 }).ToList();
+
+                //Verificamos que el modelo exista en types de dispositivos
+                if (lTypePerModel.Count > 0)
+                {
+                    //la cantidad de componentes totales para este modelo
+                    nCantTotalPart = (from Clases.TypeDevices i in lTypePerModel
+                                          select i.Quantity).Sum();
+
+                    //Es la cantidad que tenemos  que cumplir de componentes 
+                    nCantPartPorPorcen = nCantTotalPart * nPercent;
+
+                    //recorrer la lista de partes que ocupa ese modelo
+                    foreach (Clases.TypeDevices lPartPerModel in lTypePerModel)
+                    {
+                        //filtramos los componentes que sean de la misma parte y que el stock sea mayor que cero
+
+                        lCompoPerParts = (from Clases.MaintenceComponents z in listaComponents
+                                          where z.SPartCode.StartsWith(lPartPerModel.Part) ||
+                                          z.NStock > 0
+                                          orderby z.NCost ascending
+                                          select new Clases.MaintenceComponents
+                                          {
+                                              SPartCode = z.SPartCode,
+                                              SDescription = z.SDescription,
+                                              NCost = z.NCost,
+                                              NStock = z.NStock
+                                          }).ToList();
+
+
+
+
+                     }// fin del foreach de las parts que ocupa por modelo
+
+
+                    
+
+                }
+                else
+                {
+                    bOk = false;
+                    Error.addError("The model doesn't exist ", "The model " + lPlanActual.SModel + " doesn't exist in the table types of devices.");
+                }
+
+
+
+
+
+            }// fin del foreach de planes
+
+
+            return bOk;
+            
+        }
     }
 }
