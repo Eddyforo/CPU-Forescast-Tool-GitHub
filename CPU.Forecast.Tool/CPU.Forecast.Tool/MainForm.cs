@@ -447,13 +447,15 @@ namespace CPU.Forecast.Tool
         private bool calcularCosto()
         {
             bool bOk = true;
-
+            ///
             decimal nPercent = Convert.ToDecimal( txtPercent.EditValue);
             decimal nCantTotalPart = 0;
             decimal nCantPartPorPorcen = 0; // la cantidad de partes necesarias para cumplir con el porcentaje definido
 
             //lista de datos en la tablas
             List<Clases.TypeDevices> listaTypeDevice = new List<Clases.TypeDevices>();
+
+            ///Lista de componentesss
             List<Clases.MaintenceComponents> listaComponents = new List<Clases.MaintenceComponents>();
             List<Clases.Plan> listaPlan = new List<Clases.Plan>();
 
@@ -464,6 +466,11 @@ namespace CPU.Forecast.Tool
             // se usa para seleccionar todas las partes del mismo tipo para luego sugerirlos
             List<Clases.MaintenceComponents> lCompoPerParts = new List<Clases.MaintenceComponents>();
 
+
+            //Lista versiones por plan
+            List<Clases.VersionPlan> listVersionPlan = new List<Clases.VersionPlan>() ;
+            //versiones por plan para agregar uno a uno a la lista
+            Clases.VersionPlan unaVersionPlan;
 
             // paso de datatales a listas
             listaTypeDevice = (from DataRow row in dtTypeDevices.Rows
@@ -482,7 +489,7 @@ namespace CPU.Forecast.Tool
                                    SPartCode = row[Clases.constantes.PART_CODE].ToString(),
                                    SDescription = row[Clases.constantes.DESCRIPTION].ToString(),
                                    NCost = (decimal)row[Clases.constantes.COST],
-                                   NStock = (int)row[Clases.constantes.PART]
+                                   NStock = (int)row[Clases.constantes.STOCK]
                                }).ToList();
 
             listaPlan = (from DataRow row in dtPlan.Rows
@@ -496,66 +503,73 @@ namespace CPU.Forecast.Tool
             //Comienza el proceso
             foreach (Clases.Plan lPlanActual in listaPlan)
             {
-                
-                //filtro por modelo
-                lTypePerModel = (from Clases.TypeDevices x in listaTypeDevice
-                                 where x.Model == lPlanActual.SModel
-                                 orderby x.Model
-                                 select new Clases.TypeDevices
-                                 {
-                                     Type_devices = x.Type_devices.ToString(),
-                                     Description = x.Description.ToString(),
-                                     Model = x.Model.ToString(),
-                                     Part = x.Part.ToString(),
-                                     Quantity = x.Quantity
-                                 }).ToList();
-
-                //Verificamos que el modelo exista en types de dispositivos
-                if (lTypePerModel.Count > 0)
+                // for por cada cantidad que se ocupa por plan
+                for (int cont = 0; cont < lPlanActual.NPlan; cont++)
                 {
-                    //la cantidad de componentes totales para este modelo
-                    nCantTotalPart = (from Clases.TypeDevices i in lTypePerModel
+
+                    //Agregar una version nueva al plan
+                    unaVersionPlan = new Clases.VersionPlan();
+
+                    //filtro por modelo
+                    lTypePerModel = (from Clases.TypeDevices x in listaTypeDevice
+                                     where x.Model == lPlanActual.SModel
+                                     orderby x.Model
+                                     select new Clases.TypeDevices
+                                     {
+                                         Type_devices = x.Type_devices.ToString(),
+                                         Description = x.Description.ToString(),
+                                         Model = x.Model.ToString(),
+                                         Part = x.Part.ToString(),
+                                         Quantity = x.Quantity
+                                     }).ToList();
+
+                    //Verificamos que el modelo exista en types de dispositivos
+                    if (lTypePerModel.Count > 0)
+                    {
+                        //la cantidad de componentes totales para este modelo
+                        nCantTotalPart = (from Clases.TypeDevices i in lTypePerModel
                                           select i.Quantity).Sum();
 
-                    //Es la cantidad que tenemos  que cumplir de componentes 
-                    nCantPartPorPorcen = nCantTotalPart * nPercent;
+                        //Es la cantidad que tenemos  que cumplir de componentes 
+                        nCantPartPorPorcen = nCantTotalPart * nPercent;
 
-                    //recorrer la lista de partes que ocupa ese modelo
-                    foreach (Clases.TypeDevices lPartPerModel in lTypePerModel)
+                        //recorrer la lista de partes que ocupa ese modelo
+                        foreach (Clases.TypeDevices lPartPerModel in lTypePerModel)
+                        {
+                            //filtramos los componentes que sean de la misma parte y que el stock sea mayor que cero
+
+                            lCompoPerParts = (from Clases.MaintenceComponents z in listaComponents
+                                              where z.SPartCode.StartsWith(lPartPerModel.Part) &&
+                                              z.NStock > 0
+                                              orderby z.NCost ascending
+                                              select new Clases.MaintenceComponents
+                                              {
+                                                  SPartCode = z.SPartCode,
+                                                  SDescription = z.SDescription,
+                                                  NCost = z.NCost,
+                                                  NStock = z.NStock
+                                              }).ToList();
+
+                            
+                            unaVersionPlan.
+
+
+                        }// fin del foreach de las parts que ocupa por modelo
+
+
+
+
+                    }
+                    else
                     {
-                        //filtramos los componentes que sean de la misma parte y que el stock sea mayor que cero
-
-                        lCompoPerParts = (from Clases.MaintenceComponents z in listaComponents
-                                          where z.SPartCode.StartsWith(lPartPerModel.Part) ||
-                                          z.NStock > 0
-                                          orderby z.NCost ascending
-                                          select new Clases.MaintenceComponents
-                                          {
-                                              SPartCode = z.SPartCode,
-                                              SDescription = z.SDescription,
-                                              NCost = z.NCost,
-                                              NStock = z.NStock
-                                          }).ToList();
+                        bOk = false;
+                        Error.addError("The model doesn't exist ", "The model " + lPlanActual.SModel + " doesn't exist in the table types of devices.");
+                    }
 
 
 
 
-                     }// fin del foreach de las parts que ocupa por modelo
-
-
-                    
-
-                }
-                else
-                {
-                    bOk = false;
-                    Error.addError("The model doesn't exist ", "The model " + lPlanActual.SModel + " doesn't exist in the table types of devices.");
-                }
-
-
-
-
-
+                }// fin del for cada plan por modelo uno a uno
             }// fin del foreach de planes
 
 

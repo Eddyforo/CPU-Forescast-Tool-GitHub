@@ -211,6 +211,180 @@ namespace CPU.Forecast.Tool
             }
         }
 
+        public class DetalleVersionPlan
+        {
+            private int nVersion;
+            private string sPart;
+            private string sModel;
+            private int nCantidadPart;
+
+
+            public string SPart
+            {
+                get
+                {
+                    return sPart;
+                }
+
+                set
+                {
+                    sPart = value;
+                }
+            }
+
+            public string SModel
+            {
+                get
+                {
+                    return sModel;
+                }
+
+                set
+                {
+                    sModel = value;
+                }
+            }
+
+            public int NVersion
+            {
+                get
+                {
+                    return nVersion;
+                }
+
+                set
+                {
+                    nVersion = value;
+                }
+            }
+
+            public int NCantidadPart
+            {
+                get
+                {
+                    return nCantidadPart;
+                }
+
+                set
+                {
+                    nCantidadPart = value;
+                }
+            }
+        }
+        public class VersionPlan
+        {
+            private string sType;
+            private string sModel;
+            private int nVersion = 0;
+            private int nCantidadPlan;
+            private decimal nCOG;
+            private decimal nTotalCOG;
+            private List<DetalleVersionPlan> listaDetalle;
+
+            public VersionPlan()
+            {
+                nVersion += 1;
+            }
+
+            public string SType
+            {
+                get
+                {
+                    return sType;
+                }
+
+                set
+                {
+                    sType = value;
+                }
+            }
+
+            public string SModel
+            {
+                get
+                {
+                    return sModel;
+                }
+
+                set
+                {
+                    sModel = value;
+                }
+            }
+
+            public int NVersion
+            {
+                get
+                {
+                    return nVersion;
+                }
+            }
+
+            public int NCantidadPlan
+            {
+                get
+                {
+                    return nCantidadPlan;
+                }
+
+                set
+                {
+                    nCantidadPlan = value;
+                }
+            }
+
+            public decimal NCOG
+            {
+                get
+                {
+                    return nCOG;
+                }
+
+                set
+                {
+                    nCOG = value;
+                }
+            }
+
+            public decimal NTotalCOG
+            {
+                get
+                {
+                    return nTotalCOG;
+                }
+
+                set
+                {
+                    nTotalCOG = value;
+                }
+            }
+
+            internal List<DetalleVersionPlan> ListaDetalle
+            {
+                get
+                {
+                    return listaDetalle;
+                }
+
+                set
+                {
+                    listaDetalle = value;
+                }
+            }
+
+            public void addDetalle(string sPrmPart, int nPrmCantidadPart)
+            {
+                DetalleVersionPlan nuevo = new DetalleVersionPlan();
+
+                nuevo.NVersion = NVersion;
+                nuevo.SModel = SModel;
+                nuevo.SPart = sPrmPart;
+                nuevo.NCantidadPart = nPrmCantidadPart;
+
+                ListaDetalle.Add(nuevo);
+            }
+        }
+
         public class Forecast
         {
             public bool UpdateDB(DataTable dtTypeDevice, DataTable dtMaintenceCompo, DataTable dtMaximCost, DataTable dtPlan )
