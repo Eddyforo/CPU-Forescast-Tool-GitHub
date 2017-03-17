@@ -447,6 +447,11 @@ namespace CPU.Forecast.Tool
         private bool calcularCosto()
         {
             bool bOk = true;
+            bool bHayUnCostMenor= false;
+            bool bNoHaySufComponentes = false;
+            //saber si hay que buscar una version nueva
+            bool bVersionNueva = false;
+
             ///
             decimal nPercent = Convert.ToDecimal( txtPercent.EditValue);
             decimal nCantTotalPart = 0;
@@ -503,17 +508,80 @@ namespace CPU.Forecast.Tool
             //Comienza el proceso
             foreach (Clases.Plan lPlanActual in listaPlan)
             {
+                //Agregar una version nueva al plan
+                unaVersionPlan = new Clases.VersionPlan();
+
+                bHayUnCostMenor = false;
                 // for por cada cantidad que se ocupa por plan
                 for (int cont = 0; cont < lPlanActual.NPlan; cont++)
                 {
+                    if (bHayUnCostMenor)
+                    {
+                        //unaVersionPlan.ListaDetalle
 
-                    //Agregar una version nueva al plan
-                    unaVersionPlan = new Clases.VersionPlan();
+                        //Lista de componentes para la version actual
+                        //List<Clases.MaintenceComponents> listaComponetsVersion = (
+                        //   listaComponents.Where(d => unaVersionPlan.ListaDetalle.Any(c => d.SPartCode == c.SPart)).OrderBy(u => u.SPartCode).Select(f => 
+                        //       new Clases.MaintenceComponents()
+                        //       {
+                        //           SPartCode = f.SPartCode,
+                        //           NStock = f.NStock,
+                        //           SDescription = f.SDescription,
+                        //           NCost = f.NCost
+                                   
+                        //       }
+                        //    )).ToList();
 
+                        int nCantidaFalta = lPlanActual.NPlan - cont - 1;
+
+                        ///Para saber si tener que restar uno a la cantidad faltante por que el que esta no alcanza
+                        bool bBuscaMenorF = false;
+                        bool bHayStockSuf = false;
+
+                        for (int i = nCantidaFalta; i > 0; i--)
+                        {
+                            foreach (Clases.TypeDevices item in lTypePerModel)
+                            {
+                                // es la cantidad que hace falta estimar
+                                int cantidadNecesario = i * item.Quantity;
+
+                                //si la cantidad necesaria es menor o igual entonces la podemos usar 
+                                if (cantidadNecesario <= listaComponents.Find(j => j.SPartCode == item.Part).NStock)
+                                {
+                                    bHayStockSuf = true;
+                                    bBuscaMenorF = false;
+
+                                }
+                                else
+                                {
+                                    bBuscaMenorF = true;
+                                    bHayStockSuf = false;
+                                    break;
+                                }
+
+                            }
+
+                            if (bHayStockSuf && !bBuscaMenorF)
+                            {
+                                unaVersionPlan.NCantidadPlan += i;
+
+                                cont = unaVersionPlan.NCantidadPlan;
+                                break;
+                            }
+                        }
+
+                    }
+
+                    //si ya hay un costo menor y si en cont del for de planes es igual a la cantidad de planes quiere decir que ya esta todo
+                    //ese plan estimado , hay que pasar al otro
+                    if (bHayUnCostMenor && cont == lPlanActual.NPlan)
+                    {
+                        break;
+                    }
                     //filtro por modelo
                     lTypePerModel = (from Clases.TypeDevices x in listaTypeDevice
                                      where x.Model == lPlanActual.SModel
-                                     orderby x.Model
+                                     orderby x.Model, x.Part
                                      select new Clases.TypeDevices
                                      {
                                          Type_devices = x.Type_devices.ToString(),
@@ -550,10 +618,34 @@ namespace CPU.Forecast.Tool
                                                   NStock = z.NStock
                                               }).ToList();
 
-                            
-                            unaVersionPlan.
 
+                            if (lCompoPerParts.Count > 0)
+                            {
+                                if ((lCompoPerParts[0].NStock - lPartPerModel.Quantity) >= 0)
+                                {
+                                    //Se agrega el componente al detalle de la version
+                                    unaVersionPlan.SModel = lPartPerModel.Model;
+                                    unaVersionPlan.SType = lPartPerModel.Type_devices;
+                                    unaVersionPlan.addDetalle(lCompoPerParts[0].SPartCode, lPartPerModel.Quantity, lCompoPerParts[0].NCost);
+                                    
+                                    //Resta el componente que acaba de agregar a la lista de componentes padre
+                                    listaComponents.Where(w => w.SPartCode == lCompoPerParts[0].SPartCode).ToList()
+                                                .ForEach(k => k.NStock -= lPartPerModel.Quantity);
+                                }
+                                else
+                                {
+                                    bNoHaySufComponentes = true;
+                                    //no hay suficientes partes para este modelo
+                                    break;
+                                }
 
+                            }
+                            else
+                            {
+                                bNoHaySufComponentes = true;
+                                //hacer si no existe el componente en el stock
+                                break;  
+                            }
                         }// fin del foreach de las parts que ocupa por modelo
 
 
@@ -567,7 +659,23 @@ namespace CPU.Forecast.Tool
                     }
 
 
+                    if (unaVersionPlan.ListaDetalle.Count > 0 && !bNoHaySufComponentes)
+                    {
+                        unaVersionPlan.NCantidadPlan += 1;
 
+                        //bandera para saber si ya hay uno estimado
+                        bHayUnCostMenor = true;
+
+                        //agrego la version a la lista principal
+                        listVersionPlan.Add(unaVersionPlan);
+                        
+                    }
+                    else if (bNoHaySufComponentes)
+                    {
+                        int nFaltane = lPlanActual.NPlan - cont;
+                        cont = lPlanActual.NPlan;
+
+                    }
 
                 }// fin del for cada plan por modelo uno a uno
             }// fin del foreach de planes
