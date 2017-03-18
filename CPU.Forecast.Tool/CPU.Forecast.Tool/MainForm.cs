@@ -10,6 +10,7 @@ using DevExpress.XtraGrid.Views.Card;
 using System.Collections.Concurrent;
 using System.Linq;
 using System.Collections;
+using System.ComponentModel;
 
 namespace CPU.Forecast.Tool
 {
@@ -456,6 +457,7 @@ namespace CPU.Forecast.Tool
             decimal nPercent = Convert.ToDecimal( txtPercent.EditValue);
             decimal nCantTotalPart = 0;
             decimal nCantPartPorPorcen = 0; // la cantidad de partes necesarias para cumplir con el porcentaje definido
+            int nVersion = 0;
 
             //lista de datos en la tablas
             List<Clases.TypeDevices> listaTypeDevice = new List<Clases.TypeDevices>();
@@ -509,7 +511,8 @@ namespace CPU.Forecast.Tool
             foreach (Clases.Plan lPlanActual in listaPlan)
             {
                 //Agregar una version nueva al plan
-                unaVersionPlan = new Clases.VersionPlan();
+                unaVersionPlan = new Clases.VersionPlan(nVersion + 1);
+                nVersion = 0;
 
                 bHayUnCostMenor = false;
                 // for por cada cantidad que se ocupa por plan
@@ -532,7 +535,7 @@ namespace CPU.Forecast.Tool
                         //       }
                         //    )).ToList();
 
-                        int nCantidaFalta = lPlanActual.NPlan - cont - 1;
+                        int nCantidaFalta = lPlanActual.NPlan - cont;
 
                         ///Para saber si tener que restar uno a la cantidad faltante por que el que esta no alcanza
                         bool bBuscaMenorF = false;
@@ -540,13 +543,13 @@ namespace CPU.Forecast.Tool
 
                         for (int i = nCantidaFalta; i > 0; i--)
                         {
-                            foreach (Clases.TypeDevices item in lTypePerModel)
+                            foreach (Clases.DetalleVersionPlan item in unaVersionPlan.ListaDetalle)
                             {
                                 // es la cantidad que hace falta estimar
-                                int cantidadNecesario = i * item.Quantity;
+                                int cantidadNecesario = i * item.NCantidadPart;
 
                                 //si la cantidad necesaria es menor o igual entonces la podemos usar 
-                                if (cantidadNecesario <= listaComponents.Find(j => j.SPartCode == item.Part).NStock)
+                                if (cantidadNecesario <= listaComponents.Find(j => j.SPartCode == item.SPart).NStock)
                                 {
                                     bHayStockSuf = true;
                                     bBuscaMenorF = false;
@@ -561,11 +564,21 @@ namespace CPU.Forecast.Tool
 
                             }
 
+                            //hay stock suficiente y ya no hay que ir a restarle uno al faltante para ver si cabe
                             if (bHayStockSuf && !bBuscaMenorF)
                             {
                                 unaVersionPlan.NCantidadPlan += i;
 
-                                cont = unaVersionPlan.NCantidadPlan;
+                                cont += i;
+
+                                foreach (Clases.DetalleVersionPlan item in unaVersionPlan.ListaDetalle)
+                                {
+
+                                    //Resta el la cantidad de componentes que se ocupan para esta cantidad 
+                                    listaComponents.Where(w => w.SPartCode == item.SPart).ToList()
+                                            .ForEach(k => k.NStock -= (item.NCantidadPart * i));
+                                }
+
                                 break;
                             }
                         }
@@ -577,6 +590,10 @@ namespace CPU.Forecast.Tool
                     if (bHayUnCostMenor && cont == lPlanActual.NPlan)
                     {
                         break;
+                    }
+                    else
+                    {
+                        unaVersionPlan = new Clases.VersionPlan(nVersion + 1);
                     }
                     //filtro por modelo
                     lTypePerModel = (from Clases.TypeDevices x in listaTypeDevice
@@ -623,6 +640,7 @@ namespace CPU.Forecast.Tool
                             {
                                 if ((lCompoPerParts[0].NStock - lPartPerModel.Quantity) >= 0)
                                 {
+
                                     //Se agrega el componente al detalle de la version
                                     unaVersionPlan.SModel = lPartPerModel.Model;
                                     unaVersionPlan.SType = lPartPerModel.Type_devices;
@@ -658,7 +676,7 @@ namespace CPU.Forecast.Tool
                         Error.addError("The model doesn't exist ", "The model " + lPlanActual.SModel + " doesn't exist in the table types of devices.");
                     }
 
-
+                    
                     if (unaVersionPlan.ListaDetalle.Count > 0 && !bNoHaySufComponentes)
                     {
                         unaVersionPlan.NCantidadPlan += 1;
@@ -684,5 +702,44 @@ namespace CPU.Forecast.Tool
             return bOk;
             
         }
+
+        //public static DataTable ToDataTable<T>(this IList<T> data)
+        //{
+        //    PropertyDescriptorCollection properties =
+        //        TypeDescriptor.GetProperties(typeof(T));
+        //    DataTable table = new DataTable();
+        //    foreach (PropertyDescriptor prop in properties)
+        //        table.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
+        //    foreach (T item in data)
+        //    {
+        //        DataRow row = table.NewRow();
+        //        foreach (PropertyDescriptor prop in properties)
+        //            row[prop.Name] = prop.GetValue(item) ?? DBNull.Value;
+        //        table.Rows.Add(row);
+        //    }
+        //    return table;
+        //}
+
+    //    public static DataTable ToDataTable<T>(this IList<T> data)
+    //    {
+    //        PropertyDescriptorCollection props =
+    //            TypeDescriptor.GetProperties(typeof(T));
+    //        DataTable table = new DataTable();
+    //        for (int i = 0; i < props.Count; i++)
+    //        {
+    //            PropertyDescriptor prop = props[i];
+    //            table.Columns.Add(prop.Name, prop.PropertyType);
+    //        }
+    //        object[] values = new object[props.Count];
+    //        foreach (T item in data)
+    //        {
+    //            for (int i = 0; i < values.Length; i++)
+    //            {
+    //                values[i] = props[i].GetValue(item);
+    //            }
+    //            table.Rows.Add(values);
+    //        }
+    //        return table;
+    //    }
     }
 }
