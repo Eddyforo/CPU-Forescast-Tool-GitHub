@@ -411,6 +411,15 @@ namespace CPU.Forecast.Tool
             }
         }
 
+        /// <summary>
+        /// usada para cuando se estima parcial por falta de componenetes 
+        /// </summary>
+        public class DetalleVersionPlanParcial
+        {
+            public string sParte;
+            public int iCant;
+            public decimal dCosto;
+        }
         //public DataTable ToDataTable<T>(this IList<T> data)
         //{
         //    PropertyDescriptorCollection props =

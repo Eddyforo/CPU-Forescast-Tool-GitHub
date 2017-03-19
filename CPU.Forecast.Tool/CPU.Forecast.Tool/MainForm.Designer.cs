@@ -398,7 +398,7 @@
             // Connect
             // 
             this.Connect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.Connect.Image = global::CPU.Forecast.Tool.Properties.Resources.database;
+            this.Connect.Image = ((System.Drawing.Image)(resources.GetObject("Connect.Image")));
             this.Connect.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.Connect.Name = "Connect";
             this.Connect.Size = new System.Drawing.Size(23, 22);
@@ -409,7 +409,7 @@
             // tsExit
             // 
             this.tsExit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsExit.Image = global::CPU.Forecast.Tool.Properties.Resources.exit;
+            this.tsExit.Image = ((System.Drawing.Image)(resources.GetObject("tsExit.Image")));
             this.tsExit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsExit.Name = "tsExit";
             this.tsExit.Size = new System.Drawing.Size(23, 22);
@@ -436,7 +436,7 @@
             this.tpMenorCosto});
             this.PanelPrincipal.RegularSize = new System.Drawing.Size(888, 395);
             this.PanelPrincipal.SelectedPage = this.tpPlans;
-            this.PanelPrincipal.SelectedPageIndex = 4;
+            this.PanelPrincipal.SelectedPageIndex = 1;
             this.PanelPrincipal.Size = new System.Drawing.Size(888, 395);
             this.PanelPrincipal.TabIndex = 1;
             this.PanelPrincipal.Text = "tabPane1";

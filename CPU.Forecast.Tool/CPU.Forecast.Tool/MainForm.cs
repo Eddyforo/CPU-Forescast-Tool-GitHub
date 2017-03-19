@@ -448,8 +448,12 @@ namespace CPU.Forecast.Tool
         private bool calcularCosto()
         {
             bool bOk = true;
+            //si ya encontramos el menor costo para ese modelo.
             bool bHayUnCostMenor= false;
+            //si no hay suficientes componenetes para ese model del todo
             bool bNoHaySufComponentes = false;
+            // si se estimo una parte de un componente para la estimacion ya que no alcanzaba y hay que buscar otra
+            bool bEstimaCompParcial = false;
             //saber si hay que buscar una version nueva
             bool bVersionNueva = false;
 
@@ -638,22 +642,65 @@ namespace CPU.Forecast.Tool
 
                             if (lCompoPerParts.Count > 0)
                             {
-                                if ((lCompoPerParts[0].NStock - lPartPerModel.Quantity) >= 0)
+                                int nContEstimada = lPartPerModel.Quantity;
+                                List<Clases.DetalleVersionPlanParcial> tempParcial = new List<Clases.DetalleVersionPlanParcial>();
+                                //Se recorren todas las partes pensando en el caso que la primera no cumpla con el 
+                                for (int i = 0; i < lCompoPerParts.Count; i++)
                                 {
+                                    if ((lCompoPerParts[i].NStock - nContEstimada) >= 0 && !bEstimaCompParcial)
+                                    {
 
-                                    //Se agrega el componente al detalle de la version
-                                    unaVersionPlan.SModel = lPartPerModel.Model;
-                                    unaVersionPlan.SType = lPartPerModel.Type_devices;
-                                    unaVersionPlan.addDetalle(lCompoPerParts[0].SPartCode, lPartPerModel.Quantity, lCompoPerParts[0].NCost);
-                                    
-                                    //Resta el componente que acaba de agregar a la lista de componentes padre
-                                    listaComponents.Where(w => w.SPartCode == lCompoPerParts[0].SPartCode).ToList()
-                                                .ForEach(k => k.NStock -= lPartPerModel.Quantity);
+                                        //Se agrega el componente al detalle de la version
+                                        unaVersionPlan.SModel = lPartPerModel.Model;
+                                        unaVersionPlan.SType = lPartPerModel.Type_devices;
+                                        unaVersionPlan.addDetalle(lCompoPerParts[i].SPartCode, nContEstimada, lCompoPerParts[i].NCost);
+                                         
+                                        //Resta el componente que acaba de agregar a la lista de componentes padre
+                                        listaComponents.Where(w => w.SPartCode == lCompoPerParts[i].SPartCode).ToList()
+                                                    .ForEach(k => k.NStock -= nContEstimada);
+                                        
+                                        //En el caso que ya cantidad estimada sea igual que la necesaria, ya no hay que calcular nada y se sale.
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        //se igual al stock ya que se va a agregar esa parte del stock para luego buscar las restantes
+                                       // nContEstimada = lCompoPerParts[i].NStock;
+
+                                        //se crea una lista temporal para el detalle ya que no se sabe si se van a cumplir con el total de componentes
+                                        Clases.DetalleVersionPlanParcial pTemp = new Clases.DetalleVersionPlanParcial();
+
+                                        pTemp.sParte = lCompoPerParts[i].SPartCode;
+                                        pTemp.iCant = nContEstimada > lCompoPerParts[i].NStock ? lCompoPerParts[i].NStock : nContEstimada ;
+                                        pTemp.dCosto = lCompoPerParts[i].NCost;
+
+                                        nContEstimada = nContEstimada - pTemp.iCant;
+
+                                        tempParcial.Add( pTemp);
+                                        
+                                        //se comienza a estimar componentes parciales por que no hay en el stock
+                                        bEstimaCompParcial = true;
+
+                                    }
                                 }
-                                else
+
+                                if (bEstimaCompParcial && nContEstimada == 0 )
+                                {
+                                    foreach (Clases.DetalleVersionPlanParcial detalle in tempParcial)
+                                    {
+                                        //Se agrega el componente al detalle de la version
+                                        unaVersionPlan.SModel = lPartPerModel.Model;
+                                        unaVersionPlan.SType = lPartPerModel.Type_devices;
+                                        unaVersionPlan.addDetalle(detalle.sParte, detalle.iCant, detalle.dCosto);
+
+                                        //Resta el componente que acaba de agregar a la lista de componentes padre
+                                        listaComponents.Where(w => w.SPartCode == detalle.sParte).ToList()
+                                                    .ForEach(k => k.NStock -= detalle.iCant);
+                                    }
+                                }
+                                else if (bEstimaCompParcial)
                                 {
                                     bNoHaySufComponentes = true;
-                                    //no hay suficientes partes para este modelo
                                     break;
                                 }
 
@@ -666,9 +713,7 @@ namespace CPU.Forecast.Tool
                             }
                         }// fin del foreach de las parts que ocupa por modelo
 
-
-
-
+                        
                     }
                     else
                     {
