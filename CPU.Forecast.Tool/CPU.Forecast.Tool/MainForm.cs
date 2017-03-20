@@ -11,6 +11,7 @@ using System.Collections.Concurrent;
 using System.Linq;
 using System.Collections;
 using System.ComponentModel;
+using static CPU.Forecast.Tool.Clases;
 
 namespace CPU.Forecast.Tool
 {
@@ -25,6 +26,7 @@ namespace CPU.Forecast.Tool
         //public static DataTable dtDetalle;
 
         DataTable dtEstimate;
+        DataTable dtEstimadoDetalle;
         Clases.Forecast clsTransacc;
 
         
@@ -524,21 +526,6 @@ namespace CPU.Forecast.Tool
                 {
                     if (bHayUnCostMenor)
                     {
-                        //unaVersionPlan.ListaDetalle
-
-                        //Lista de componentes para la version actual
-                        //List<Clases.MaintenceComponents> listaComponetsVersion = (
-                        //   listaComponents.Where(d => unaVersionPlan.ListaDetalle.Any(c => d.SPartCode == c.SPart)).OrderBy(u => u.SPartCode).Select(f => 
-                        //       new Clases.MaintenceComponents()
-                        //       {
-                        //           SPartCode = f.SPartCode,
-                        //           NStock = f.NStock,
-                        //           SDescription = f.SDescription,
-                        //           NCost = f.NCost
-                                   
-                        //       }
-                        //    )).ToList();
-
                         int nCantidaFalta = lPlanActual.NPlan - cont;
 
                         ///Para saber si tener que restar uno a la cantidad faltante por que el que esta no alcanza
@@ -597,7 +584,8 @@ namespace CPU.Forecast.Tool
                     }
                     else
                     {
-                        unaVersionPlan = new Clases.VersionPlan(nVersion + 1);
+                        nVersion += 1;
+                        unaVersionPlan = new Clases.VersionPlan(nVersion);
                     }
                     //filtro por modelo
                     lTypePerModel = (from Clases.TypeDevices x in listaTypeDevice
@@ -697,6 +685,8 @@ namespace CPU.Forecast.Tool
                                         listaComponents.Where(w => w.SPartCode == detalle.sParte).ToList()
                                                     .ForEach(k => k.NStock -= detalle.iCant);
                                     }
+
+                                    bEstimaCompParcial = false;
                                 }
                                 else if (bEstimaCompParcial)
                                 {
@@ -737,16 +727,37 @@ namespace CPU.Forecast.Tool
                     {
                         int nFaltane = lPlanActual.NPlan - cont;
                         cont = lPlanActual.NPlan;
+                        //Hay que hacer el faltante y guardarlo en una lista o datatable
 
                     }
 
-                }// fin del for cada plan por modelo uno a uno
+                }// fin del for cada plan por modelo uno a uno-- cont es la variable.
             }// fin del foreach de planes
+
+            if (listVersionPlan.Count > 0)
+            {
+                dtEstimate = convertir.ToDataTable(listVersionPlan);
+
+                dgvEstimado.DataSource = dtEstimate;
+
+                dtEstimadoDetalle = new DataTable();
+
+                foreach (VersionPlan item in listVersionPlan)
+                {
+                    dtEstimadoDetalle.Merge(convertir.ToDataTable(item.ListaDetalle));
+
+                }
+
+                dgvEstimadoDetail.DataSource = dtEstimadoDetalle;
+
+
+            }
 
 
             return bOk;
             
         }
+
 
         //public static DataTable ToDataTable<T>(this IList<T> data)
         //{
@@ -765,26 +776,26 @@ namespace CPU.Forecast.Tool
         //    return table;
         //}
 
-    //    public static DataTable ToDataTable<T>(this IList<T> data)
-    //    {
-    //        PropertyDescriptorCollection props =
-    //            TypeDescriptor.GetProperties(typeof(T));
-    //        DataTable table = new DataTable();
-    //        for (int i = 0; i < props.Count; i++)
-    //        {
-    //            PropertyDescriptor prop = props[i];
-    //            table.Columns.Add(prop.Name, prop.PropertyType);
-    //        }
-    //        object[] values = new object[props.Count];
-    //        foreach (T item in data)
-    //        {
-    //            for (int i = 0; i < values.Length; i++)
-    //            {
-    //                values[i] = props[i].GetValue(item);
-    //            }
-    //            table.Rows.Add(values);
-    //        }
-    //        return table;
-    //    }
+        //public DataTable ToDataTable<T>(this IList<T> data)
+        //{
+        //    PropertyDescriptorCollection props =
+        //        TypeDescriptor.GetProperties(typeof(T));
+        //    DataTable table = new DataTable();
+        //    for (int i = 0; i < props.Count; i++)
+        //    {
+        //        PropertyDescriptor prop = props[i];
+        //        table.Columns.Add(prop.Name, prop.PropertyType);
+        //    }
+        //    object[] values = new object[props.Count];
+        //    foreach (T item in data)
+        //    {
+        //        for (int i = 0; i < values.Length; i++)
+        //        {
+        //            values[i] = props[i].GetValue(item);
+        //        }
+        //        table.Rows.Add(values);
+        //    }
+        //    return table;
+        //}
     }
 }

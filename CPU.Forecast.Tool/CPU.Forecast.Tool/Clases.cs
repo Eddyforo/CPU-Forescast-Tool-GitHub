@@ -220,6 +220,11 @@ namespace CPU.Forecast.Tool
             private int nCantidadPart;
             private decimal nCost;
             
+            public DetalleVersionPlan(int nSprmVErsion)
+            {
+                nVersion = nSprmVErsion;
+            }
+
             public string SPart
             {
                 get
@@ -251,11 +256,6 @@ namespace CPU.Forecast.Tool
                 get
                 {
                     return nVersion;
-                }
-
-                set
-                {
-                    nVersion = value;
                 }
             }
 
@@ -298,7 +298,7 @@ namespace CPU.Forecast.Tool
             public VersionPlan(int nPrmVersion)
             {
                 nVersion = nPrmVersion;
-                ListaDetalle = new List<DetalleVersionPlan>();
+                ListaDetalle = new List<DetalleVersionPlan>(nVersion);
 
             }
 
@@ -392,9 +392,9 @@ namespace CPU.Forecast.Tool
 
             public void addDetalle(string sPrmPart, int nPrmCantidadPart,decimal nPrmCost)
             {
-                DetalleVersionPlan nuevo = new DetalleVersionPlan();
+                DetalleVersionPlan nuevo = new DetalleVersionPlan(NVersion);
 
-                nuevo.NVersion = NVersion;
+                //nuevo.NVersion = NVersion;
                 nuevo.SModel = SModel;
                 nuevo.SPart = sPrmPart;
                 nuevo.NCost = nPrmCost;
@@ -420,27 +420,8 @@ namespace CPU.Forecast.Tool
             public int iCant;
             public decimal dCosto;
         }
-        //public DataTable ToDataTable<T>(this IList<T> data)
-        //{
-        //    PropertyDescriptorCollection props =
-        //        TypeDescriptor.GetProperties(typeof(T));
-        //    DataTable table = new DataTable();
-        //    for (int i = 0; i < props.Count; i++)
-        //    {
-        //        PropertyDescriptor prop = props[i];
-        //        table.Columns.Add(prop.Name, prop.PropertyType);
-        //    }
-        //    object[] values = new object[props.Count];
-        //    foreach (T item in data)
-        //    {
-        //        for (int i = 0; i < values.Length; i++)
-        //        {
-        //            values[i] = props[i].GetValue(item);
-        //        }
-        //        table.Rows.Add(values);
-        //    }
-        //    return table;
-        //}
+        
+       
 
         public class Forecast
         {
@@ -781,5 +762,30 @@ namespace CPU.Forecast.Tool
             MAXIMUN_COST
         };
 
+    }
+
+    public static class convertir
+    {
+        public static DataTable ToDataTable<T>(this IList<T> data)
+        {
+            PropertyDescriptorCollection props =
+                TypeDescriptor.GetProperties(typeof(T));
+            DataTable table = new DataTable();
+            for (int i = 0; i < props.Count; i++)
+            {
+                PropertyDescriptor prop = props[i];
+                table.Columns.Add(prop.Name, prop.PropertyType);
+            }
+            object[] values = new object[props.Count];
+            foreach (T item in data)
+            {
+                for (int i = 0; i < values.Length; i++)
+                {
+                    values[i] = props[i].GetValue(item);
+                }
+                table.Rows.Add(values);
+            }
+            return table;
+        }
     }
 }

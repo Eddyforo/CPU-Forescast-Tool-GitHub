@@ -99,11 +99,13 @@
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.tpMenorCosto = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.dgvEstimadoDetail = new DevExpress.XtraGrid.GridControl();
+            this.gvEstimadoDetail = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.txtPercent = new DevExpress.XtraEditors.TextEdit();
-            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
-            this.gridView6 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.dgvEstimado = new DevExpress.XtraGrid.GridControl();
+            this.gvEstimado = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.tsBotton = new System.Windows.Forms.ToolStrip();
             this.TableMainContent.SuspendLayout();
             this.tsTopMain.SuspendLayout();
@@ -127,10 +129,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             this.tpMenorCosto.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEstimadoDetail)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvEstimadoDetail)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPercent.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEstimado)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvEstimado)).BeginInit();
             this.SuspendLayout();
             // 
             // TableMainContent
@@ -436,7 +440,7 @@
             this.tpMenorCosto});
             this.PanelPrincipal.RegularSize = new System.Drawing.Size(888, 395);
             this.PanelPrincipal.SelectedPage = this.tpPlans;
-            this.PanelPrincipal.SelectedPageIndex = 1;
+            this.PanelPrincipal.SelectedPageIndex = 4;
             this.PanelPrincipal.Size = new System.Drawing.Size(888, 395);
             this.PanelPrincipal.TabIndex = 1;
             this.PanelPrincipal.Text = "tabPane1";
@@ -734,17 +738,34 @@
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90.96385F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.036144F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.07229F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.92771F));
+            this.tableLayoutPanel1.Controls.Add(this.dgvEstimadoDetail, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.gridControl1, 0, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(20, 16);
+            this.tableLayoutPanel1.Controls.Add(this.dgvEstimado, 0, 1);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(17, 17);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.32076F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 88.67924F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(830, 265);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(835, 317);
             this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // dgvEstimadoDetail
+            // 
+            this.dgvEstimadoDetail.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvEstimadoDetail.Location = new System.Drawing.Point(404, 38);
+            this.dgvEstimadoDetail.MainView = this.gvEstimadoDetail;
+            this.dgvEstimadoDetail.Name = "dgvEstimadoDetail";
+            this.dgvEstimadoDetail.Size = new System.Drawing.Size(428, 276);
+            this.dgvEstimadoDetail.TabIndex = 2;
+            this.dgvEstimadoDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvEstimadoDetail});
+            // 
+            // gvEstimadoDetail
+            // 
+            this.gvEstimadoDetail.GridControl = this.dgvEstimadoDetail;
+            this.gvEstimadoDetail.Name = "gvEstimadoDetail";
             // 
             // tableLayoutPanel2
             // 
@@ -788,20 +809,21 @@
             this.txtPercent.TabIndex = 1;
             this.txtPercent.ToolTip = "OEM Percentage";
             // 
-            // gridControl1
+            // dgvEstimado
             // 
-            this.gridControl1.Location = new System.Drawing.Point(3, 33);
-            this.gridControl1.MainView = this.gridView6;
-            this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(400, 200);
-            this.gridControl1.TabIndex = 1;
-            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView6});
+            this.dgvEstimado.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvEstimado.Location = new System.Drawing.Point(3, 38);
+            this.dgvEstimado.MainView = this.gvEstimado;
+            this.dgvEstimado.Name = "dgvEstimado";
+            this.dgvEstimado.Size = new System.Drawing.Size(395, 276);
+            this.dgvEstimado.TabIndex = 1;
+            this.dgvEstimado.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvEstimado});
             // 
-            // gridView6
+            // gvEstimado
             // 
-            this.gridView6.GridControl = this.gridControl1;
-            this.gridView6.Name = "gridView6";
+            this.gvEstimado.GridControl = this.dgvEstimado;
+            this.gvEstimado.Name = "gvEstimado";
             // 
             // tsBotton
             // 
@@ -857,11 +879,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             this.tpMenorCosto.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEstimadoDetail)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvEstimadoDetail)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPercent.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEstimado)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvEstimado)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -931,7 +955,9 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label label1;
         private DevExpress.XtraEditors.TextEdit txtPercent;
-        private DevExpress.XtraGrid.GridControl gridControl1;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView6;
+        private DevExpress.XtraGrid.GridControl dgvEstimado;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvEstimado;
+        private DevExpress.XtraGrid.GridControl dgvEstimadoDetail;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvEstimadoDetail;
     }
 }
