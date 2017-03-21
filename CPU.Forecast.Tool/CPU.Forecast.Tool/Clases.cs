@@ -225,7 +225,7 @@ namespace CPU.Forecast.Tool
                 nVersion = nSprmVErsion;
             }
 
-            public string SPart
+            public string Part
             {
                 get
                 {
@@ -238,7 +238,7 @@ namespace CPU.Forecast.Tool
                 }
             }
 
-            public string SModel
+            public string Model
             {
                 get
                 {
@@ -251,7 +251,7 @@ namespace CPU.Forecast.Tool
                 }
             }
 
-            public int NVersion
+            public int Version
             {
                 get
                 {
@@ -259,7 +259,7 @@ namespace CPU.Forecast.Tool
                 }
             }
 
-            public int NCantidadPart
+            public int NumberPart
             {
                 get
                 {
@@ -272,7 +272,7 @@ namespace CPU.Forecast.Tool
                 }
             }
 
-            public decimal NCost
+            public decimal Cost
             {
                 get
                 {
@@ -302,7 +302,7 @@ namespace CPU.Forecast.Tool
 
             }
 
-            public string SType
+            public string Type
             {
                 get
                 {
@@ -315,7 +315,7 @@ namespace CPU.Forecast.Tool
                 }
             }
 
-            public string SModel
+            public string Model
             {
                 get
                 {
@@ -328,7 +328,7 @@ namespace CPU.Forecast.Tool
                 }
             }
 
-            public int NVersion
+            public int Version
             {
                 get
                 {
@@ -336,7 +336,7 @@ namespace CPU.Forecast.Tool
                 }
             }
 
-            public int NCantidadPlan
+            public int PlanAmount
             {
                 get
                 {
@@ -347,11 +347,11 @@ namespace CPU.Forecast.Tool
                 {
                     nCantidadPlan = value;
 
-                    NTotalCOG = NCOG * value;
+                    TotalCOG = COG * value;
                 }
             }
 
-            public decimal NCOG
+            public decimal COG
             {
                 get
                 {
@@ -364,7 +364,7 @@ namespace CPU.Forecast.Tool
                 }
             }
 
-            public decimal NTotalCOG
+            public decimal TotalCOG
             {
                 get
                 {
@@ -392,20 +392,20 @@ namespace CPU.Forecast.Tool
 
             public void addDetalle(string sPrmPart, int nPrmCantidadPart,decimal nPrmCost)
             {
-                DetalleVersionPlan nuevo = new DetalleVersionPlan(NVersion);
+                DetalleVersionPlan nuevo = new DetalleVersionPlan(Version);
 
                 //nuevo.NVersion = NVersion;
-                nuevo.SModel = SModel;
-                nuevo.SPart = sPrmPart;
-                nuevo.NCost = nPrmCost;
-                nuevo.NCantidadPart = nPrmCantidadPart;
+                nuevo.Model = Model;
+                nuevo.Part = sPrmPart;
+                nuevo.Cost = nPrmCost;
+                nuevo.NumberPart = nPrmCantidadPart;
 
                 //Calcular el COG y el total
                 decimal tempCOG = nPrmCantidadPart * nPrmCost;
 
-                NCOG += tempCOG;
+                COG += tempCOG;
 
-                NTotalCOG = NCOG * NCantidadPlan;
+                TotalCOG = COG * PlanAmount;
 
                 ListaDetalle.Add(nuevo);
             }

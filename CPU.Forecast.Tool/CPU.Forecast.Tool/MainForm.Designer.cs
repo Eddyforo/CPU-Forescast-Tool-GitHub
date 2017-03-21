@@ -99,14 +99,38 @@
             this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.tpMenorCosto = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.dgvEstimadoDetail = new DevExpress.XtraGrid.GridControl();
-            this.gvEstimadoDetail = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.txtPercent = new DevExpress.XtraEditors.TextEdit();
+            this.tabPane1 = new DevExpress.XtraBars.Navigation.TabPane();
+            this.All = new DevExpress.XtraBars.Navigation.TabNavigationPage();
+            this.dgvEstimadoDetail = new DevExpress.XtraGrid.GridControl();
+            this.gvEstimadoDetail = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.Version = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.dgvEstimado = new DevExpress.XtraGrid.GridControl();
             this.gvEstimado = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.tsBotton = new System.Windows.Forms.ToolStrip();
+            this.ProgressBar = new System.Windows.Forms.ToolStripProgressBar();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.labelProgress = new System.Windows.Forms.ToolStripLabel();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.Type = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Model = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.sVersion = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.PlanAmount = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.COG = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.TotalCOG = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Part = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.sModel = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.nVersion = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.NumberPart = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.Cost = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.pageMissingMaterial = new DevExpress.XtraBars.Navigation.TabNavigationPage();
+            this.pageEventsViewer = new DevExpress.XtraBars.Navigation.TabNavigationPage();
+            this.dgvMissing = new DevExpress.XtraGrid.GridControl();
+            this.gvMissing = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.dgvEventViewe = new DevExpress.XtraGrid.GridControl();
+            this.gvEventViewer = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.TableMainContent.SuspendLayout();
             this.tsTopMain.SuspendLayout();
             this.PanelPrincipal.SuspendLayout();
@@ -129,12 +153,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             this.tpMenorCosto.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvEstimadoDetail)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvEstimadoDetail)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPercent.Properties)).BeginInit();
+            this.tabPane1.SuspendLayout();
+            this.All.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEstimadoDetail)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvEstimadoDetail)).BeginInit();
+            this.Version.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvEstimado)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvEstimado)).BeginInit();
+            this.tsBotton.SuspendLayout();
+            this.pageMissingMaterial.SuspendLayout();
+            this.pageEventsViewer.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMissing)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvMissing)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEventViewe)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvEventViewer)).BeginInit();
             this.SuspendLayout();
             // 
             // TableMainContent
@@ -737,48 +771,36 @@
             // 
             // tableLayoutPanel1
             // 
+            this.tableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.InsetDouble;
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.07229F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.92771F));
-            this.tableLayoutPanel1.Controls.Add(this.dgvEstimadoDetail, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.tabPane1, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.tableLayoutPanel2, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.dgvEstimado, 0, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(17, 17);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11.32076F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 88.67924F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(835, 317);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(870, 350);
             this.tableLayoutPanel1.TabIndex = 0;
-            // 
-            // dgvEstimadoDetail
-            // 
-            this.dgvEstimadoDetail.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvEstimadoDetail.Location = new System.Drawing.Point(404, 38);
-            this.dgvEstimadoDetail.MainView = this.gvEstimadoDetail;
-            this.dgvEstimadoDetail.Name = "dgvEstimadoDetail";
-            this.dgvEstimadoDetail.Size = new System.Drawing.Size(428, 276);
-            this.dgvEstimadoDetail.TabIndex = 2;
-            this.dgvEstimadoDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gvEstimadoDetail});
-            // 
-            // gvEstimadoDetail
-            // 
-            this.gvEstimadoDetail.GridControl = this.dgvEstimadoDetail;
-            this.gvEstimadoDetail.Name = "gvEstimadoDetail";
             // 
             // tableLayoutPanel2
             // 
+            this.tableLayoutPanel2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.75949F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64.24051F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.7439F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.2561F));
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.txtPercent, 1, 0);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(115, 6);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(328, 24);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(298, 24);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // label1
@@ -800,7 +822,7 @@
             0,
             0,
             131072});
-            this.txtPercent.Location = new System.Drawing.Point(120, 3);
+            this.txtPercent.Location = new System.Drawing.Point(160, 3);
             this.txtPercent.Name = "txtPercent";
             this.txtPercent.Properties.Mask.BeepOnError = true;
             this.txtPercent.Properties.Mask.EditMask = "p";
@@ -809,29 +831,272 @@
             this.txtPercent.TabIndex = 1;
             this.txtPercent.ToolTip = "OEM Percentage";
             // 
+            // tabPane1
+            // 
+            this.tableLayoutPanel1.SetColumnSpan(this.tabPane1, 2);
+            this.tabPane1.Controls.Add(this.All);
+            this.tabPane1.Controls.Add(this.Version);
+            this.tabPane1.Controls.Add(this.pageMissingMaterial);
+            this.tabPane1.Controls.Add(this.pageEventsViewer);
+            this.tabPane1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabPane1.Location = new System.Drawing.Point(6, 41);
+            this.tabPane1.Name = "tabPane1";
+            this.tabPane1.Pages.AddRange(new DevExpress.XtraBars.Navigation.NavigationPageBase[] {
+            this.Version,
+            this.All,
+            this.pageMissingMaterial,
+            this.pageEventsViewer});
+            this.tabPane1.RegularSize = new System.Drawing.Size(858, 303);
+            this.tabPane1.SelectedPage = this.Version;
+            this.tabPane1.SelectedPageIndex = 2;
+            this.tabPane1.Size = new System.Drawing.Size(858, 303);
+            this.tabPane1.TabIndex = 3;
+            this.tabPane1.Text = "tabPane1";
+            // 
+            // All
+            // 
+            this.All.Caption = "All";
+            this.All.Controls.Add(this.dgvEstimadoDetail);
+            this.All.Name = "All";
+            this.All.Size = new System.Drawing.Size(840, 258);
+            // 
+            // dgvEstimadoDetail
+            // 
+            this.dgvEstimadoDetail.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvEstimadoDetail.Location = new System.Drawing.Point(0, 0);
+            this.dgvEstimadoDetail.MainView = this.gvEstimadoDetail;
+            this.dgvEstimadoDetail.Name = "dgvEstimadoDetail";
+            this.dgvEstimadoDetail.Size = new System.Drawing.Size(840, 258);
+            this.dgvEstimadoDetail.TabIndex = 2;
+            this.dgvEstimadoDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvEstimadoDetail});
+            // 
+            // gvEstimadoDetail
+            // 
+            this.gvEstimadoDetail.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.Part,
+            this.sModel,
+            this.nVersion,
+            this.NumberPart,
+            this.Cost});
+            this.gvEstimadoDetail.GridControl = this.dgvEstimadoDetail;
+            this.gvEstimadoDetail.Name = "gvEstimadoDetail";
+            // 
+            // Version
+            // 
+            this.Version.Caption = "Group by Version";
+            this.Version.Controls.Add(this.dgvEstimado);
+            this.Version.Name = "Version";
+            this.Version.Size = new System.Drawing.Size(840, 258);
+            // 
             // dgvEstimado
             // 
             this.dgvEstimado.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvEstimado.Location = new System.Drawing.Point(3, 38);
+            this.dgvEstimado.Location = new System.Drawing.Point(0, 0);
             this.dgvEstimado.MainView = this.gvEstimado;
             this.dgvEstimado.Name = "dgvEstimado";
-            this.dgvEstimado.Size = new System.Drawing.Size(395, 276);
+            this.dgvEstimado.Size = new System.Drawing.Size(840, 258);
             this.dgvEstimado.TabIndex = 1;
             this.dgvEstimado.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvEstimado});
             // 
             // gvEstimado
             // 
+            this.gvEstimado.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.Type,
+            this.Model,
+            this.sVersion,
+            this.PlanAmount,
+            this.COG,
+            this.TotalCOG});
             this.gvEstimado.GridControl = this.dgvEstimado;
             this.gvEstimado.Name = "gvEstimado";
             // 
             // tsBotton
             // 
+            this.tsBotton.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.ProgressBar,
+            this.toolStripSeparator1,
+            this.labelProgress,
+            this.toolStripSeparator2});
             this.tsBotton.Location = new System.Drawing.Point(5, 655);
             this.tsBotton.Name = "tsBotton";
+            this.tsBotton.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.tsBotton.Size = new System.Drawing.Size(894, 25);
             this.tsBotton.TabIndex = 3;
             this.tsBotton.Text = "toolStrip1";
+            // 
+            // ProgressBar
+            // 
+            this.ProgressBar.Name = "ProgressBar";
+            this.ProgressBar.Size = new System.Drawing.Size(100, 22);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            // 
+            // labelProgress
+            // 
+            this.labelProgress.Name = "labelProgress";
+            this.labelProgress.Size = new System.Drawing.Size(86, 22);
+            this.labelProgress.Text = "toolStripLabel1";
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            // 
+            // Type
+            // 
+            this.Type.Caption = "Type";
+            this.Type.FieldName = "Type";
+            this.Type.Name = "Type";
+            this.Type.OptionsColumn.AllowEdit = false;
+            this.Type.Visible = true;
+            this.Type.VisibleIndex = 0;
+            // 
+            // Model
+            // 
+            this.Model.Caption = "Model";
+            this.Model.FieldName = "Model";
+            this.Model.Name = "Model";
+            this.Model.OptionsColumn.AllowEdit = false;
+            this.Model.Visible = true;
+            this.Model.VisibleIndex = 1;
+            // 
+            // sVersion
+            // 
+            this.sVersion.Caption = "Version";
+            this.sVersion.FieldName = "Version";
+            this.sVersion.Name = "sVersion";
+            this.sVersion.OptionsColumn.AllowEdit = false;
+            this.sVersion.Visible = true;
+            this.sVersion.VisibleIndex = 2;
+            // 
+            // PlanAmount
+            // 
+            this.PlanAmount.Caption = "Plan Amount";
+            this.PlanAmount.FieldName = "PlanAmount";
+            this.PlanAmount.Name = "PlanAmount";
+            this.PlanAmount.OptionsColumn.AllowEdit = false;
+            this.PlanAmount.Visible = true;
+            this.PlanAmount.VisibleIndex = 3;
+            // 
+            // COG
+            // 
+            this.COG.Caption = "COG";
+            this.COG.DisplayFormat.FormatString = "c2";
+            this.COG.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.COG.FieldName = "COG";
+            this.COG.Name = "COG";
+            this.COG.OptionsColumn.AllowEdit = false;
+            this.COG.Visible = true;
+            this.COG.VisibleIndex = 4;
+            // 
+            // TotalCOG
+            // 
+            this.TotalCOG.Caption = "Total COG";
+            this.TotalCOG.DisplayFormat.FormatString = "c2";
+            this.TotalCOG.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.TotalCOG.FieldName = "TotalCOG";
+            this.TotalCOG.Name = "TotalCOG";
+            this.TotalCOG.OptionsColumn.AllowEdit = false;
+            this.TotalCOG.Visible = true;
+            this.TotalCOG.VisibleIndex = 5;
+            // 
+            // Part
+            // 
+            this.Part.Caption = "Part";
+            this.Part.FieldName = "Part";
+            this.Part.Name = "Part";
+            this.Part.OptionsColumn.AllowEdit = false;
+            this.Part.Visible = true;
+            this.Part.VisibleIndex = 0;
+            // 
+            // sModel
+            // 
+            this.sModel.Caption = "Model";
+            this.sModel.FieldName = "Model";
+            this.sModel.Name = "sModel";
+            this.sModel.OptionsColumn.AllowEdit = false;
+            this.sModel.Visible = true;
+            this.sModel.VisibleIndex = 1;
+            // 
+            // nVersion
+            // 
+            this.nVersion.Caption = "Version";
+            this.nVersion.FieldName = "Version";
+            this.nVersion.Name = "nVersion";
+            this.nVersion.OptionsColumn.AllowEdit = false;
+            this.nVersion.Visible = true;
+            this.nVersion.VisibleIndex = 2;
+            // 
+            // NumberPart
+            // 
+            this.NumberPart.Caption = "Number Part";
+            this.NumberPart.FieldName = "NumberPart";
+            this.NumberPart.Name = "NumberPart";
+            this.NumberPart.OptionsColumn.AllowEdit = false;
+            this.NumberPart.Visible = true;
+            this.NumberPart.VisibleIndex = 3;
+            // 
+            // Cost
+            // 
+            this.Cost.Caption = "Cost";
+            this.Cost.DisplayFormat.FormatString = "c2";
+            this.Cost.DisplayFormat.FormatType = DevExpress.Utils.FormatType.Numeric;
+            this.Cost.FieldName = "Cost";
+            this.Cost.Name = "Cost";
+            this.Cost.OptionsColumn.AllowEdit = false;
+            this.Cost.Visible = true;
+            this.Cost.VisibleIndex = 4;
+            // 
+            // pageMissingMaterial
+            // 
+            this.pageMissingMaterial.Caption = "Missing Material";
+            this.pageMissingMaterial.Controls.Add(this.dgvMissing);
+            this.pageMissingMaterial.Name = "pageMissingMaterial";
+            this.pageMissingMaterial.Size = new System.Drawing.Size(840, 258);
+            // 
+            // pageEventsViewer
+            // 
+            this.pageEventsViewer.Caption = "Events Viewer";
+            this.pageEventsViewer.Controls.Add(this.dgvEventViewe);
+            this.pageEventsViewer.Name = "pageEventsViewer";
+            this.pageEventsViewer.Size = new System.Drawing.Size(840, 258);
+            // 
+            // dgvMissing
+            // 
+            this.dgvMissing.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvMissing.Location = new System.Drawing.Point(0, 0);
+            this.dgvMissing.MainView = this.gvMissing;
+            this.dgvMissing.Name = "dgvMissing";
+            this.dgvMissing.Size = new System.Drawing.Size(840, 258);
+            this.dgvMissing.TabIndex = 0;
+            this.dgvMissing.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvMissing});
+            // 
+            // gvMissing
+            // 
+            this.gvMissing.GridControl = this.dgvMissing;
+            this.gvMissing.Name = "gvMissing";
+            // 
+            // dgvEventViewe
+            // 
+            this.dgvEventViewe.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvEventViewe.Location = new System.Drawing.Point(0, 0);
+            this.dgvEventViewe.MainView = this.gvEventViewer;
+            this.dgvEventViewe.Name = "dgvEventViewe";
+            this.dgvEventViewe.Size = new System.Drawing.Size(840, 258);
+            this.dgvEventViewe.TabIndex = 0;
+            this.dgvEventViewe.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gvEventViewer});
+            // 
+            // gvEventViewer
+            // 
+            this.gvEventViewer.GridControl = this.dgvEventViewe;
+            this.gvEventViewer.Name = "gvEventViewer";
             // 
             // MainForm
             // 
@@ -879,13 +1144,24 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             this.tpMenorCosto.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvEstimadoDetail)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gvEstimadoDetail)).EndInit();
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPercent.Properties)).EndInit();
+            this.tabPane1.ResumeLayout(false);
+            this.All.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEstimadoDetail)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvEstimadoDetail)).EndInit();
+            this.Version.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvEstimado)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvEstimado)).EndInit();
+            this.tsBotton.ResumeLayout(false);
+            this.tsBotton.PerformLayout();
+            this.pageMissingMaterial.ResumeLayout(false);
+            this.pageEventsViewer.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMissing)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvMissing)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvEventViewe)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gvEventViewer)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -959,5 +1235,29 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gvEstimado;
         private DevExpress.XtraGrid.GridControl dgvEstimadoDetail;
         private DevExpress.XtraGrid.Views.Grid.GridView gvEstimadoDetail;
+        private DevExpress.XtraBars.Navigation.TabPane tabPane1;
+        private DevExpress.XtraBars.Navigation.TabNavigationPage All;
+        private DevExpress.XtraBars.Navigation.TabNavigationPage Version;
+        private System.Windows.Forms.ToolStripProgressBar ProgressBar;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripLabel labelProgress;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private DevExpress.XtraGrid.Columns.GridColumn Type;
+        private DevExpress.XtraGrid.Columns.GridColumn Model;
+        private DevExpress.XtraGrid.Columns.GridColumn sVersion;
+        private DevExpress.XtraGrid.Columns.GridColumn PlanAmount;
+        private DevExpress.XtraGrid.Columns.GridColumn COG;
+        private DevExpress.XtraGrid.Columns.GridColumn TotalCOG;
+        private DevExpress.XtraGrid.Columns.GridColumn Part;
+        private DevExpress.XtraGrid.Columns.GridColumn sModel;
+        private DevExpress.XtraGrid.Columns.GridColumn nVersion;
+        private DevExpress.XtraGrid.Columns.GridColumn NumberPart;
+        private DevExpress.XtraGrid.Columns.GridColumn Cost;
+        private DevExpress.XtraBars.Navigation.TabNavigationPage pageMissingMaterial;
+        private DevExpress.XtraGrid.GridControl dgvMissing;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvMissing;
+        private DevExpress.XtraBars.Navigation.TabNavigationPage pageEventsViewer;
+        private DevExpress.XtraGrid.GridControl dgvEventViewe;
+        private DevExpress.XtraGrid.Views.Grid.GridView gvEventViewer;
     }
 }

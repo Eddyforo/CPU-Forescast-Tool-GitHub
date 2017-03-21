@@ -29,7 +29,9 @@ namespace CPU.Forecast.Tool
         DataTable dtEstimadoDetalle;
         Clases.Forecast clsTransacc;
 
-        
+        //Lista versiones por plan
+        List<VersionPlan> listVersionPlan;
+
         public MainForm()
         {
             InitializeComponent();
@@ -146,43 +148,7 @@ namespace CPU.Forecast.Tool
             
         }
 
-        //private DataTable CreatablaMaestro()
-        //{
-            
-        //    dtMaestro = new DataTable("PLAN");
-
-        //    dtMaestro.Columns.Add(new DataColumn("PLAN", typeof(string)));
-        //    dtMaestro.Columns.Add(new DataColumn("MODEL", typeof(string)));
-
-        //    dtMaestro.Rows.Add("1", "2");
-        //   // dtMaestro.Rows.Add("1", "2");
-        //    dtMaestro.Rows.Add("1", "3");
-        //    //dtMaestro.Rows.Add("1", "3");
-        //    dtMaestro.Rows.Add("1", "4");
-
-
-
-        //    return dtMaestro;
-        //}
-
-        //private DataTable CreatablaDetalle()
-        //{
-        //    dtDetalle = new DataTable("MODELO");
-
-        //    dtDetalle.Columns.Add(new DataColumn("DESCRIPTION", typeof(string)));
-        //    dtDetalle.Columns.Add(new DataColumn("MODEL", typeof(string)));
-        //    dtDetalle.Columns.Add(new DataColumn("PART", typeof(string)));
-        //    dtDetalle.Columns.Add(new DataColumn("QUANTITY", typeof(Int32)));
-
-        //    dtDetalle.Rows.Add("Prueba","2","adaa",5);
-        //    dtDetalle.Rows.Add("Prueba1", "2", "adaa1", 51);
-        //    dtDetalle.Rows.Add("Prueba2", "3", "adaa2", 52);
-        //    dtDetalle.Rows.Add("Prueba3", "3", "adaa3", 53);
-        //    dtDetalle.Rows.Add("Prueba4", "4", "adaa4", 54);
-
-
-        //    return dtDetalle;
-        //}
+      
 
         private DataTable CreatablaTipos()
         {
@@ -481,7 +447,7 @@ namespace CPU.Forecast.Tool
 
 
             //Lista versiones por plan
-            List<Clases.VersionPlan> listVersionPlan = new List<Clases.VersionPlan>() ;
+            listVersionPlan = new List<Clases.VersionPlan>() ;
             //versiones por plan para agregar uno a uno a la lista
             Clases.VersionPlan unaVersionPlan;
 
@@ -537,10 +503,10 @@ namespace CPU.Forecast.Tool
                             foreach (Clases.DetalleVersionPlan item in unaVersionPlan.ListaDetalle)
                             {
                                 // es la cantidad que hace falta estimar
-                                int cantidadNecesario = i * item.NCantidadPart;
+                                int cantidadNecesario = i * item.NumberPart;
 
                                 //si la cantidad necesaria es menor o igual entonces la podemos usar 
-                                if (cantidadNecesario <= listaComponents.Find(j => j.SPartCode == item.SPart).NStock)
+                                if (cantidadNecesario <= listaComponents.Find(j => j.SPartCode == item.Part).NStock)
                                 {
                                     bHayStockSuf = true;
                                     bBuscaMenorF = false;
@@ -558,7 +524,7 @@ namespace CPU.Forecast.Tool
                             //hay stock suficiente y ya no hay que ir a restarle uno al faltante para ver si cabe
                             if (bHayStockSuf && !bBuscaMenorF)
                             {
-                                unaVersionPlan.NCantidadPlan += i;
+                                unaVersionPlan.PlanAmount += i;
 
                                 cont += i;
 
@@ -566,8 +532,8 @@ namespace CPU.Forecast.Tool
                                 {
 
                                     //Resta el la cantidad de componentes que se ocupan para esta cantidad 
-                                    listaComponents.Where(w => w.SPartCode == item.SPart).ToList()
-                                            .ForEach(k => k.NStock -= (item.NCantidadPart * i));
+                                    listaComponents.Where(w => w.SPartCode == item.Part).ToList()
+                                            .ForEach(k => k.NStock -= (item.NumberPart * i));
                                 }
 
                                 break;
@@ -639,8 +605,8 @@ namespace CPU.Forecast.Tool
                                     {
 
                                         //Se agrega el componente al detalle de la version
-                                        unaVersionPlan.SModel = lPartPerModel.Model;
-                                        unaVersionPlan.SType = lPartPerModel.Type_devices;
+                                        unaVersionPlan.Model = lPartPerModel.Model;
+                                        unaVersionPlan.Type = lPartPerModel.Type_devices;
                                         unaVersionPlan.addDetalle(lCompoPerParts[i].SPartCode, nContEstimada, lCompoPerParts[i].NCost);
                                          
                                         //Resta el componente que acaba de agregar a la lista de componentes padre
@@ -653,10 +619,10 @@ namespace CPU.Forecast.Tool
                                     else
                                     {
                                         //se igual al stock ya que se va a agregar esa parte del stock para luego buscar las restantes
-                                       // nContEstimada = lCompoPerParts[i].NStock;
+                                        // nContEstimada = lCompoPerParts[i].NStock;
 
                                         //se crea una lista temporal para el detalle ya que no se sabe si se van a cumplir con el total de componentes
-                                        Clases.DetalleVersionPlanParcial pTemp = new Clases.DetalleVersionPlanParcial();
+                                        DetalleVersionPlanParcial pTemp = new DetalleVersionPlanParcial();
 
                                         pTemp.sParte = lCompoPerParts[i].SPartCode;
                                         pTemp.iCant = nContEstimada > lCompoPerParts[i].NStock ? lCompoPerParts[i].NStock : nContEstimada ;
@@ -677,8 +643,8 @@ namespace CPU.Forecast.Tool
                                     foreach (Clases.DetalleVersionPlanParcial detalle in tempParcial)
                                     {
                                         //Se agrega el componente al detalle de la version
-                                        unaVersionPlan.SModel = lPartPerModel.Model;
-                                        unaVersionPlan.SType = lPartPerModel.Type_devices;
+                                        unaVersionPlan.Model = lPartPerModel.Model;
+                                        unaVersionPlan.Type = lPartPerModel.Type_devices;
                                         unaVersionPlan.addDetalle(detalle.sParte, detalle.iCant, detalle.dCosto);
 
                                         //Resta el componente que acaba de agregar a la lista de componentes padre
@@ -714,7 +680,7 @@ namespace CPU.Forecast.Tool
                     
                     if (unaVersionPlan.ListaDetalle.Count > 0 && !bNoHaySufComponentes)
                     {
-                        unaVersionPlan.NCantidadPlan += 1;
+                        unaVersionPlan.PlanAmount += 1;
 
                         //bandera para saber si ya hay uno estimado
                         bHayUnCostMenor = true;
@@ -738,64 +704,36 @@ namespace CPU.Forecast.Tool
             {
                 dtEstimate = convertir.ToDataTable(listVersionPlan);
 
-                dgvEstimado.DataSource = dtEstimate;
+                //dgvEstimado.DataSource = dtEstimate;
 
                 dtEstimadoDetalle = new DataTable();
 
                 foreach (VersionPlan item in listVersionPlan)
                 {
                     dtEstimadoDetalle.Merge(convertir.ToDataTable(item.ListaDetalle));
-
                 }
 
                 dgvEstimadoDetail.DataSource = dtEstimadoDetalle;
 
+                dtEstimate.TableName = "ESTIMATED";
+                dtEstimadoDetalle.TableName = "ESTIMATEDDETAILS";
+                DataSet dtSet = new DataSet("ESTIMATED");
+                dtSet.Tables.Add(dtEstimate);
+                dtSet.Tables.Add(dtEstimadoDetalle);
 
+                DataRelation dtRelation;
+                DataColumn custCol = dtSet.Tables["ESTIMATED"].Columns["Version"];
+                DataColumn orderCol = dtSet.Tables["ESTIMATEDDETAILS"].Columns["Version"];
+                dtRelation = new DataRelation("Version", custCol, orderCol);
+                dtSet.Tables["ESTIMATEDDETAILS"].ParentRelations.Add(dtRelation);
+               
+                dgvEstimado.DataSource = dtSet.Tables["ESTIMATED"];
+                
             }
-
-
+            
             return bOk;
             
         }
-
-
-        //public static DataTable ToDataTable<T>(this IList<T> data)
-        //{
-        //    PropertyDescriptorCollection properties =
-        //        TypeDescriptor.GetProperties(typeof(T));
-        //    DataTable table = new DataTable();
-        //    foreach (PropertyDescriptor prop in properties)
-        //        table.Columns.Add(prop.Name, Nullable.GetUnderlyingType(prop.PropertyType) ?? prop.PropertyType);
-        //    foreach (T item in data)
-        //    {
-        //        DataRow row = table.NewRow();
-        //        foreach (PropertyDescriptor prop in properties)
-        //            row[prop.Name] = prop.GetValue(item) ?? DBNull.Value;
-        //        table.Rows.Add(row);
-        //    }
-        //    return table;
-        //}
-
-        //public DataTable ToDataTable<T>(this IList<T> data)
-        //{
-        //    PropertyDescriptorCollection props =
-        //        TypeDescriptor.GetProperties(typeof(T));
-        //    DataTable table = new DataTable();
-        //    for (int i = 0; i < props.Count; i++)
-        //    {
-        //        PropertyDescriptor prop = props[i];
-        //        table.Columns.Add(prop.Name, prop.PropertyType);
-        //    }
-        //    object[] values = new object[props.Count];
-        //    foreach (T item in data)
-        //    {
-        //        for (int i = 0; i < values.Length; i++)
-        //        {
-        //            values[i] = props[i].GetValue(item);
-        //        }
-        //        table.Rows.Add(values);
-        //    }
-        //    return table;
-        //}
+       
     }
 }
