@@ -119,7 +119,7 @@ namespace CPU.Forecast.Tool
                 }
                 catch (Exception ex)
                 {
-                    Error.addError("Failed to connect to data source", ex.Message);
+                    Error.addMensaje("Failed to connect to data source", ex.Message, true);
                     return false;
                 }
 
@@ -136,7 +136,7 @@ namespace CPU.Forecast.Tool
             }
             catch (Exception ex)
             {
-                Error.addError("Failed to Disconnect to data source", ex.Message);
+                Error.addMensaje("Failed to Disconnect to data source", ex.Message, true);
             }
           
         }

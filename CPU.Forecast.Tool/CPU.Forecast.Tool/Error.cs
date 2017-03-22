@@ -8,34 +8,34 @@ namespace CPU.Forecast.Tool
 {
     public static class Error
     {
-        private static string sError;
-        private static string sDescripcionError;
+        private static string sMensaje;
+        private static string sDescripcionMensaje;
         private static List<string> lErroCargarExcel;
 
 
-        public static string SError
+        public static string SMensaje
         {
             get
             {
-                return sError;
+                return sMensaje;
             }
 
             set
             {
-                sError = value;
+                sMensaje = value;
             }
         }
 
-        public static string SDescripcionError
+        public static string SDescripcionMensaje
         {
             get
             {
-                return sDescripcionError;
+                return sDescripcionMensaje;
             }
 
             set
             {
-                sDescripcionError = value;
+                sDescripcionMensaje = value;
             }
         }
 
@@ -52,15 +52,24 @@ namespace CPU.Forecast.Tool
             }
         }
 
-        public static void addError( string sPrmError, string sPrmDecripcion) {
-            SError = sPrmError;
-            SDescripcionError = sPrmDecripcion;
-            ShowError();
+        public static void addMensaje( string sPrmMensaje, string sPrmDecripcion, bool EsError) {
+            SMensaje = sPrmMensaje;
+            SDescripcionMensaje = sPrmDecripcion;
+            ShowError(EsError);
         }
 
-        public static void ShowError()
+        public static void ShowError(bool bEsError)
         {
-            MessageBox.Show(SError, SDescripcionError, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if (bEsError)
+            {
+                MessageBox.Show(SMensaje, SDescripcionMensaje, MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+            }
+            else
+            {
+                MessageBox.Show(SMensaje, SDescripcionMensaje, MessageBoxButtons.OK, MessageBoxIcon.None);
+
+            }
         }
     }
 }

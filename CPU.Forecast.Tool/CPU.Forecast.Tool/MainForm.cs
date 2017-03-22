@@ -67,33 +67,6 @@ namespace CPU.Forecast.Tool
 
         }
 
-        private void btnNew_ItemClick(object sender, TileItemEventArgs e)
-        {
-
-            if (PanelPrincipal.SelectedPageIndex == 0)
-            {
-                this.gvTypeDevices.PostEditor();
-                gvTypeDevices.AddNewRow();
-            }
-            else if (PanelPrincipal.SelectedPageIndex== 1)
-            {
-                this.gvMaximun.PostEditor();
-                gvMaximun.AddNewRow();
-
-            }
-
-            else if (PanelPrincipal.SelectedPageIndex == 2)
-            {
-                this.gvMaintenceCompo.PostEditor();
-                gvMaintenceCompo.AddNewRow();
-            }
-            else if (PanelPrincipal.SelectedPageIndex == 3)
-            {
-                this.gvPlan.PostEditor();
-                gvPlan.AddNewRow();
-            }
-
-        }
 
         private void InitializeComponentExtra()
         {
@@ -120,31 +93,12 @@ namespace CPU.Forecast.Tool
         private void CargarGrid()
         {
              dgvTypeDevices.DataSource = CreatablaTipos();
-            // Clases.TypeDevices TD = new Clases.TypeDevices();
-
-            //dgvTypeDevices.DataSource = TD.CargaTypeDevices();
 
             dgvMaximun.DataSource = CreaMaximunCost();
 
             dgvMaintenceCompo.DataSource = CreaMaintenceCompo();
 
             dgvPlan.DataSource = CreaPlans();
-
-
-            //DataSet dtSet = new DataSet("TYPE_DEVICE");
-            //dtSet.Tables.Add(dtTypeDevices);
-            //dtSet.Tables.Add(dtComponents);
-
-            //DataRelation dtRelation;
-            //DataColumn custCol = dtSet.Tables["TYPE_DEVICE"].Columns["PART"];
-            //DataColumn orderCol = dtSet.Tables["COMPONENTS"].Columns["PART_CODE"];
-            //dtRelation = new DataRelation("CustOrderRelation ", custCol, orderCol);
-            //dtSet.Tables["COMPONENTS"].ParentRelations.Add(dtRelation);
-            ////dgvLowerCostUnit. SetDataBinding(dtSet, "TYPE_DEVICE");
-
-
-            //dgvLowerCostUnit.DataSource = dtSet.Tables["COMPONENTS"];
-            
             
         }
 
@@ -207,6 +161,8 @@ namespace CPU.Forecast.Tool
             return dtMaximunCost;
         }
 
+        #region Eventos
+
         private void tbTypeDevices_ItemClick(object sender, TileItemEventArgs e)
         {
             PanelPrincipal.SelectedPageIndex = 0;
@@ -225,6 +181,39 @@ namespace CPU.Forecast.Tool
         private void tbPlans_ItemClick(object sender, TileItemEventArgs e)
         {
             PanelPrincipal.SelectedPageIndex = 3;
+        }
+
+        private void tbEstimate_ItemClick(object sender, TileItemEventArgs e)
+        {
+            PanelPrincipal.SelectedPageIndex = 4;
+        }
+
+        private void btnNew_ItemClick(object sender, TileItemEventArgs e)
+        {
+
+            if (PanelPrincipal.SelectedPageIndex == 0)
+            {
+                this.gvTypeDevices.PostEditor();
+                gvTypeDevices.AddNewRow();
+            }
+            else if (PanelPrincipal.SelectedPageIndex == 1)
+            {
+                this.gvMaximun.PostEditor();
+                gvMaximun.AddNewRow();
+
+            }
+
+            else if (PanelPrincipal.SelectedPageIndex == 2)
+            {
+                this.gvMaintenceCompo.PostEditor();
+                gvMaintenceCompo.AddNewRow();
+            }
+            else if (PanelPrincipal.SelectedPageIndex == 3)
+            {
+                this.gvPlan.PostEditor();
+                gvPlan.AddNewRow();
+            }
+
         }
 
         private void btnDelete_ItemClick(object sender, TileItemEventArgs e)
@@ -273,16 +262,88 @@ namespace CPU.Forecast.Tool
                 bOk = clsTransacc.UpdateDB(dtTypeDevices, dtComponents, dtMaximunCost, dtPlan);
             }
 
-            if (!bOk)
+            if (bOk)
             {
-               
-            }
-            else
-            {
-
+                Error.addMensaje("Successfully updated ", "The database is updated with all rows", false); 
             }
 
         }
+
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+
+        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
+        private void MainForm_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
+
+        private void tbLoad_ItemClick(object sender, TileItemEventArgs e)
+        {
+
+            if (PanelPrincipal.SelectedPageIndex == 0)
+            {
+                Clases.sTablasLoad = Clases.EnumTablas.TYPE_DEVICES;
+            }
+            else if (PanelPrincipal.SelectedPageIndex == 1)
+            {
+
+            }
+
+            else if (PanelPrincipal.SelectedPageIndex == 2)
+            {
+                Clases.sTablasLoad = Clases.EnumTablas.COMPONENTS;
+            }
+            else if (PanelPrincipal.SelectedPageIndex == 3)
+            {
+
+            }
+
+            Form load = new CargaExcelWizard();
+
+            load.ShowDialog();
+
+
+            dgvTypeDevices.DataSource = dtTypeDevices;
+            dgvMaintenceCompo.DataSource = dtComponents;
+
+        }
+
+        private void PanelPrincipal_SelectedPageChanged(object sender, DevExpress.XtraBars.Navigation.SelectedPageChangedEventArgs e)
+        {
+            if (e.Page.Caption == "Lower cost per unit")
+            {
+                tbCalculate.Enabled = true;
+            }
+            else
+            {
+                tbCalculate.Enabled = false;
+            }
+        }
+
+        private void tbCalculate_ItemClick(object sender, TileItemEventArgs e)
+        {
+            bool bOk = true;
+
+            bOk = validarGridLlenos();
+
+            if (bOk)
+            {
+                bOk = calcularCosto();
+            }
+        }
+
+        #endregion Eventos
+
+        #region Funciones
+
 
         private bool validarGrid()
         {
@@ -315,77 +376,7 @@ namespace CPU.Forecast.Tool
            // }
         }
 
-        public const int WM_NCLBUTTONDOWN = 0xA1;
-        public const int HT_CAPTION = 0x2;
-
-        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
-        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
-        [System.Runtime.InteropServices.DllImportAttribute("user32.dll")]
-        public static extern bool ReleaseCapture();
-        private void MainForm_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                ReleaseCapture();
-                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
-            }
-        }
-
-        private void tbLoad_ItemClick(object sender, TileItemEventArgs e)
-        {
-           
-            if (PanelPrincipal.SelectedPageIndex == 0)
-            {
-                Clases.sTablasLoad = Clases.EnumTablas.TYPE_DEVICES;
-            }
-            else if (PanelPrincipal.SelectedPageIndex == 1)
-            {
-               
-            }
-
-            else if (PanelPrincipal.SelectedPageIndex == 2)
-            {
-                Clases.sTablasLoad = Clases.EnumTablas.COMPONENTS;
-            }
-            else if (PanelPrincipal.SelectedPageIndex == 3)
-            {
-                
-            }
-
-            Form load = new CargaExcelWizard();
-            
-            load.ShowDialog();
-            
-
-            dgvTypeDevices.DataSource = dtTypeDevices;
-            dgvMaintenceCompo.DataSource = dtComponents;
-            
-        }
-
-        private void PanelPrincipal_SelectedPageChanged(object sender, DevExpress.XtraBars.Navigation.SelectedPageChangedEventArgs e)
-        {
-            if (e.Page.Caption == "Lower cost per unit")
-            {
-                tbCalculate.Enabled = true;
-            }
-            else
-            {
-                tbCalculate.Enabled = false;
-            }
-        }
-
-        private void tbCalculate_ItemClick(object sender, TileItemEventArgs e)
-        {
-            bool bOk = true;
-
-            bOk = validarGridLlenos();
-
-            if (bOk)
-            {
-               bOk = calcularCosto();
-            }           
-        }
-
+        
         private bool validarGridLlenos()
         {
             bool bOk = true;
@@ -393,21 +384,21 @@ namespace CPU.Forecast.Tool
             if (dtTypeDevices.Rows.Count < 1) 
             {
                 bOk = false;
-                Error.addError("Types of devices is empty","In order to calculate, we needs almost one row in the table: types of devices");
+                Error.addMensaje("Types of devices is empty","In order to calculate, we needs almost one row in the table: types of devices", true);
             }
 
             if (bOk && dtComponents.Rows.Count < 1)
             {
                 bOk = false;
 
-                Error.addError("Components is empty", "In order to calculate, we needs almost one row in the table of components");
+                Error.addMensaje("Components is empty", "In order to calculate, we needs almost one row in the table of components", true);
             }
 
             if (bOk && dtPlan.Rows.Count < 1)
             {
                 bOk = false;
 
-                Error.addError("Plan is empty", "In order to calculate, we needs almost one row in the table of plans");
+                Error.addMensaje("Plan is empty", "In order to calculate, we needs almost one row in the table of plans", true);
             }
 
             return bOk;
@@ -674,7 +665,7 @@ namespace CPU.Forecast.Tool
                     else
                     {
                         bOk = false;
-                        Error.addError("The model doesn't exist ", "The model " + lPlanActual.SModel + " doesn't exist in the table types of devices.");
+                        Error.addMensaje("The model doesn't exist ", "The model " + lPlanActual.SModel + " doesn't exist in the table types of devices.", true);
                     }
 
                     
@@ -734,6 +725,9 @@ namespace CPU.Forecast.Tool
             return bOk;
             
         }
+
+        #endregion Funciones
+
        
     }
 }

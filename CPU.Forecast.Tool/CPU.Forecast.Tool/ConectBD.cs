@@ -40,7 +40,7 @@ namespace CPU.Forecast.Tool
             }
             else
             {
-                Error.ShowError();
+                Error.ShowError(true);
             }
 
         }

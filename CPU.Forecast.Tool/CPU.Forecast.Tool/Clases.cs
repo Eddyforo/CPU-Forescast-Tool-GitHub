@@ -495,7 +495,7 @@ namespace CPU.Forecast.Tool
                 }
                 catch (Exception ex)
                 {
-                    Error.addError("Error inserting row in a : " + sTabla + " ", ex.Message);
+                    Error.addMensaje("Error inserting rows in a : " + sTabla + " ", ex.Message, true);
                     bOk = false;
                 }
                 return bOk;
@@ -520,7 +520,7 @@ namespace CPU.Forecast.Tool
                 }
                 catch (Exception e)
                 {
-                    Error.addError("Error deleting row in a table" + sTabla, e.Message);
+                    Error.addMensaje("Error deleting row in a table" + sTabla, e.Message, true);
                     bOk = false;
                 }
 
@@ -552,7 +552,7 @@ namespace CPU.Forecast.Tool
                 }
                 catch (Exception e)
                 {
-                    Error.addError("Error loading rows in a table type_devices " , e.Message);
+                    Error.addMensaje("Error loading rows in a table type_devices " , e.Message, true);
                     bOk = false;
                 }
 
@@ -579,7 +579,7 @@ namespace CPU.Forecast.Tool
                 }
                 catch (Exception e)
                 {
-                    Error.addError("Error loading rows in a table COMPONENTS ", e.Message);
+                    Error.addMensaje("Error loading rows in a table COMPONENTS ", e.Message, true);
                     bOk = false;
                 }
 
@@ -605,7 +605,7 @@ namespace CPU.Forecast.Tool
                 }
                 catch (Exception e)
                 {
-                    Error.addError("Error loading rows in a table MAXIMUN_COST ", e.Message);
+                    Error.addMensaje("Error loading rows in a table MAXIMUN_COST ", e.Message, true);
                     bOk = false;
                 }
 
@@ -631,7 +631,7 @@ namespace CPU.Forecast.Tool
                 }
                 catch (Exception e)
                 {
-                    Error.addError("Error loading rows in a table PLANS ", e.Message);
+                    Error.addMensaje("Error loading rows in a table PLANS ", e.Message, true);
                     bOk = false;
                 }
 

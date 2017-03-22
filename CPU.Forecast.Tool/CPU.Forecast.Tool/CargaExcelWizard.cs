@@ -43,23 +43,32 @@ namespace CPU.Forecast.Tool
 
             Excel.Application App = new Excel.Application();
 
-
-            Excel.Workbook wBook = App.Workbooks.Open(psRuta);
-
-            object misValue = System.Reflection.Missing.Value;
-
-            NombresHojas = new List<string>();
-
-
-            foreach (Excel.Worksheet hoja in wBook.Sheets)
+            try
             {
-                NombresHojas.Add(hoja.Name);
+
+                Excel.Workbook wBook = App.Workbooks.Open(psRuta);
+
+                object misValue = System.Reflection.Missing.Value;
+
+                NombresHojas = new List<string>();
+
+
+                foreach (Excel.Worksheet hoja in wBook.Sheets)
+                {
+                    NombresHojas.Add(hoja.Name);
+
+                }
+
+                wBook.Close(false, misValue, misValue);
+                App.Workbooks.Close();
+                App.Quit();
 
             }
+            catch (Exception ex)
+            {
 
-            wBook.Close(false, misValue, misValue);
-            App.Workbooks.Close();
-            App.Quit();
+                Error.addMensaje("Error opening file", ex.Message, true);
+            }
 
         }
 
@@ -134,7 +143,8 @@ namespace CPU.Forecast.Tool
             {
 
                 //en caso de haber una excepcion que nos mande un mensaje de error
-                MessageBox.Show("Error, Verificar el archivo o el nombre de la hoja", ex.Message);
+                Error.addMensaje("Error opening file", ex.Message, true);
+
             }
         }
 
@@ -185,7 +195,7 @@ namespace CPU.Forecast.Tool
                 catch (Exception ex)
                 {
                     //en caso de haber una excepcion que nos mande un mensaje de error
-                    MessageBox.Show("Error, Verificar el archivo o el nombre de la hoja", ex.Message);
+                    Error.addMensaje("Error reading file", ex.Message, true);
                 }
             }
         }
@@ -213,9 +223,9 @@ namespace CPU.Forecast.Tool
                 }
 
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-                XtraMessageBox.Show("Error en obtener el nombre de columnas del archivo");
+                Error.addMensaje("Error reading columns of the excel", ex.Message, true);
             }
 
         }
@@ -313,6 +323,10 @@ namespace CPU.Forecast.Tool
                 {
                     Error.LErroCargarExcel.Add(ee.Message);
                 }
+                catch (Exception ex)
+                {
+                    Error.addMensaje("Error loading data", ex.Message, true);
+                }
 
             }
         }
@@ -337,7 +351,7 @@ namespace CPU.Forecast.Tool
             {
                 if (imglstbxColAsociacion.ItemCount == 0)
                 {
-                    MessageBox.Show("Debe asociar las columnas del archivo con las columnas de las base de datos", "Validando asociación", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    Error.addMensaje("Validating association", "You must associate the columns of the file with the columns of the database", true);
                     e.Cancel = true;
                 }
             }
