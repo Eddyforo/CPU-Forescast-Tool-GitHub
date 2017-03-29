@@ -123,6 +123,9 @@
             this.pageEventsViewer = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.dgvEventViewe = new DevExpress.XtraGrid.GridControl();
             this.gvEventViewer = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gColDateTime = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColEvent = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColDescripcion = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.txtPercent = new DevExpress.XtraEditors.TextEdit();
@@ -806,7 +809,7 @@
             this.pageEventsViewer});
             this.tabPane1.RegularSize = new System.Drawing.Size(858, 303);
             this.tabPane1.SelectedPage = this.Version;
-            this.tabPane1.SelectedPageIndex = 2;
+            this.tabPane1.SelectedPageIndex = 3;
             this.tabPane1.Size = new System.Drawing.Size(858, 303);
             this.tabPane1.TabIndex = 3;
             this.tabPane1.Text = "tabPane1";
@@ -839,6 +842,7 @@
             this.Cost});
             this.gvEstimadoDetail.GridControl = this.dgvEstimadoDetail;
             this.gvEstimadoDetail.Name = "gvEstimadoDetail";
+            this.gvEstimadoDetail.OptionsSelection.MultiSelect = true;
             // 
             // Part
             // 
@@ -916,6 +920,7 @@
             this.TotalCOG});
             this.gvEstimado.GridControl = this.dgvEstimado;
             this.gvEstimado.Name = "gvEstimado";
+            this.gvEstimado.OptionsSelection.MultiSelect = true;
             // 
             // Type
             // 
@@ -1018,8 +1023,37 @@
             // 
             // gvEventViewer
             // 
+            this.gvEventViewer.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gColDateTime,
+            this.gColEvent,
+            this.gColDescripcion});
             this.gvEventViewer.GridControl = this.dgvEventViewe;
             this.gvEventViewer.Name = "gvEventViewer";
+            // 
+            // gColDateTime
+            // 
+            this.gColDateTime.Caption = "Date and Time";
+            this.gColDateTime.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
+            this.gColDateTime.FieldName = "DATE";
+            this.gColDateTime.Name = "gColDateTime";
+            this.gColDateTime.Visible = true;
+            this.gColDateTime.VisibleIndex = 0;
+            // 
+            // gColEvent
+            // 
+            this.gColEvent.Caption = "Event";
+            this.gColEvent.FieldName = "EVENT";
+            this.gColEvent.Name = "gColEvent";
+            this.gColEvent.Visible = true;
+            this.gColEvent.VisibleIndex = 2;
+            // 
+            // gColDescripcion
+            // 
+            this.gColDescripcion.Caption = "Description";
+            this.gColDescripcion.FieldName = "DESCRIPTION";
+            this.gColDescripcion.Name = "gColDescripcion";
+            this.gColDescripcion.Visible = true;
+            this.gColDescripcion.VisibleIndex = 1;
             // 
             // tableLayoutPanel2
             // 
@@ -1260,5 +1294,8 @@
         private DevExpress.XtraBars.Navigation.TabNavigationPage pageEventsViewer;
         private DevExpress.XtraGrid.GridControl dgvEventViewe;
         private DevExpress.XtraGrid.Views.Grid.GridView gvEventViewer;
+        private DevExpress.XtraGrid.Columns.GridColumn gColDateTime;
+        private DevExpress.XtraGrid.Columns.GridColumn gColDescripcion;
+        private DevExpress.XtraGrid.Columns.GridColumn gColEvent;
     }
 }

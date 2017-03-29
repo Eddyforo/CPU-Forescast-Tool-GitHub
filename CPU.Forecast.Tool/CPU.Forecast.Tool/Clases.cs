@@ -257,6 +257,11 @@ namespace CPU.Forecast.Tool
                 {
                     return nVersion;
                 }
+
+                set
+                {
+                    nVersion = value;
+                }
             }
 
             public int NumberPart
@@ -377,7 +382,7 @@ namespace CPU.Forecast.Tool
                 }
             }
 
-            internal List<DetalleVersionPlan> ListaDetalle
+            public  List<DetalleVersionPlan> ListaDetalle
             {
                 get
                 {

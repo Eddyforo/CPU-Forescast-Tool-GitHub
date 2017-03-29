@@ -22,6 +22,9 @@ namespace CPU.Forecast.Tool
         public static DataTable dtMaximunCost;
         public static DataTable dtComponents;
         public static DataTable dtPlan;
+
+        public static DataTable dtEventViewer;
+
         //public static DataTable dtMaestro;
         //public static DataTable dtDetalle;
 
@@ -37,6 +40,12 @@ namespace CPU.Forecast.Tool
             InitializeComponent();
             InitializeComponentExtra();
         }
+
+
+
+
+
+        #region Eventos
 
         private void toolStripButton1_Click(object sender, System.EventArgs e)
         {
@@ -55,7 +64,7 @@ namespace CPU.Forecast.Tool
 
         private void toolStripButton1_Click_1(object sender, System.EventArgs e)
         {
-           // Login Conectar = new Login();
+            // Login Conectar = new Login();
 
             ConectBD Conectar = new ConectBD();
 
@@ -89,80 +98,6 @@ namespace CPU.Forecast.Tool
 
             clsTransacc.LoadDatosTabla(dtTypeDevices, dtComponents, dtMaximunCost, dtPlan);
         }
-
-        private void CargarGrid()
-        {
-             dgvTypeDevices.DataSource = CreatablaTipos();
-
-            dgvMaximun.DataSource = CreaMaximunCost();
-
-            dgvMaintenceCompo.DataSource = CreaMaintenceCompo();
-
-            dgvPlan.DataSource = CreaPlans();
-            
-        }
-
-      
-
-        private DataTable CreatablaTipos()
-        {
-            dtTypeDevices = new DataTable("TYPE_DEVICE");
-
-            dtTypeDevices.Columns.Add(new DataColumn("TYPE_DEVICE", typeof(string)));
-            dtTypeDevices.Columns.Add(new DataColumn("DESCRIPTION", typeof(string)));
-            dtTypeDevices.Columns.Add(new DataColumn("MODEL", typeof(string)));
-            dtTypeDevices.Columns.Add(new DataColumn("PART", typeof(string)));
-            dtTypeDevices.Columns.Add(new DataColumn("QUANTITY", typeof(Int32)));
-
-            DataColumn[] keys = new DataColumn[3];
-
-            keys[0] = dtTypeDevices.Columns["TYPE_DEVICE"];
-            keys[1] = dtTypeDevices.Columns["MODEL"];
-            keys[2] = dtTypeDevices.Columns["PART"];
-
-            dtTypeDevices.PrimaryKey = keys;
-            
-
-            return dtTypeDevices;
-        }
-
-        private DataTable CreaMaintenceCompo()
-        {
-            dtComponents = new DataTable("COMPONENTS");
-
-            dtComponents.Columns.Add(new DataColumn("PART_CODE", typeof(string)));
-            dtComponents.Columns.Add(new DataColumn("DESCRIPTION", typeof(string)));
-            dtComponents.Columns.Add(new DataColumn("COST", typeof(decimal)));
-            dtComponents.Columns.Add(new DataColumn("STOCK", typeof(Int32)));
-
-            dtComponents.Columns["PART_CODE"].Unique = true;
-
-            return dtComponents;
-        }
-
-
-        private DataTable CreaPlans()
-        {
-            dtPlan = new DataTable("PLANS");
-
-            dtPlan.Columns.Add(new DataColumn("MODEL", typeof(string)));
-            dtPlan.Columns.Add(new DataColumn("PLANS", typeof(Int32)));
-
-            return dtPlan;
-        }
-
-        private DataTable CreaMaximunCost()
-        {
-            dtMaximunCost = new DataTable("MAXIMUN_COST");
-
-            dtMaximunCost.Columns.Add(new DataColumn("MODEL", typeof(string)));
-            dtMaximunCost.Columns.Add(new DataColumn("MAX_COST", typeof(decimal)));
-
-            return dtMaximunCost;
-        }
-
-        #region Eventos
-
         private void tbTypeDevices_ItemClick(object sender, TileItemEventArgs e)
         {
             PanelPrincipal.SelectedPageIndex = 0;
@@ -344,6 +279,87 @@ namespace CPU.Forecast.Tool
 
         #region Funciones
 
+        private void CargarGrid()
+        {
+            dgvTypeDevices.DataSource = CreatablaTipos();
+
+            dgvMaximun.DataSource = CreaMaximunCost();
+
+            dgvMaintenceCompo.DataSource = CreaMaintenceCompo();
+
+            dgvPlan.DataSource = CreaPlans();
+
+            dgvEventViewe.DataSource = CrearTablaEventViewer();
+
+        }
+
+        private DataTable CrearTablaEventViewer()
+        {
+            dtEventViewer = new DataTable("EVENT_VIEWER");
+
+            dtEventViewer.Columns.Add(new DataColumn("DATE", typeof(DateTime)));
+            dtEventViewer.Columns.Add(new DataColumn("EVENT", typeof(string)));
+            dtEventViewer.Columns.Add(new DataColumn("DESCRIPTION", typeof(string)));
+
+            return dtEventViewer;
+        }
+
+        private DataTable CreatablaTipos()
+        {
+            dtTypeDevices = new DataTable("TYPE_DEVICE");
+
+            dtTypeDevices.Columns.Add(new DataColumn("TYPE_DEVICE", typeof(string)));
+            dtTypeDevices.Columns.Add(new DataColumn("DESCRIPTION", typeof(string)));
+            dtTypeDevices.Columns.Add(new DataColumn("MODEL", typeof(string)));
+            dtTypeDevices.Columns.Add(new DataColumn("PART", typeof(string)));
+            dtTypeDevices.Columns.Add(new DataColumn("QUANTITY", typeof(Int32)));
+
+            DataColumn[] keys = new DataColumn[3];
+
+            keys[0] = dtTypeDevices.Columns["TYPE_DEVICE"];
+            keys[1] = dtTypeDevices.Columns["MODEL"];
+            keys[2] = dtTypeDevices.Columns["PART"];
+
+            dtTypeDevices.PrimaryKey = keys;
+
+
+            return dtTypeDevices;
+        }
+
+        private DataTable CreaMaintenceCompo()
+        {
+            dtComponents = new DataTable("COMPONENTS");
+
+            dtComponents.Columns.Add(new DataColumn("PART_CODE", typeof(string)));
+            dtComponents.Columns.Add(new DataColumn("DESCRIPTION", typeof(string)));
+            dtComponents.Columns.Add(new DataColumn("COST", typeof(decimal)));
+            dtComponents.Columns.Add(new DataColumn("STOCK", typeof(Int32)));
+
+            dtComponents.Columns["PART_CODE"].Unique = true;
+
+            return dtComponents;
+        }
+
+
+        private DataTable CreaPlans()
+        {
+            dtPlan = new DataTable("PLANS");
+
+            dtPlan.Columns.Add(new DataColumn("MODEL", typeof(string)));
+            dtPlan.Columns.Add(new DataColumn("PLANS", typeof(Int32)));
+
+            return dtPlan;
+        }
+
+        private DataTable CreaMaximunCost()
+        {
+            dtMaximunCost = new DataTable("MAXIMUN_COST");
+
+            dtMaximunCost.Columns.Add(new DataColumn("MODEL", typeof(string)));
+            dtMaximunCost.Columns.Add(new DataColumn("MAX_COST", typeof(decimal)));
+
+            return dtMaximunCost;
+        }
 
         private bool validarGrid()
         {
@@ -507,6 +523,8 @@ namespace CPU.Forecast.Tool
                                 {
                                     bBuscaMenorF = true;
                                     bHayStockSuf = false;
+
+
                                     break;
                                 }
 
@@ -526,6 +544,8 @@ namespace CPU.Forecast.Tool
                                     listaComponents.Where(w => w.SPartCode == item.Part).ToList()
                                             .ForEach(k => k.NStock -= (item.NumberPart * i));
                                 }
+
+
 
                                 break;
                             }
@@ -572,7 +592,7 @@ namespace CPU.Forecast.Tool
                         {
                             //filtramos los componentes que sean de la misma parte y que el stock sea mayor que cero
 
-                            lCompoPerParts = (from Clases.MaintenceComponents z in listaComponents
+                            lCompoPerParts = (from MaintenceComponents z in listaComponents
                                               where z.SPartCode.StartsWith(lPartPerModel.Part) &&
                                               z.NStock > 0
                                               orderby z.NCost ascending
@@ -655,6 +675,8 @@ namespace CPU.Forecast.Tool
                             else
                             {
                                 bNoHaySufComponentes = true;
+
+                                dtEventViewer.Rows.Add(DateTime.Now, "Component doesn't exist", "The component " + lPartPerModel.Part + " doesn't exist.");
                                 //hacer si no existe el componente en el stock
                                 break;  
                             }
@@ -665,14 +687,182 @@ namespace CPU.Forecast.Tool
                     else
                     {
                         bOk = false;
-                        Error.addMensaje("The model doesn't exist ", "The model " + lPlanActual.SModel + " doesn't exist in the table types of devices.", true);
+
+                        dtEventViewer.Rows.Add(DateTime.Now, "The model doesn't exist", "The model " + lPlanActual.SModel + " doesn't exist in the table types of devices.");
+                       // Error.addMensaje("The model doesn't exist ", "The model " + lPlanActual.SModel + " doesn't exist in the table types of devices.", true);
                     }
 
                     
                     if (unaVersionPlan.ListaDetalle.Count > 0 && !bNoHaySufComponentes)
                     {
-                        unaVersionPlan.PlanAmount += 1;
+                        
+                        //lista de todos los componentes que no son R en la version actual
+                        List<DetalleVersionPlan> lversionDetalleNoR = (from DetalleVersionPlan h in unaVersionPlan.ListaDetalle
+                                                                    where !h.Part.EndsWith("R")
+                                                                    select new DetalleVersionPlan(h.Version)
+                                                                    {
+                                                                        Part = h.Part,
+                                                                        Model = h.Model,
+                                                                        Version = h.Version,
+                                                                        NumberPart = h.NumberPart,
+                                                                        Cost = h.Cost
 
+                                                                    }).ToList();
+
+                        //contamos la cantidad de componentes que no son R
+                        nCantTotalPart = (from DetalleVersionPlan i in lversionDetalleNoR
+                                          select i.NumberPart).Sum();
+
+                        //verificamos si cumplimos con el porcentaje requerido
+                        if (nCantTotalPart < nCantPartPorPorcen)
+                        {
+                            decimal nCantidadfaltaOEM = nCantTotalPart - nCantPartPorPorcen;
+                            //DetalleVersionPlan itemTemp ;
+
+                            //se sacan todos los compoenentes que son R para luego quitarlos y cumplir con el porcentaje
+                            List<DetalleVersionPlan> lVersionDetalleR = unaVersionPlan.ListaDetalle.Except(lversionDetalleNoR).ToList();
+
+                            //recorremos cada uno de ellos
+                            foreach (DetalleVersionPlan item in lVersionDetalleR)
+                            {
+                                if (nCantidadfaltaOEM > 0)
+                                {
+                                    //comenzamos con el primero
+                                    // itemTemp = unaVersionPlan.ListaDetalle.Find(x => x.Part == item.Part);
+
+                                    //Quitamos el componente de la version antes de buscar el nuevo componente
+                                    unaVersionPlan.ListaDetalle.Remove(item); 
+
+                                    TypeDevices sMainTypeDevice = lTypePerModel.Find( x => x.Part.StartsWith(item.Part.Substring(0, item.Part.Length - 2)) 
+                                                        && x.Model == item.Model);
+
+
+
+
+
+                                    #region Codigo de estimación usado arriba con variantes
+
+                                    //filtramos los componentes que sean de la misma parte y que el stock sea mayor que cero y en este caso que no sean R
+
+                                    lCompoPerParts = (from MaintenceComponents z in listaComponents
+                                                      where z.SPartCode.StartsWith(item.Part) &&
+                                                      !z.SPartCode.EndsWith("R") &&
+                                                      z.NStock > 0
+                                                      orderby z.NCost ascending
+                                                      select new Clases.MaintenceComponents
+                                                      {
+                                                          SPartCode = z.SPartCode,
+                                                          SDescription = z.SDescription,
+                                                          NCost = z.NCost,
+                                                          NStock = z.NStock
+                                                      }).ToList();
+
+
+                                    if (lCompoPerParts.Count > 0)
+                                    {
+                                        int nContEstimada = sMainTypeDevice.Quantity;
+                                        List<Clases.DetalleVersionPlanParcial> tempParcial = new List<Clases.DetalleVersionPlanParcial>();
+                                        //Se recorren todas las partes pensando en el caso que la primera no cumpla con el 
+                                        for (int i = 0; i < lCompoPerParts.Count; i++)
+                                        {
+                                            if ((lCompoPerParts[i].NStock - nContEstimada) >= 0 && !bEstimaCompParcial)
+                                            {
+
+                                                //Se agrega el componente al detalle de la version
+                                                unaVersionPlan.Model = sMainTypeDevice.Model;
+                                                unaVersionPlan.Type =  sMainTypeDevice.Type_devices;
+                                                unaVersionPlan.addDetalle(lCompoPerParts[i].SPartCode, nContEstimada, lCompoPerParts[i].NCost);
+
+                                                //primero sumamos el componente que estamos sustituyendo
+                                                listaComponents.Where(w => w.SPartCode == item.Part).ToList()
+                                                            .ForEach(k => k.NStock += nContEstimada);
+
+                                                //Resta el componente que acaba de agregar a la lista de componentes padre
+                                                listaComponents.Where(w => w.SPartCode == lCompoPerParts[i].SPartCode).ToList()
+                                                            .ForEach(k => k.NStock -= nContEstimada);
+
+                                                //se resta la cantidad que falta para llegar al porcentaje de OEM
+                                                nCantidadfaltaOEM -= nContEstimada;
+
+                                                //En el caso que ya cantidad estimada sea igual que la necesaria, ya no hay que calcular nada y se sale.
+                                                break;
+                                            }
+                                            else
+                                            {
+                                                //se igual al stock ya que se va a agregar esa parte del stock para luego buscar las restantes
+                                                // nContEstimada = lCompoPerParts[i].NStock;
+
+                                                //se crea una lista temporal para el detalle ya que no se sabe si se van a cumplir con el total de componentes
+                                                DetalleVersionPlanParcial pTemp = new DetalleVersionPlanParcial();
+
+                                                pTemp.sParte = lCompoPerParts[i].SPartCode;
+                                                pTemp.iCant = nContEstimada > lCompoPerParts[i].NStock ? lCompoPerParts[i].NStock : nContEstimada;
+                                                pTemp.dCosto = lCompoPerParts[i].NCost;
+
+                                                nContEstimada = nContEstimada - pTemp.iCant;
+
+                                                tempParcial.Add(pTemp);
+
+                                                //se comienza a estimar componentes parciales por que no hay en el stock
+                                                bEstimaCompParcial = true;
+
+                                            }
+                                        }
+
+                                        if (bEstimaCompParcial && nContEstimada == 0)
+                                        {
+                                            foreach (Clases.DetalleVersionPlanParcial detalle in tempParcial)
+                                            {
+                                                //Se agrega el componente al detalle de la version
+                                                unaVersionPlan.Model = sMainTypeDevice.Model;
+                                                unaVersionPlan.Type = sMainTypeDevice.Type_devices;
+                                                unaVersionPlan.addDetalle(detalle.sParte, detalle.iCant, detalle.dCosto);
+
+                                                //primero sumamos el componente que estamos sustituyendo
+                                                listaComponents.Where(w => w.SPartCode == item.Part).ToList()
+                                                            .ForEach(k => k.NStock += nContEstimada);
+
+                                                //Resta el componente que acaba de agregar a la lista de componentes padre
+                                                listaComponents.Where(w => w.SPartCode == detalle.sParte).ToList()
+                                                            .ForEach(k => k.NStock -= detalle.iCant);
+
+
+                                                //se resta la cantidad que falta para llegar al porcentaje de OEM
+                                                nCantidadfaltaOEM -= nContEstimada;
+                                            }
+
+                                            bEstimaCompParcial = false;
+                                        }
+                                        else if (bEstimaCompParcial)
+                                        {
+                                            bNoHaySufComponentes = true;
+                                            break;
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        bNoHaySufComponentes = true;
+                                        //hacer si no existe el componente en el stock
+                                        break;
+                                    }
+
+                                    #endregion
+
+                                }//Fin if nCantidadfaltaOEM
+                                else
+                                {
+                                    //salimos del recorrido por que el porcentaje de OEM esta bien 
+                                    break;
+                                }
+
+                            }// fin del recorrido lVersionDetalleR
+
+
+                        } //if para sabe si cumplimos con el OEM
+
+                        unaVersionPlan.PlanAmount += 1;
+                        
                         //bandera para saber si ya hay uno estimado
                         bHayUnCostMenor = true;
 
@@ -680,7 +870,8 @@ namespace CPU.Forecast.Tool
                         listVersionPlan.Add(unaVersionPlan);
                         
                     }
-                    else if (bNoHaySufComponentes)
+
+                    if (bNoHaySufComponentes)
                     {
                         int nFaltane = lPlanActual.NPlan - cont;
                         cont = lPlanActual.NPlan;
