@@ -120,6 +120,10 @@
             this.pageMissingMaterial = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.dgvMissing = new DevExpress.XtraGrid.GridControl();
             this.gvMissing = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gColDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColModel = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColPlan = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gColMissing = new DevExpress.XtraGrid.Columns.GridColumn();
             this.pageEventsViewer = new DevExpress.XtraBars.Navigation.TabNavigationPage();
             this.dgvEventViewe = new DevExpress.XtraGrid.GridControl();
             this.gvEventViewer = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -189,7 +193,7 @@
             this.TableMainContent.Location = new System.Drawing.Point(0, 0);
             this.TableMainContent.Name = "TableMainContent";
             this.TableMainContent.Padding = new System.Windows.Forms.Padding(5);
-            this.TableMainContent.RowCount = 6;
+            this.TableMainContent.RowCount = 5;
             this.TableMainContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.TableMainContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 119F));
             this.TableMainContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 79.42478F));
@@ -212,12 +216,12 @@
             this.tileBar2.Groups.Add(this.tileBarGroup7);
             this.tileBar2.Groups.Add(this.tileBarGroup8);
             this.tileBar2.HorizontalContentAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.tileBar2.Location = new System.Drawing.Point(8, 554);
+            this.tileBar2.Location = new System.Drawing.Point(8, 570);
             this.tileBar2.MaxId = 9;
             this.tileBar2.Name = "tileBar2";
             this.tileBar2.Padding = new System.Windows.Forms.Padding(22, 0, 22, 0);
             this.tileBar2.ScrollMode = DevExpress.XtraEditors.TileControlScrollMode.ScrollButtons;
-            this.tileBar2.Size = new System.Drawing.Size(888, 98);
+            this.tileBar2.Size = new System.Drawing.Size(888, 102);
             this.tileBar2.TabIndex = 0;
             this.tileBar2.Text = "tileBar2";
             // 
@@ -476,10 +480,10 @@
             this.tpMaintenceCompo,
             this.tpPlans,
             this.tpMenorCosto});
-            this.PanelPrincipal.RegularSize = new System.Drawing.Size(888, 395);
+            this.PanelPrincipal.RegularSize = new System.Drawing.Size(888, 411);
             this.PanelPrincipal.SelectedPage = this.tpPlans;
             this.PanelPrincipal.SelectedPageIndex = 4;
-            this.PanelPrincipal.Size = new System.Drawing.Size(888, 395);
+            this.PanelPrincipal.Size = new System.Drawing.Size(888, 411);
             this.PanelPrincipal.TabIndex = 1;
             this.PanelPrincipal.Text = "tabPane1";
             this.PanelPrincipal.SelectedPageChanged += new DevExpress.XtraBars.Navigation.SelectedPageChangedEventHandler(this.PanelPrincipal_SelectedPageChanged);
@@ -493,7 +497,7 @@
             this.tpTypeDevice.Caption = "Types of Device";
             this.tpTypeDevice.Controls.Add(this.dgvTypeDevices);
             this.tpTypeDevice.Name = "tpTypeDevice";
-            this.tpTypeDevice.Size = new System.Drawing.Size(870, 350);
+            this.tpTypeDevice.Size = new System.Drawing.Size(870, 366);
             // 
             // dgvTypeDevices
             // 
@@ -501,7 +505,7 @@
             this.dgvTypeDevices.Location = new System.Drawing.Point(0, 0);
             this.dgvTypeDevices.MainView = this.gvTypeDevices;
             this.dgvTypeDevices.Name = "dgvTypeDevices";
-            this.dgvTypeDevices.Size = new System.Drawing.Size(870, 350);
+            this.dgvTypeDevices.Size = new System.Drawing.Size(870, 366);
             this.dgvTypeDevices.TabIndex = 0;
             this.dgvTypeDevices.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvTypeDevices,
@@ -603,7 +607,7 @@
             this.tpMaximunCost.Caption = "Maximun Costs";
             this.tpMaximunCost.Controls.Add(this.dgvMaximun);
             this.tpMaximunCost.Name = "tpMaximunCost";
-            this.tpMaximunCost.Size = new System.Drawing.Size(870, 350);
+            this.tpMaximunCost.Size = new System.Drawing.Size(870, 366);
             // 
             // dgvMaximun
             // 
@@ -611,7 +615,7 @@
             this.dgvMaximun.Location = new System.Drawing.Point(0, 0);
             this.dgvMaximun.MainView = this.gvMaximun;
             this.dgvMaximun.Name = "dgvMaximun";
-            this.dgvMaximun.Size = new System.Drawing.Size(870, 350);
+            this.dgvMaximun.Size = new System.Drawing.Size(870, 366);
             this.dgvMaximun.TabIndex = 0;
             this.dgvMaximun.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvMaximun,
@@ -655,7 +659,7 @@
             this.tpMaintenceCompo.Caption = "Components Maintenance";
             this.tpMaintenceCompo.Controls.Add(this.dgvMaintenceCompo);
             this.tpMaintenceCompo.Name = "tpMaintenceCompo";
-            this.tpMaintenceCompo.Size = new System.Drawing.Size(870, 350);
+            this.tpMaintenceCompo.Size = new System.Drawing.Size(870, 366);
             // 
             // dgvMaintenceCompo
             // 
@@ -663,7 +667,7 @@
             this.dgvMaintenceCompo.Location = new System.Drawing.Point(0, 0);
             this.dgvMaintenceCompo.MainView = this.gvMaintenceCompo;
             this.dgvMaintenceCompo.Name = "dgvMaintenceCompo";
-            this.dgvMaintenceCompo.Size = new System.Drawing.Size(870, 350);
+            this.dgvMaintenceCompo.Size = new System.Drawing.Size(870, 366);
             this.dgvMaintenceCompo.TabIndex = 0;
             this.dgvMaintenceCompo.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvMaintenceCompo,
@@ -723,7 +727,7 @@
             this.tpPlans.Caption = "Plans";
             this.tpPlans.Controls.Add(this.dgvPlan);
             this.tpPlans.Name = "tpPlans";
-            this.tpPlans.Size = new System.Drawing.Size(870, 350);
+            this.tpPlans.Size = new System.Drawing.Size(870, 366);
             // 
             // dgvPlan
             // 
@@ -731,7 +735,7 @@
             this.dgvPlan.Location = new System.Drawing.Point(0, 0);
             this.dgvPlan.MainView = this.gvPlan;
             this.dgvPlan.Name = "dgvPlan";
-            this.dgvPlan.Size = new System.Drawing.Size(870, 350);
+            this.dgvPlan.Size = new System.Drawing.Size(870, 366);
             this.dgvPlan.TabIndex = 0;
             this.dgvPlan.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvPlan,
@@ -771,7 +775,7 @@
             this.tpMenorCosto.Caption = "Lower cost per unit";
             this.tpMenorCosto.Controls.Add(this.tableLayoutPanel1);
             this.tpMenorCosto.Name = "tpMenorCosto";
-            this.tpMenorCosto.Size = new System.Drawing.Size(870, 350);
+            this.tpMenorCosto.Size = new System.Drawing.Size(870, 366);
             // 
             // tableLayoutPanel1
             // 
@@ -789,7 +793,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(870, 350);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(870, 366);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tabPane1
@@ -807,10 +811,10 @@
             this.All,
             this.pageMissingMaterial,
             this.pageEventsViewer});
-            this.tabPane1.RegularSize = new System.Drawing.Size(858, 303);
+            this.tabPane1.RegularSize = new System.Drawing.Size(858, 319);
             this.tabPane1.SelectedPage = this.Version;
-            this.tabPane1.SelectedPageIndex = 3;
-            this.tabPane1.Size = new System.Drawing.Size(858, 303);
+            this.tabPane1.SelectedPageIndex = 2;
+            this.tabPane1.Size = new System.Drawing.Size(858, 319);
             this.tabPane1.TabIndex = 3;
             this.tabPane1.Text = "tabPane1";
             // 
@@ -819,7 +823,7 @@
             this.All.Caption = "All";
             this.All.Controls.Add(this.dgvEstimadoDetail);
             this.All.Name = "All";
-            this.All.Size = new System.Drawing.Size(840, 258);
+            this.All.Size = new System.Drawing.Size(840, 274);
             // 
             // dgvEstimadoDetail
             // 
@@ -827,7 +831,7 @@
             this.dgvEstimadoDetail.Location = new System.Drawing.Point(0, 0);
             this.dgvEstimadoDetail.MainView = this.gvEstimadoDetail;
             this.dgvEstimadoDetail.Name = "dgvEstimadoDetail";
-            this.dgvEstimadoDetail.Size = new System.Drawing.Size(840, 258);
+            this.dgvEstimadoDetail.Size = new System.Drawing.Size(840, 274);
             this.dgvEstimadoDetail.TabIndex = 2;
             this.dgvEstimadoDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvEstimadoDetail});
@@ -896,7 +900,7 @@
             this.Version.Caption = "Group by Version";
             this.Version.Controls.Add(this.dgvEstimado);
             this.Version.Name = "Version";
-            this.Version.Size = new System.Drawing.Size(840, 258);
+            this.Version.Size = new System.Drawing.Size(840, 274);
             // 
             // dgvEstimado
             // 
@@ -904,7 +908,7 @@
             this.dgvEstimado.Location = new System.Drawing.Point(0, 0);
             this.dgvEstimado.MainView = this.gvEstimado;
             this.dgvEstimado.Name = "dgvEstimado";
-            this.dgvEstimado.Size = new System.Drawing.Size(840, 258);
+            this.dgvEstimado.Size = new System.Drawing.Size(840, 274);
             this.dgvEstimado.TabIndex = 1;
             this.dgvEstimado.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvEstimado});
@@ -985,7 +989,7 @@
             this.pageMissingMaterial.Caption = "Missing Material";
             this.pageMissingMaterial.Controls.Add(this.dgvMissing);
             this.pageMissingMaterial.Name = "pageMissingMaterial";
-            this.pageMissingMaterial.Size = new System.Drawing.Size(840, 258);
+            this.pageMissingMaterial.Size = new System.Drawing.Size(840, 274);
             // 
             // dgvMissing
             // 
@@ -993,22 +997,67 @@
             this.dgvMissing.Location = new System.Drawing.Point(0, 0);
             this.dgvMissing.MainView = this.gvMissing;
             this.dgvMissing.Name = "dgvMissing";
-            this.dgvMissing.Size = new System.Drawing.Size(840, 258);
+            this.dgvMissing.Size = new System.Drawing.Size(840, 274);
             this.dgvMissing.TabIndex = 0;
             this.dgvMissing.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvMissing});
             // 
             // gvMissing
             // 
+            this.gvMissing.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gColDate,
+            this.gColModel,
+            this.gColPlan,
+            this.gColMissing});
             this.gvMissing.GridControl = this.dgvMissing;
             this.gvMissing.Name = "gvMissing";
+            // 
+            // gColDate
+            // 
+            this.gColDate.Caption = "Date and Time";
+            this.gColDate.FieldName = "DATE";
+            this.gColDate.Name = "gColDate";
+            this.gColDate.OptionsColumn.AllowEdit = false;
+            this.gColDate.OptionsColumn.ReadOnly = true;
+            this.gColDate.Visible = true;
+            this.gColDate.VisibleIndex = 0;
+            // 
+            // gColModel
+            // 
+            this.gColModel.Caption = "Model";
+            this.gColModel.FieldName = "MODEL";
+            this.gColModel.Name = "gColModel";
+            this.gColModel.OptionsColumn.AllowEdit = false;
+            this.gColModel.OptionsColumn.ReadOnly = true;
+            this.gColModel.Visible = true;
+            this.gColModel.VisibleIndex = 1;
+            // 
+            // gColPlan
+            // 
+            this.gColPlan.Caption = "Plan";
+            this.gColPlan.FieldName = "PLAN";
+            this.gColPlan.Name = "gColPlan";
+            this.gColPlan.OptionsColumn.AllowEdit = false;
+            this.gColPlan.OptionsColumn.ReadOnly = true;
+            this.gColPlan.Visible = true;
+            this.gColPlan.VisibleIndex = 2;
+            // 
+            // gColMissing
+            // 
+            this.gColMissing.Caption = "Missing Plan";
+            this.gColMissing.FieldName = "MISSING";
+            this.gColMissing.Name = "gColMissing";
+            this.gColMissing.OptionsColumn.AllowEdit = false;
+            this.gColMissing.OptionsColumn.ReadOnly = true;
+            this.gColMissing.Visible = true;
+            this.gColMissing.VisibleIndex = 3;
             // 
             // pageEventsViewer
             // 
             this.pageEventsViewer.Caption = "Events Viewer";
             this.pageEventsViewer.Controls.Add(this.dgvEventViewe);
             this.pageEventsViewer.Name = "pageEventsViewer";
-            this.pageEventsViewer.Size = new System.Drawing.Size(840, 258);
+            this.pageEventsViewer.Size = new System.Drawing.Size(840, 274);
             // 
             // dgvEventViewe
             // 
@@ -1016,7 +1065,7 @@
             this.dgvEventViewe.Location = new System.Drawing.Point(0, 0);
             this.dgvEventViewe.MainView = this.gvEventViewer;
             this.dgvEventViewe.Name = "dgvEventViewe";
-            this.dgvEventViewe.Size = new System.Drawing.Size(840, 258);
+            this.dgvEventViewe.Size = new System.Drawing.Size(840, 274);
             this.dgvEventViewe.TabIndex = 0;
             this.dgvEventViewe.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvEventViewer});
@@ -1045,7 +1094,7 @@
             this.gColEvent.FieldName = "EVENT";
             this.gColEvent.Name = "gColEvent";
             this.gColEvent.Visible = true;
-            this.gColEvent.VisibleIndex = 2;
+            this.gColEvent.VisibleIndex = 1;
             // 
             // gColDescripcion
             // 
@@ -1053,7 +1102,7 @@
             this.gColDescripcion.FieldName = "DESCRIPTION";
             this.gColDescripcion.Name = "gColDescripcion";
             this.gColDescripcion.Visible = true;
-            this.gColDescripcion.VisibleIndex = 1;
+            this.gColDescripcion.VisibleIndex = 2;
             // 
             // tableLayoutPanel2
             // 
@@ -1105,7 +1154,7 @@
             this.toolStripSeparator1,
             this.labelProgress,
             this.toolStripSeparator2});
-            this.tsBotton.Location = new System.Drawing.Point(5, 655);
+            this.tsBotton.Location = new System.Drawing.Point(5, 675);
             this.tsBotton.Name = "tsBotton";
             this.tsBotton.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.tsBotton.Size = new System.Drawing.Size(894, 25);
@@ -1116,6 +1165,7 @@
             // 
             this.ProgressBar.Name = "ProgressBar";
             this.ProgressBar.Size = new System.Drawing.Size(100, 22);
+            this.ProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             // 
             // toolStripSeparator1
             // 
@@ -1297,5 +1347,9 @@
         private DevExpress.XtraGrid.Columns.GridColumn gColDateTime;
         private DevExpress.XtraGrid.Columns.GridColumn gColDescripcion;
         private DevExpress.XtraGrid.Columns.GridColumn gColEvent;
+        private DevExpress.XtraGrid.Columns.GridColumn gColDate;
+        private DevExpress.XtraGrid.Columns.GridColumn gColModel;
+        private DevExpress.XtraGrid.Columns.GridColumn gColPlan;
+        private DevExpress.XtraGrid.Columns.GridColumn gColMissing;
     }
 }

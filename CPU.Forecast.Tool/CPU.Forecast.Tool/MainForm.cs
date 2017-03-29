@@ -24,6 +24,7 @@ namespace CPU.Forecast.Tool
         public static DataTable dtPlan;
 
         public static DataTable dtEventViewer;
+        public static DataTable dtMissingPlan;
 
         //public static DataTable dtMaestro;
         //public static DataTable dtDetalle;
@@ -289,6 +290,8 @@ namespace CPU.Forecast.Tool
 
             dgvPlan.DataSource = CreaPlans();
 
+            dgvMissing.DataSource = CrearTablaMissing();
+
             dgvEventViewe.DataSource = CrearTablaEventViewer();
 
         }
@@ -302,6 +305,19 @@ namespace CPU.Forecast.Tool
             dtEventViewer.Columns.Add(new DataColumn("DESCRIPTION", typeof(string)));
 
             return dtEventViewer;
+        }
+
+
+        private DataTable CrearTablaMissing()
+        {
+            dtMissingPlan = new DataTable("MISSING_PLAN");
+
+            dtMissingPlan.Columns.Add(new DataColumn("DATE", typeof(DateTime)));
+            dtMissingPlan.Columns.Add(new DataColumn("MODEL", typeof(string)));
+            dtMissingPlan.Columns.Add(new DataColumn("PLAN", typeof(int)));
+            dtMissingPlan.Columns.Add(new DataColumn("MISSING", typeof(int)));
+
+            return dtMissingPlan;
         }
 
         private DataTable CreatablaTipos()
@@ -557,6 +573,7 @@ namespace CPU.Forecast.Tool
                     //ese plan estimado , hay que pasar al otro
                     if (bHayUnCostMenor && cont == lPlanActual.NPlan)
                     {
+                        dtEventViewer.Rows.Add(DateTime.Now, "Estimate completed", "We estimated the plan for the model " + lPlanActual.SModel);
                         break;
                     }
                     else
@@ -676,7 +693,7 @@ namespace CPU.Forecast.Tool
                             {
                                 bNoHaySufComponentes = true;
 
-                                dtEventViewer.Rows.Add(DateTime.Now, "Component doesn't exist", "The component " + lPartPerModel.Part + " doesn't exist.");
+                                dtEventViewer.Rows.Add(DateTime.Now, "Component doesn't exist", "The component " + lPartPerModel.Part + " doesn't exist Component doesn't exist or has too few to estimate the plan.");
                                 //hacer si no existe el componente en el stock
                                 break;  
                             }
@@ -843,6 +860,9 @@ namespace CPU.Forecast.Tool
                                     else
                                     {
                                         bNoHaySufComponentes = true;
+                                        dtEventViewer.Rows.Add(DateTime.Now, "OEM Percent", "There isn't enough components in order to reach la OEM percent");
+
+                                        unaVersionPlan.ListaDetalle.Add(item);
                                         //hacer si no existe el componente en el stock
                                         break;
                                     }
@@ -876,6 +896,7 @@ namespace CPU.Forecast.Tool
                         int nFaltane = lPlanActual.NPlan - cont;
                         cont = lPlanActual.NPlan;
                         //Hay que hacer el faltante y guardarlo en una lista o datatable
+                        dtMissingPlan.Rows.Add(DateTime.Now, lPlanActual.SModel, lPlanActual.NPlan, nFaltane );
 
                     }
 
