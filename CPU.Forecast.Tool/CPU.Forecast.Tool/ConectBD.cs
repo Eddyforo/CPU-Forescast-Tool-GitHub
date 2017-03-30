@@ -12,6 +12,7 @@ namespace CPU.Forecast.Tool
 {
     public partial class ConectBD : DevExpress.XtraEditors.XtraForm
     {
+        public bool seCerro = false;
         public ConectBD()
         {
             InitializeComponent();
@@ -51,6 +52,7 @@ namespace CPU.Forecast.Tool
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            seCerro = true;
             this.Close();
         }
     }

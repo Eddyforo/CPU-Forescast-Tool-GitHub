@@ -13,6 +13,7 @@ using System.Collections;
 using System.ComponentModel;
 using static CPU.Forecast.Tool.Clases;
 using DevExpress.XtraSplashScreen;
+using System.IO;
 
 namespace CPU.Forecast.Tool
 {
@@ -30,9 +31,11 @@ namespace CPU.Forecast.Tool
         //public static DataTable dtMaestro;
         //public static DataTable dtDetalle;
 
+        DataSet dtSet;
         DataTable dtEstimate;
         DataTable dtEstimadoDetalle;
         Clases.Forecast clsTransacc;
+        bool Cerrar = false;
 
         //Lista versiones por plan
         List<VersionPlan> listVersionPlan;
@@ -40,7 +43,15 @@ namespace CPU.Forecast.Tool
         public MainForm()
         {
             InitializeComponent();
-            InitializeComponentExtra();
+
+            DataConnect.InicializarVaribales();
+
+            if (!DataConnect.ConnectToSql())
+            {
+                toolStripButton1_Click_1(this, new EventArgs());
+
+            }
+ 
         }
         
 
@@ -69,6 +80,12 @@ namespace CPU.Forecast.Tool
             ConectBD Conectar = new ConectBD();
 
             Conectar.ShowDialog(this);
+
+            //si no le dieron cancelar se inicializa los datos
+            if (!Conectar.seCerro)
+            {
+               InitializeComponentExtra();
+            }
         }
 
         private void PanelPrincipal_Click(object sender, EventArgs e)
@@ -77,18 +94,11 @@ namespace CPU.Forecast.Tool
         }
 
 
-        private void InitializeComponentExtra()
+        public void InitializeComponentExtra()
         {
             //se selecciona el primer tab
             PanelPrincipal.SelectedPageIndex = 0;
-
-            DataConnect.InicializarVaribales();
-
-            if (!DataConnect.ConnectToSql())
-            {
-                toolStripButton1_Click_1(this, new EventArgs());
-            }
-
+            
             // clase para hacer las transacciones
             clsTransacc = new Clases.Forecast();
 
@@ -287,6 +297,11 @@ namespace CPU.Forecast.Tool
             }
 
             SplashScreenManager.CloseForm();
+        }
+        
+        private void tileBarItem1_ItemClick(object sender, TileItemEventArgs e)
+        {
+            exportar();
         }
 
         #endregion Eventos
@@ -905,6 +920,17 @@ namespace CPU.Forecast.Tool
 
                         //agrego la version a la lista principal
                         listVersionPlan.Add(unaVersionPlan);
+
+                        //validar el costo maximo
+                        decimal costMaximo = Convert.ToDecimal( (from DataRow row in dtMaximunCost.Rows
+                                                                 where row[constantes.MODEL].ToString() == unaVersionPlan.Model
+                                              select row[constantes.MAX_COST]).First());
+
+                        if (costMaximo < unaVersionPlan.COG)
+                        {
+                            dtEventViewer.Rows.Add(DateTime.Now, "Maximum cost exceeded", "Maximum cost exceeded for model " + unaVersionPlan.Model + " and version " + unaVersionPlan.Version + " Was exceeded by : $" + (Math.Round( unaVersionPlan.COG - costMaximo,2)).ToString() + " .");
+
+                        }
                         
                     }
 
@@ -937,7 +963,7 @@ namespace CPU.Forecast.Tool
 
                 dtEstimate.TableName = "ESTIMATED";
                 dtEstimadoDetalle.TableName = "ESTIMATEDDETAILS";
-                DataSet dtSet = new DataSet("ESTIMATED");
+                dtSet = new DataSet("ESTIMATED");
                 dtSet.Tables.Add(dtEstimate);
                 dtSet.Tables.Add(dtEstimadoDetalle);
 
@@ -948,6 +974,8 @@ namespace CPU.Forecast.Tool
                 dtSet.Tables["ESTIMATEDDETAILS"].ParentRelations.Add(dtRelation);
                
                 dgvEstimado.DataSource = dtSet.Tables["ESTIMATED"];
+
+                tbExport.Enabled = true;
                 
             }
             else
@@ -959,8 +987,64 @@ namespace CPU.Forecast.Tool
             
         }
 
+        private void exportar()
+        {
+            using (SaveFileDialog saveDialog = new SaveFileDialog())
+            {
+                saveDialog.Filter = "Excel (2003)(.xls)|*.xls|Excel (2010) (.xlsx)|*.xlsx |RichText File (.rtf)|*.rtf |Pdf File (.pdf)|*.pdf |Html File (.html)|*.html";
+                if (saveDialog.ShowDialog() != DialogResult.Cancel)
+                {
+                    string exportFilePath = saveDialog.FileName;
+                    string fileExtenstion = new FileInfo(exportFilePath).Extension;
+
+                    switch (fileExtenstion)
+                    {
+                        case ".xls":
+                            dgvEstimadoDetail.ExportToXls(exportFilePath);
+                            break;
+                        case ".xlsx":
+                            dgvEstimadoDetail.ExportToXlsx(exportFilePath);
+                            break;
+                        case ".rtf":
+                            dgvEstimadoDetail.ExportToRtf(exportFilePath);
+                            break;
+                        case ".pdf":
+                            dgvEstimadoDetail.ExportToPdf(exportFilePath);
+                            break;
+                        case ".html":
+                            dgvEstimadoDetail.ExportToHtml(exportFilePath);
+                            break;
+                        case ".mht":
+                            dgvEstimadoDetail.ExportToMht(exportFilePath);
+                            break;
+                        default:
+                            break;
+                    }
+
+                    if (File.Exists(exportFilePath))
+                    {
+                        try
+                        {
+                            //Try to open the file and let windows decide how to open it.
+                            System.Diagnostics.Process.Start(exportFilePath);
+                        }
+                        catch
+                        {
+                            String msg = "The file could not be opened." + Environment.NewLine + Environment.NewLine + "Path: " + exportFilePath;
+                            MessageBox.Show(msg, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        String msg = "The file could not be saved." + Environment.NewLine + Environment.NewLine + "Path: " + exportFilePath;
+                        MessageBox.Show(msg, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
 
         #endregion Funciones
+
 
     }
 }

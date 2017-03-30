@@ -123,7 +123,7 @@ namespace CPU.Forecast.Tool
                 }
                 catch (Exception ex)
                 {
-                    Error.addMensaje("Failed to connect to data source", ex.Message, true);
+                    Error.addMensaje( ex.Message, "Failed to connect to data source", true);
                     return false;
                 }
 
@@ -157,7 +157,7 @@ namespace CPU.Forecast.Tool
         private static void CrearArchivoConect()
         {
             string[] lines = { "DataSource: " + SDataSource, "DataBase: " + SDataBase, "User: "+ SUser };
-            string path = Environment.CurrentDirectory + @"\1232.txt";
+            string path = Environment.CurrentDirectory + @"\1232.ore";
 
             System.IO.File.WriteAllLines(path, lines);
             
@@ -170,7 +170,7 @@ namespace CPU.Forecast.Tool
             string[] dato;
             try
             {
-                string path = Environment.CurrentDirectory + @"\1232.txt";
+                string path = Environment.CurrentDirectory + @"\1232.ore";
                 System.IO.StreamReader file = new System.IO.StreamReader(path);
 
                 while ((line = file.ReadLine()) != null)
