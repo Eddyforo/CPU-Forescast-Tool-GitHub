@@ -88,6 +88,8 @@ namespace CPU.Forecast.Tool
             SPassword = string.Empty;
             conn = new SqlConnection();
 
+            leerArchivoConect();
+
         }
 
         public static bool ConnectToSql()
@@ -111,6 +113,8 @@ namespace CPU.Forecast.Tool
                     if (!variablesVacias())
                     {
                         Conn.Open();
+
+                        CrearArchivoConect();
                     }
                     else
                     {
@@ -148,6 +152,59 @@ namespace CPU.Forecast.Tool
                 return true;
             }
             return false;
+        }
+
+        private static void CrearArchivoConect()
+        {
+            string[] lines = { "DataSource: " + SDataSource, "DataBase: " + SDataBase, "User: "+ SUser };
+            string path = Environment.CurrentDirectory + @"\1232.txt";
+
+            System.IO.File.WriteAllLines(path, lines);
+            
+            
+        }
+
+        private static void leerArchivoConect()
+        {
+            string line = string.Empty;
+            string[] dato;
+            try
+            {
+                string path = Environment.CurrentDirectory + @"\1232.txt";
+                System.IO.StreamReader file = new System.IO.StreamReader(path);
+
+                while ((line = file.ReadLine()) != null)
+                {
+                    if (!string.IsNullOrWhiteSpace(line))
+                    {
+                        dato = line.Split(':');
+
+                        if (dato[0] == "DataSource")
+                        {
+                            SDataSource = dato[1].Trim();
+                        }
+                        else if (dato[0] == "DataBase")
+                        {
+                            SDataBase = dato[1].Trim();
+                        }
+                        else if (dato[0] == "User")
+                        {
+                            SUser = dato[1].Trim();
+                        }
+                        else if (dato[0] == "Password")
+                        {
+                            SUser = dato[1].Trim();
+                        }
+
+                    }
+                }
+
+                file.Close();
+            }
+            catch (Exception)
+            {
+                
+            }
         }
     }
 }

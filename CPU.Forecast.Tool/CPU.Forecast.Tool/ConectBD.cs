@@ -15,6 +15,10 @@ namespace CPU.Forecast.Tool
         public ConectBD()
         {
             InitializeComponent();
+            txtDataBase.Text = DataConnect.SDataBase ;
+            txtDataSource.Text = DataConnect.SDataSource ;
+            txtUser.Text = DataConnect.SUser ;
+            txtPassword.Text = DataConnect.SPassword;
         }
 
         private void label2_Click(object sender, EventArgs e)

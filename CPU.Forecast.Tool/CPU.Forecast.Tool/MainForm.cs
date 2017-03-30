@@ -58,6 +58,7 @@ namespace CPU.Forecast.Tool
 
         private void toolStripButton2_Click(object sender, System.EventArgs e)
         {
+            DataConnect.DisConnectSql();
             this.Close();
         }
 
@@ -91,12 +92,18 @@ namespace CPU.Forecast.Tool
             // clase para hacer las transacciones
             clsTransacc = new Clases.Forecast();
 
+            tpMaintenceCompo.PageVisible = false;
+            tpTypeDevice.PageVisible = false;
+            tpPlans.PageVisible = false;
+            tpMaximunCost.PageVisible = false;
+            tpMenorCosto.PageVisible = false;
 
             //se cargan los datagrid's
             CargarGrid();
 
             clsTransacc.LoadDatosTabla(dtTypeDevices, dtComponents, dtMaximunCost, dtPlan);
         }
+
         private void tbTypeDevices_ItemClick(object sender, TileItemEventArgs e)
         {
             PanelPrincipal.SelectedPageIndex = 0;

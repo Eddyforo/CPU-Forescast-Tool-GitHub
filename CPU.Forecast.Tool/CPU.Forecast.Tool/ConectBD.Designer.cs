@@ -108,7 +108,6 @@
             this.txtDataBase.Name = "txtDataBase";
             this.txtDataBase.Size = new System.Drawing.Size(100, 21);
             this.txtDataBase.TabIndex = 2;
-            this.txtDataBase.Text = "INGRAM";
             // 
             // label5
             // 
@@ -127,7 +126,6 @@
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(100, 21);
             this.txtUser.TabIndex = 3;
-            this.txtUser.Text = "SA";
             // 
             // label4
             // 
@@ -146,7 +144,6 @@
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(100, 21);
             this.txtPassword.TabIndex = 4;
-            this.txtPassword.Text = "sa";
             this.txtPassword.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label2
@@ -167,7 +164,6 @@
             this.txtDataSource.Name = "txtDataSource";
             this.txtDataSource.Size = new System.Drawing.Size(100, 21);
             this.txtDataSource.TabIndex = 1;
-            this.txtDataSource.Text = "EFONSECA001\\SQL2012";
             // 
             // label1
             // 
