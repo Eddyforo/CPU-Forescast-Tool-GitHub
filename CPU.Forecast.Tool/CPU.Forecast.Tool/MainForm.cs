@@ -921,17 +921,25 @@ namespace CPU.Forecast.Tool
                         //agrego la version a la lista principal
                         listVersionPlan.Add(unaVersionPlan);
 
-                        //validar el costo maximo
-                        decimal costMaximo = Convert.ToDecimal( (from DataRow row in dtMaximunCost.Rows
-                                                                 where row[constantes.MODEL].ToString() == unaVersionPlan.Model
-                                              select row[constantes.MAX_COST]).First());
-
-                        if (costMaximo < unaVersionPlan.COG)
+                        try
                         {
-                            dtEventViewer.Rows.Add(DateTime.Now, "Maximum cost exceeded", "Maximum cost exceeded for model " + unaVersionPlan.Model + " and version " + unaVersionPlan.Version + " Was exceeded by : $" + (Math.Round( unaVersionPlan.COG - costMaximo,2)).ToString() + " .");
+                            //validar el costo maximo
+                            decimal costMaximo = Convert.ToDecimal((from DataRow row in dtMaximunCost.Rows
+                                                                    where row[constantes.MODEL].ToString() == unaVersionPlan.Model
+                                                                    select row[constantes.MAX_COST]).First());
 
+                            if (costMaximo < unaVersionPlan.COG)
+                            {
+                                dtEventViewer.Rows.Add(DateTime.Now, "Maximum cost exceeded", "Maximum cost exceeded for model " + unaVersionPlan.Model + " and version " + unaVersionPlan.Version + " Was exceeded by : $" + (Math.Round(unaVersionPlan.COG - costMaximo, 2)).ToString() + " .");
+
+                            }
                         }
-                        
+                        catch (Exception)
+                        {
+
+                            dtEventViewer.Rows.Add(DateTime.Now, "Maximum cost", "Maximum cost for model " + unaVersionPlan.Model + " and version " + unaVersionPlan.Version + " It has not been found.");
+                        }
+
                     }
 
                     if (bNoHaySufComponentes)
@@ -1043,8 +1051,9 @@ namespace CPU.Forecast.Tool
             }
         }
 
+
         #endregion Funciones
 
-
+    
     }
 }

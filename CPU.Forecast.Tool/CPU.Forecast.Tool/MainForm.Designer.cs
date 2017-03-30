@@ -28,18 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraEditors.TileItemElement tileItemElement12 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement1 = new DevExpress.XtraEditors.TileItemElement();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            DevExpress.XtraEditors.TileItemElement tileItemElement13 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement14 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement15 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement16 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement17 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement18 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement19 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement20 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement21 = new DevExpress.XtraEditors.TileItemElement();
-            DevExpress.XtraEditors.TileItemElement tileItemElement22 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement2 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement3 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement4 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement5 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement6 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement7 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement8 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement9 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement10 = new DevExpress.XtraEditors.TileItemElement();
+            DevExpress.XtraEditors.TileItemElement tileItemElement11 = new DevExpress.XtraEditors.TileItemElement();
             this.TableMainContent = new System.Windows.Forms.TableLayoutPanel();
             this.tileBar2 = new DevExpress.XtraBars.Navigation.TileBar();
             this.btnNewGroup = new DevExpress.XtraBars.Navigation.TileBarGroup();
@@ -52,6 +52,8 @@
             this.tbLoad = new DevExpress.XtraBars.Navigation.TileBarItem();
             this.tileBarGroup8 = new DevExpress.XtraBars.Navigation.TileBarGroup();
             this.tbCalculate = new DevExpress.XtraBars.Navigation.TileBarItem();
+            this.tileBarGroup9 = new DevExpress.XtraBars.Navigation.TileBarGroup();
+            this.tbExport = new DevExpress.XtraBars.Navigation.TileBarItem();
             this.tileBar1 = new DevExpress.XtraBars.Navigation.TileBar();
             this.tileBarGroup2 = new DevExpress.XtraBars.Navigation.TileBarGroup();
             this.tbTypeDevices = new DevExpress.XtraBars.Navigation.TileBarItem();
@@ -134,8 +136,6 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.txtPercent = new DevExpress.XtraEditors.SpinEdit();
-            this.tileBarGroup9 = new DevExpress.XtraBars.Navigation.TileBarGroup();
-            this.tbExport = new DevExpress.XtraBars.Navigation.TileBarItem();
             this.TableMainContent.SuspendLayout();
             this.tsTopMain.SuspendLayout();
             this.PanelPrincipal.SuspendLayout();
@@ -232,9 +232,9 @@
             this.btnNew.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(45)))), ((int)(((byte)(54)))));
             this.btnNew.AppearanceItem.Normal.Options.UseBackColor = true;
             this.btnNew.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement12.Image = ((System.Drawing.Image)(resources.GetObject("tileItemElement12.Image")));
-            tileItemElement12.Text = "New";
-            this.btnNew.Elements.Add(tileItemElement12);
+            tileItemElement1.Image = ((System.Drawing.Image)(resources.GetObject("tileItemElement1.Image")));
+            tileItemElement1.Text = "New";
+            this.btnNew.Elements.Add(tileItemElement1);
             this.btnNew.Id = 0;
             this.btnNew.ItemSize = DevExpress.XtraBars.Navigation.TileBarItemSize.Medium;
             this.btnNew.Name = "btnNew";
@@ -250,9 +250,9 @@
             this.btnUpdate.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(45)))), ((int)(((byte)(54)))));
             this.btnUpdate.AppearanceItem.Normal.Options.UseBackColor = true;
             this.btnUpdate.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement13.Image = ((System.Drawing.Image)(resources.GetObject("tileItemElement13.Image")));
-            tileItemElement13.Text = "Update";
-            this.btnUpdate.Elements.Add(tileItemElement13);
+            tileItemElement2.Image = ((System.Drawing.Image)(resources.GetObject("tileItemElement2.Image")));
+            tileItemElement2.Text = "Update";
+            this.btnUpdate.Elements.Add(tileItemElement2);
             this.btnUpdate.Id = 1;
             this.btnUpdate.ItemSize = DevExpress.XtraBars.Navigation.TileBarItemSize.Medium;
             this.btnUpdate.Name = "btnUpdate";
@@ -268,9 +268,9 @@
             this.btnDelete.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(45)))), ((int)(((byte)(54)))));
             this.btnDelete.AppearanceItem.Normal.Options.UseBackColor = true;
             this.btnDelete.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement14.Image = ((System.Drawing.Image)(resources.GetObject("tileItemElement14.Image")));
-            tileItemElement14.Text = "Delete";
-            this.btnDelete.Elements.Add(tileItemElement14);
+            tileItemElement3.Image = ((System.Drawing.Image)(resources.GetObject("tileItemElement3.Image")));
+            tileItemElement3.Text = "Delete";
+            this.btnDelete.Elements.Add(tileItemElement3);
             this.btnDelete.Id = 2;
             this.btnDelete.ItemSize = DevExpress.XtraBars.Navigation.TileBarItemSize.Medium;
             this.btnDelete.Name = "btnDelete";
@@ -286,9 +286,9 @@
             this.tbLoad.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(45)))), ((int)(((byte)(54)))));
             this.tbLoad.AppearanceItem.Normal.Options.UseBackColor = true;
             this.tbLoad.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement15.Image = ((System.Drawing.Image)(resources.GetObject("tileItemElement15.Image")));
-            tileItemElement15.Text = "Load";
-            this.tbLoad.Elements.Add(tileItemElement15);
+            tileItemElement4.Image = ((System.Drawing.Image)(resources.GetObject("tileItemElement4.Image")));
+            tileItemElement4.Text = "Load";
+            this.tbLoad.Elements.Add(tileItemElement4);
             this.tbLoad.Id = 4;
             this.tbLoad.ItemSize = DevExpress.XtraBars.Navigation.TileBarItemSize.Medium;
             this.tbLoad.Name = "tbLoad";
@@ -304,16 +304,35 @@
             this.tbCalculate.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(45)))), ((int)(((byte)(54)))));
             this.tbCalculate.AppearanceItem.Normal.Options.UseBackColor = true;
             this.tbCalculate.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement16.AnimateTransition = DevExpress.Utils.DefaultBoolean.True;
-            tileItemElement16.Image = ((System.Drawing.Image)(resources.GetObject("tileItemElement16.Image")));
-            tileItemElement16.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleRight;
-            tileItemElement16.Text = "Calculate";
-            tileItemElement16.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleLeft;
-            this.tbCalculate.Elements.Add(tileItemElement16);
+            tileItemElement5.AnimateTransition = DevExpress.Utils.DefaultBoolean.True;
+            tileItemElement5.Image = ((System.Drawing.Image)(resources.GetObject("tileItemElement5.Image")));
+            tileItemElement5.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleRight;
+            tileItemElement5.Text = "Calculate";
+            tileItemElement5.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleLeft;
+            this.tbCalculate.Elements.Add(tileItemElement5);
             this.tbCalculate.Id = 7;
             this.tbCalculate.ItemSize = DevExpress.XtraBars.Navigation.TileBarItemSize.Wide;
             this.tbCalculate.Name = "tbCalculate";
             this.tbCalculate.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.tbCalculate_ItemClick);
+            // 
+            // tileBarGroup9
+            // 
+            this.tileBarGroup9.Items.Add(this.tbExport);
+            this.tileBarGroup9.Name = "tileBarGroup9";
+            // 
+            // tbExport
+            // 
+            this.tbExport.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(45)))), ((int)(((byte)(54)))));
+            this.tbExport.AppearanceItem.Normal.Options.UseBackColor = true;
+            this.tbExport.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
+            tileItemElement6.Image = ((System.Drawing.Image)(resources.GetObject("tileItemElement6.Image")));
+            tileItemElement6.Text = "Export";
+            this.tbExport.Elements.Add(tileItemElement6);
+            this.tbExport.Enabled = false;
+            this.tbExport.Id = 9;
+            this.tbExport.ItemSize = DevExpress.XtraBars.Navigation.TileBarItemSize.Medium;
+            this.tbExport.Name = "tbExport";
+            this.tbExport.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.tileBarItem1_ItemClick);
             // 
             // tileBar1
             // 
@@ -348,11 +367,11 @@
             this.tbTypeDevices.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(115)))), ((int)(((byte)(128)))));
             this.tbTypeDevices.AppearanceItem.Normal.Options.UseBackColor = true;
             this.tbTypeDevices.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement17.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleLeft;
-            tileItemElement17.ImageToTextAlignment = DevExpress.XtraEditors.TileControlImageToTextAlignment.Left;
-            tileItemElement17.Text = "Types of  Devices";
-            tileItemElement17.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            this.tbTypeDevices.Elements.Add(tileItemElement17);
+            tileItemElement7.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleLeft;
+            tileItemElement7.ImageToTextAlignment = DevExpress.XtraEditors.TileControlImageToTextAlignment.Left;
+            tileItemElement7.Text = "Types of  Devices";
+            tileItemElement7.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            this.tbTypeDevices.Elements.Add(tileItemElement7);
             this.tbTypeDevices.Id = 4;
             this.tbTypeDevices.ItemSize = DevExpress.XtraBars.Navigation.TileBarItemSize.Wide;
             this.tbTypeDevices.Name = "tbTypeDevices";
@@ -364,9 +383,9 @@
             this.tbMaximunCosts.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(86)))), ((int)(((byte)(110)))), ((int)(((byte)(117)))));
             this.tbMaximunCosts.AppearanceItem.Normal.Options.UseBackColor = true;
             this.tbMaximunCosts.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement18.Text = "Maximum Costs";
-            tileItemElement18.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            this.tbMaximunCosts.Elements.Add(tileItemElement18);
+            tileItemElement8.Text = "Maximum Costs";
+            tileItemElement8.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            this.tbMaximunCosts.Elements.Add(tileItemElement8);
             this.tbMaximunCosts.Id = 8;
             this.tbMaximunCosts.ItemSize = DevExpress.XtraBars.Navigation.TileBarItemSize.Wide;
             this.tbMaximunCosts.Name = "tbMaximunCosts";
@@ -383,9 +402,9 @@
             this.tbMaintence.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(45)))), ((int)(((byte)(54)))));
             this.tbMaintence.AppearanceItem.Normal.Options.UseBackColor = true;
             this.tbMaintence.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement19.Text = "Components Maintenance";
-            tileItemElement19.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            this.tbMaintence.Elements.Add(tileItemElement19);
+            tileItemElement9.Text = "Components Maintenance";
+            tileItemElement9.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            this.tbMaintence.Elements.Add(tileItemElement9);
             this.tbMaintence.Id = 5;
             this.tbMaintence.ItemSize = DevExpress.XtraBars.Navigation.TileBarItemSize.Wide;
             this.tbMaintence.Name = "tbMaintence";
@@ -403,9 +422,9 @@
             this.tbPlans.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(143)))), ((int)(((byte)(140)))), ((int)(((byte)(104)))));
             this.tbPlans.AppearanceItem.Normal.Options.UseBackColor = true;
             this.tbPlans.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement20.Text = "Plans by Model";
-            tileItemElement20.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            this.tbPlans.Elements.Add(tileItemElement20);
+            tileItemElement10.Text = "Plans by Model";
+            tileItemElement10.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            this.tbPlans.Elements.Add(tileItemElement10);
             this.tbPlans.Id = 7;
             this.tbPlans.ItemSize = DevExpress.XtraBars.Navigation.TileBarItemSize.Wide;
             this.tbPlans.Name = "tbPlans";
@@ -416,9 +435,9 @@
             this.tbEstimate.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(98)))), ((int)(((byte)(118)))));
             this.tbEstimate.AppearanceItem.Normal.Options.UseBackColor = true;
             this.tbEstimate.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement21.Text = "Estimate";
-            tileItemElement21.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
-            this.tbEstimate.Elements.Add(tileItemElement21);
+            tileItemElement11.Text = "Estimate";
+            tileItemElement11.TextAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleCenter;
+            this.tbEstimate.Elements.Add(tileItemElement11);
             this.tbEstimate.Id = 11;
             this.tbEstimate.ItemSize = DevExpress.XtraBars.Navigation.TileBarItemSize.Wide;
             this.tbEstimate.Name = "tbEstimate";
@@ -1168,25 +1187,6 @@
             this.txtPercent.Size = new System.Drawing.Size(91, 20);
             this.txtPercent.TabIndex = 1;
             this.txtPercent.ToolTip = "OEM Percentage";
-            // 
-            // tileBarGroup9
-            // 
-            this.tileBarGroup9.Items.Add(this.tbExport);
-            this.tileBarGroup9.Name = "tileBarGroup9";
-            // 
-            // tbExport
-            // 
-            this.tbExport.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(34)))), ((int)(((byte)(45)))), ((int)(((byte)(54)))));
-            this.tbExport.AppearanceItem.Normal.Options.UseBackColor = true;
-            this.tbExport.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement22.Image = ((System.Drawing.Image)(resources.GetObject("tileItemElement22.Image")));
-            tileItemElement22.Text = "Export";
-            this.tbExport.Elements.Add(tileItemElement22);
-            this.tbExport.Enabled = false;
-            this.tbExport.Id = 9;
-            this.tbExport.ItemSize = DevExpress.XtraBars.Navigation.TileBarItemSize.Medium;
-            this.tbExport.Name = "tbExport";
-            this.tbExport.ItemClick += new DevExpress.XtraEditors.TileItemClickEventHandler(this.tileBarItem1_ItemClick);
             // 
             // MainForm
             // 

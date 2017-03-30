@@ -305,7 +305,7 @@ namespace CPU.Forecast.Tool
                         string type = item[Clases.constantes.TYPE_DEVICE].ToString();
                         string description = item[Clases.constantes.DESCRIPTION].ToString();
                         string part = item[Clases.constantes.PART].ToString();
-                        int quantity = (int)item[Clases.constantes.QUANTITY];
+                        int quantity = Convert.ToInt16( item[Clases.constantes.QUANTITY]);
                         string model = item[Clases.constantes.MODEL].ToString();
                         MainForm.dtTypeDevices.Rows.Add(type, description, model, part, quantity);
                     }
