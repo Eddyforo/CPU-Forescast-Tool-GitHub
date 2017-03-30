@@ -766,7 +766,7 @@ namespace CPU.Forecast.Tool
                                     //filtramos los componentes que sean de la misma parte y que el stock sea mayor que cero y en este caso que no sean R
 
                                     lCompoPerParts = (from MaintenceComponents z in listaComponents
-                                                      where z.SPartCode.StartsWith(item.Part) &&
+                                                      where z.SPartCode.StartsWith(sMainTypeDevice.Part) &&
                                                       !z.SPartCode.EndsWith("R") &&
                                                       z.NStock > 0
                                                       orderby z.NCost ascending
@@ -802,9 +802,9 @@ namespace CPU.Forecast.Tool
                                                 listaComponents.Where(w => w.SPartCode == lCompoPerParts[i].SPartCode).ToList()
                                                             .ForEach(k => k.NStock -= nContEstimada);
 
-                                                //se resta la cantidad que falta para llegar al porcentaje de OEM
-                                                nCantidadfaltaOEM -= nContEstimada;
-
+                                                //se suma la cantidad que falta para llegar al porcentaje de OEM
+                                                nCantidadfaltaOEM += nContEstimada;
+                                                nCantTotalPartOEM += nContEstimada;
                                                 //En el caso que ya cantidad estimada sea igual que la necesaria, ya no hay que calcular nada y se sale.
                                                 break;
                                             }
@@ -848,8 +848,8 @@ namespace CPU.Forecast.Tool
                                                             .ForEach(k => k.NStock -= detalle.iCant);
 
 
-                                                //se resta la cantidad que falta para llegar al porcentaje de OEM
-                                                nCantidadfaltaOEM -= nContEstimada;
+                                                //se Suma la cantidad que falta para llegar al porcentaje de OEM
+                                                nCantidadfaltaOEM += nContEstimada;
                                             }
 
                                             bEstimaCompParcial = false;
@@ -886,7 +886,7 @@ namespace CPU.Forecast.Tool
                         } //if para saber si cumplimos con el OEM
 
 
-                        decimal PorcentaOEM = (nCantTotalPartOEM * 100 / nCantTotalPart );
+                        decimal PorcentaOEM = Math.Round( (nCantTotalPartOEM * 100 / nCantTotalPart ),2);
 
                         dtEventViewer.Rows.Add(DateTime.Now, "Percentage OEM", "Percentage OEM for model " + unaVersionPlan.Model + " and version " + unaVersionPlan.Version + " is: " + PorcentaOEM.ToString() +" %." );
                         
