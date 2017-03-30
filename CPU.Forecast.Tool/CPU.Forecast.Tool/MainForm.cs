@@ -12,6 +12,7 @@ using System.Linq;
 using System.Collections;
 using System.ComponentModel;
 using static CPU.Forecast.Tool.Clases;
+using DevExpress.XtraSplashScreen;
 
 namespace CPU.Forecast.Tool
 {
@@ -41,10 +42,7 @@ namespace CPU.Forecast.Tool
             InitializeComponent();
             InitializeComponentExtra();
         }
-
-
-
-
+        
 
         #region Eventos
 
@@ -183,6 +181,8 @@ namespace CPU.Forecast.Tool
         {
             bool bOk = true;
 
+            SplashScreenManager.ShowForm(typeof(WaitForm1));
+
             bOk = validarGrid();
 
             if (bOk)
@@ -197,6 +197,8 @@ namespace CPU.Forecast.Tool
 
                 bOk = clsTransacc.UpdateDB(dtTypeDevices, dtComponents, dtMaximunCost, dtPlan);
             }
+
+            SplashScreenManager.CloseForm();
 
             if (bOk)
             {
@@ -268,12 +270,16 @@ namespace CPU.Forecast.Tool
         {
             bool bOk = true;
 
+            SplashScreenManager.ShowForm(typeof(WaitForm1));
+
             bOk = validarGridLlenos();
 
             if (bOk)
             {
                 bOk = calcularCosto();
             }
+
+            SplashScreenManager.CloseForm();
         }
 
         #endregion Eventos
@@ -474,7 +480,7 @@ namespace CPU.Forecast.Tool
             //versiones por plan para agregar uno a uno a la lista
             Clases.VersionPlan unaVersionPlan;
 
-            // paso de datatales a listas
+            // paso de datatables a listas
             listaTypeDevice = (from DataRow row in dtTypeDevices.Rows
                                     select new Clases.TypeDevices
                                     {
@@ -540,7 +546,6 @@ namespace CPU.Forecast.Tool
                                     bBuscaMenorF = true;
                                     bHayStockSuf = false;
 
-
                                     break;
                                 }
 
@@ -603,6 +608,8 @@ namespace CPU.Forecast.Tool
 
                         //Es la cantidad que tenemos  que cumplir de componentes 
                         nCantPartPorPorcen = nCantTotalPart * nPercent;
+
+                        nCantPartPorPorcen = nCantPartPorPorcen == 0 ? 1 : nCantPartPorPorcen;
 
                         //recorrer la lista de partes que ocupa ese modelo
                         foreach (Clases.TypeDevices lPartPerModel in lTypePerModel)
@@ -727,13 +734,13 @@ namespace CPU.Forecast.Tool
                                                                     }).ToList();
 
                         //contamos la cantidad de componentes que no son R
-                        nCantTotalPart = (from DetalleVersionPlan i in lversionDetalleNoR
+                        decimal nCantTotalPartOEM = (from DetalleVersionPlan i in lversionDetalleNoR
                                           select i.NumberPart).Sum();
 
                         //verificamos si cumplimos con el porcentaje requerido
-                        if (nCantTotalPart < nCantPartPorPorcen)
+                        if (nCantTotalPartOEM < nCantPartPorPorcen)
                         {
-                            decimal nCantidadfaltaOEM = nCantTotalPart - nCantPartPorPorcen;
+                            decimal nCantidadfaltaOEM = nCantTotalPartOEM - nCantPartPorPorcen;
                             //DetalleVersionPlan itemTemp ;
 
                             //se sacan todos los compoenentes que son R para luego quitarlos y cumplir con el porcentaje
@@ -742,7 +749,7 @@ namespace CPU.Forecast.Tool
                             //recorremos cada uno de ellos
                             foreach (DetalleVersionPlan item in lVersionDetalleR)
                             {
-                                if (nCantidadfaltaOEM > 0)
+                                if (nCantidadfaltaOEM < 0)
                                 {
                                     //comenzamos con el primero
                                     // itemTemp = unaVersionPlan.ListaDetalle.Find(x => x.Part == item.Part);
@@ -753,10 +760,7 @@ namespace CPU.Forecast.Tool
                                     TypeDevices sMainTypeDevice = lTypePerModel.Find( x => x.Part.StartsWith(item.Part.Substring(0, item.Part.Length - 2)) 
                                                         && x.Model == item.Model);
 
-
-
-
-
+                                    
                                     #region Codigo de estimación usado arriba con variantes
 
                                     //filtramos los componentes que sean de la misma parte y que el stock sea mayor que cero y en este caso que no sean R
@@ -879,7 +883,13 @@ namespace CPU.Forecast.Tool
                             }// fin del recorrido lVersionDetalleR
 
 
-                        } //if para sabe si cumplimos con el OEM
+                        } //if para saber si cumplimos con el OEM
+
+
+                        decimal PorcentaOEM = (nCantTotalPartOEM * 100 / nCantTotalPart );
+
+                        dtEventViewer.Rows.Add(DateTime.Now, "Percentage OEM", "Percentage OEM for model " + unaVersionPlan.Model + " and version " + unaVersionPlan.Version + " is: " + PorcentaOEM.ToString() +" %." );
+                        
 
                         unaVersionPlan.PlanAmount += 1;
                         
@@ -933,13 +943,17 @@ namespace CPU.Forecast.Tool
                 dgvEstimado.DataSource = dtSet.Tables["ESTIMATED"];
                 
             }
+            else
+            {
+                dtEventViewer.Rows.Add( DateTime.Now, "No plan could be estimated", "There are not enough components to estimate the plan");
+            }
             
             return bOk;
             
         }
 
+
         #endregion Funciones
 
-       
     }
 }

@@ -10,6 +10,7 @@ using DevExpress.XtraEditors;
 using System.Data.OleDb;
 using Excel = Microsoft.Office.Interop.Excel;
 using DevExpress.XtraWizard;
+using DevExpress.XtraSplashScreen;
 
 namespace CPU.Forecast.Tool
 {
@@ -120,21 +121,18 @@ namespace CPU.Forecast.Tool
 
                 if (openfile1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    // splashScreenManager1.ShowWaitForm();
+                    SplashScreenManager.ShowForm(typeof(WaitForm1));
                     this.txtRuta.Text = openfile1.FileName;
 
                     LlenarNombreshojas(txtRuta.Text);
 
                     //llenar el grid 
                     LLenarGrid(openfile1.FileName, NombresHojas[0].ToString());
-
-                    //llenar el grid de nivel de precios
-                    // LLenarGrid(openfile1.FileName, NombresHojas[0].ToString(), true);
-
+                    
                     llenarColumnasBDArchivo();
 
-                    // splashScreenManager1.CloseWaitForm();
-                    //this.Close();
+                    SplashScreenManager.CloseForm();
+                   
 
                 }
 
@@ -285,6 +283,8 @@ namespace CPU.Forecast.Tool
 
         private void wizardControl1_FinishClick(object sender, CancelEventArgs e)
         {
+            SplashScreenManager.ShowForm(typeof(WaitForm1));
+
             Error.LErroCargarExcel = new List<string>();
             for (int i = 0; i < ListaAsociacion.Count; i++)
             {
@@ -329,6 +329,8 @@ namespace CPU.Forecast.Tool
                 }
 
             }
+
+            SplashScreenManager.CloseForm();
         }
 
         private void wizardControl1_SelectedPageChanging(object sender, DevExpress.XtraWizard.WizardPageChangingEventArgs e)

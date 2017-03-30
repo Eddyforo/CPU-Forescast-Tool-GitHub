@@ -132,12 +132,7 @@
             this.gColDescripcion = new DevExpress.XtraGrid.Columns.GridColumn();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtPercent = new DevExpress.XtraEditors.TextEdit();
-            this.tsBotton = new System.Windows.Forms.ToolStrip();
-            this.ProgressBar = new System.Windows.Forms.ToolStripProgressBar();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.labelProgress = new System.Windows.Forms.ToolStripLabel();
-            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.txtPercent = new DevExpress.XtraEditors.SpinEdit();
             this.TableMainContent.SuspendLayout();
             this.tsTopMain.SuspendLayout();
             this.PanelPrincipal.SuspendLayout();
@@ -175,7 +170,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvEventViewer)).BeginInit();
             this.tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPercent.Properties)).BeginInit();
-            this.tsBotton.SuspendLayout();
             this.SuspendLayout();
             // 
             // TableMainContent
@@ -187,7 +181,6 @@
             this.TableMainContent.Controls.Add(this.tileBar1, 0, 1);
             this.TableMainContent.Controls.Add(this.tsTopMain, 0, 0);
             this.TableMainContent.Controls.Add(this.PanelPrincipal, 0, 2);
-            this.TableMainContent.Controls.Add(this.tsBotton, 0, 4);
             this.TableMainContent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TableMainContent.ForeColor = System.Drawing.Color.Black;
             this.TableMainContent.Location = new System.Drawing.Point(0, 0);
@@ -196,9 +189,9 @@
             this.TableMainContent.RowCount = 5;
             this.TableMainContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
             this.TableMainContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 119F));
-            this.TableMainContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 79.42478F));
-            this.TableMainContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.57522F));
-            this.TableMainContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.TableMainContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 82.87292F));
+            this.TableMainContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.12707F));
+            this.TableMainContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
             this.TableMainContent.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.TableMainContent.Size = new System.Drawing.Size(904, 707);
             this.TableMainContent.TabIndex = 2;
@@ -216,12 +209,12 @@
             this.tileBar2.Groups.Add(this.tileBarGroup7);
             this.tileBar2.Groups.Add(this.tileBarGroup8);
             this.tileBar2.HorizontalContentAlignment = DevExpress.Utils.HorzAlignment.Center;
-            this.tileBar2.Location = new System.Drawing.Point(8, 570);
+            this.tileBar2.Location = new System.Drawing.Point(8, 603);
             this.tileBar2.MaxId = 9;
             this.tileBar2.Name = "tileBar2";
             this.tileBar2.Padding = new System.Windows.Forms.Padding(22, 0, 22, 0);
             this.tileBar2.ScrollMode = DevExpress.XtraEditors.TileControlScrollMode.ScrollButtons;
-            this.tileBar2.Size = new System.Drawing.Size(888, 102);
+            this.tileBar2.Size = new System.Drawing.Size(888, 87);
             this.tileBar2.TabIndex = 0;
             this.tileBar2.Text = "tileBar2";
             // 
@@ -351,7 +344,6 @@
             this.tbTypeDevices.AppearanceItem.Normal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(163)))), ((int)(((byte)(115)))), ((int)(((byte)(128)))));
             this.tbTypeDevices.AppearanceItem.Normal.Options.UseBackColor = true;
             this.tbTypeDevices.DropDownOptions.BeakColor = System.Drawing.Color.Empty;
-            tileItemElement6.Image = ((System.Drawing.Image)(resources.GetObject("tileItemElement6.Image")));
             tileItemElement6.ImageAlignment = DevExpress.XtraEditors.TileItemContentAlignment.MiddleLeft;
             tileItemElement6.ImageToTextAlignment = DevExpress.XtraEditors.TileControlImageToTextAlignment.Left;
             tileItemElement6.Text = "Types of  Devices";
@@ -480,10 +472,10 @@
             this.tpMaintenceCompo,
             this.tpPlans,
             this.tpMenorCosto});
-            this.PanelPrincipal.RegularSize = new System.Drawing.Size(888, 411);
+            this.PanelPrincipal.RegularSize = new System.Drawing.Size(888, 444);
             this.PanelPrincipal.SelectedPage = this.tpPlans;
             this.PanelPrincipal.SelectedPageIndex = 4;
-            this.PanelPrincipal.Size = new System.Drawing.Size(888, 411);
+            this.PanelPrincipal.Size = new System.Drawing.Size(888, 444);
             this.PanelPrincipal.TabIndex = 1;
             this.PanelPrincipal.Text = "tabPane1";
             this.PanelPrincipal.SelectedPageChanged += new DevExpress.XtraBars.Navigation.SelectedPageChangedEventHandler(this.PanelPrincipal_SelectedPageChanged);
@@ -497,7 +489,7 @@
             this.tpTypeDevice.Caption = "Types of Device";
             this.tpTypeDevice.Controls.Add(this.dgvTypeDevices);
             this.tpTypeDevice.Name = "tpTypeDevice";
-            this.tpTypeDevice.Size = new System.Drawing.Size(870, 366);
+            this.tpTypeDevice.Size = new System.Drawing.Size(870, 399);
             // 
             // dgvTypeDevices
             // 
@@ -505,7 +497,7 @@
             this.dgvTypeDevices.Location = new System.Drawing.Point(0, 0);
             this.dgvTypeDevices.MainView = this.gvTypeDevices;
             this.dgvTypeDevices.Name = "dgvTypeDevices";
-            this.dgvTypeDevices.Size = new System.Drawing.Size(870, 366);
+            this.dgvTypeDevices.Size = new System.Drawing.Size(870, 399);
             this.dgvTypeDevices.TabIndex = 0;
             this.dgvTypeDevices.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvTypeDevices,
@@ -607,7 +599,7 @@
             this.tpMaximunCost.Caption = "Maximun Costs";
             this.tpMaximunCost.Controls.Add(this.dgvMaximun);
             this.tpMaximunCost.Name = "tpMaximunCost";
-            this.tpMaximunCost.Size = new System.Drawing.Size(870, 366);
+            this.tpMaximunCost.Size = new System.Drawing.Size(870, 399);
             // 
             // dgvMaximun
             // 
@@ -615,7 +607,7 @@
             this.dgvMaximun.Location = new System.Drawing.Point(0, 0);
             this.dgvMaximun.MainView = this.gvMaximun;
             this.dgvMaximun.Name = "dgvMaximun";
-            this.dgvMaximun.Size = new System.Drawing.Size(870, 366);
+            this.dgvMaximun.Size = new System.Drawing.Size(870, 399);
             this.dgvMaximun.TabIndex = 0;
             this.dgvMaximun.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvMaximun,
@@ -659,7 +651,7 @@
             this.tpMaintenceCompo.Caption = "Components Maintenance";
             this.tpMaintenceCompo.Controls.Add(this.dgvMaintenceCompo);
             this.tpMaintenceCompo.Name = "tpMaintenceCompo";
-            this.tpMaintenceCompo.Size = new System.Drawing.Size(870, 366);
+            this.tpMaintenceCompo.Size = new System.Drawing.Size(870, 399);
             // 
             // dgvMaintenceCompo
             // 
@@ -667,7 +659,7 @@
             this.dgvMaintenceCompo.Location = new System.Drawing.Point(0, 0);
             this.dgvMaintenceCompo.MainView = this.gvMaintenceCompo;
             this.dgvMaintenceCompo.Name = "dgvMaintenceCompo";
-            this.dgvMaintenceCompo.Size = new System.Drawing.Size(870, 366);
+            this.dgvMaintenceCompo.Size = new System.Drawing.Size(870, 399);
             this.dgvMaintenceCompo.TabIndex = 0;
             this.dgvMaintenceCompo.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvMaintenceCompo,
@@ -727,7 +719,7 @@
             this.tpPlans.Caption = "Plans";
             this.tpPlans.Controls.Add(this.dgvPlan);
             this.tpPlans.Name = "tpPlans";
-            this.tpPlans.Size = new System.Drawing.Size(870, 366);
+            this.tpPlans.Size = new System.Drawing.Size(870, 399);
             // 
             // dgvPlan
             // 
@@ -735,7 +727,7 @@
             this.dgvPlan.Location = new System.Drawing.Point(0, 0);
             this.dgvPlan.MainView = this.gvPlan;
             this.dgvPlan.Name = "dgvPlan";
-            this.dgvPlan.Size = new System.Drawing.Size(870, 366);
+            this.dgvPlan.Size = new System.Drawing.Size(870, 399);
             this.dgvPlan.TabIndex = 0;
             this.dgvPlan.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvPlan,
@@ -775,7 +767,7 @@
             this.tpMenorCosto.Caption = "Lower cost per unit";
             this.tpMenorCosto.Controls.Add(this.tableLayoutPanel1);
             this.tpMenorCosto.Name = "tpMenorCosto";
-            this.tpMenorCosto.Size = new System.Drawing.Size(870, 366);
+            this.tpMenorCosto.Size = new System.Drawing.Size(870, 399);
             // 
             // tableLayoutPanel1
             // 
@@ -793,7 +785,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(870, 366);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(870, 399);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // tabPane1
@@ -811,10 +803,10 @@
             this.All,
             this.pageMissingMaterial,
             this.pageEventsViewer});
-            this.tabPane1.RegularSize = new System.Drawing.Size(858, 319);
+            this.tabPane1.RegularSize = new System.Drawing.Size(858, 352);
             this.tabPane1.SelectedPage = this.Version;
-            this.tabPane1.SelectedPageIndex = 2;
-            this.tabPane1.Size = new System.Drawing.Size(858, 319);
+            this.tabPane1.SelectedPageIndex = 0;
+            this.tabPane1.Size = new System.Drawing.Size(858, 352);
             this.tabPane1.TabIndex = 3;
             this.tabPane1.Text = "tabPane1";
             // 
@@ -823,7 +815,7 @@
             this.All.Caption = "All";
             this.All.Controls.Add(this.dgvEstimadoDetail);
             this.All.Name = "All";
-            this.All.Size = new System.Drawing.Size(840, 274);
+            this.All.Size = new System.Drawing.Size(840, 307);
             // 
             // dgvEstimadoDetail
             // 
@@ -831,7 +823,7 @@
             this.dgvEstimadoDetail.Location = new System.Drawing.Point(0, 0);
             this.dgvEstimadoDetail.MainView = this.gvEstimadoDetail;
             this.dgvEstimadoDetail.Name = "dgvEstimadoDetail";
-            this.dgvEstimadoDetail.Size = new System.Drawing.Size(840, 274);
+            this.dgvEstimadoDetail.Size = new System.Drawing.Size(840, 307);
             this.dgvEstimadoDetail.TabIndex = 2;
             this.dgvEstimadoDetail.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvEstimadoDetail});
@@ -900,7 +892,7 @@
             this.Version.Caption = "Group by Version";
             this.Version.Controls.Add(this.dgvEstimado);
             this.Version.Name = "Version";
-            this.Version.Size = new System.Drawing.Size(840, 274);
+            this.Version.Size = new System.Drawing.Size(840, 307);
             // 
             // dgvEstimado
             // 
@@ -908,7 +900,7 @@
             this.dgvEstimado.Location = new System.Drawing.Point(0, 0);
             this.dgvEstimado.MainView = this.gvEstimado;
             this.dgvEstimado.Name = "dgvEstimado";
-            this.dgvEstimado.Size = new System.Drawing.Size(840, 274);
+            this.dgvEstimado.Size = new System.Drawing.Size(840, 307);
             this.dgvEstimado.TabIndex = 1;
             this.dgvEstimado.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvEstimado});
@@ -989,7 +981,7 @@
             this.pageMissingMaterial.Caption = "Missing Material";
             this.pageMissingMaterial.Controls.Add(this.dgvMissing);
             this.pageMissingMaterial.Name = "pageMissingMaterial";
-            this.pageMissingMaterial.Size = new System.Drawing.Size(840, 274);
+            this.pageMissingMaterial.Size = new System.Drawing.Size(840, 307);
             // 
             // dgvMissing
             // 
@@ -997,7 +989,7 @@
             this.dgvMissing.Location = new System.Drawing.Point(0, 0);
             this.dgvMissing.MainView = this.gvMissing;
             this.dgvMissing.Name = "dgvMissing";
-            this.dgvMissing.Size = new System.Drawing.Size(840, 274);
+            this.dgvMissing.Size = new System.Drawing.Size(840, 307);
             this.dgvMissing.TabIndex = 0;
             this.dgvMissing.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvMissing});
@@ -1057,7 +1049,7 @@
             this.pageEventsViewer.Caption = "Events Viewer";
             this.pageEventsViewer.Controls.Add(this.dgvEventViewe);
             this.pageEventsViewer.Name = "pageEventsViewer";
-            this.pageEventsViewer.Size = new System.Drawing.Size(840, 274);
+            this.pageEventsViewer.Size = new System.Drawing.Size(840, 307);
             // 
             // dgvEventViewe
             // 
@@ -1065,7 +1057,7 @@
             this.dgvEventViewe.Location = new System.Drawing.Point(0, 0);
             this.dgvEventViewe.MainView = this.gvEventViewer;
             this.dgvEventViewe.Name = "dgvEventViewe";
-            this.dgvEventViewe.Size = new System.Drawing.Size(840, 274);
+            this.dgvEventViewe.Size = new System.Drawing.Size(840, 307);
             this.dgvEventViewe.TabIndex = 0;
             this.dgvEventViewe.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvEventViewer});
@@ -1085,24 +1077,33 @@
             this.gColDateTime.DisplayFormat.FormatType = DevExpress.Utils.FormatType.DateTime;
             this.gColDateTime.FieldName = "DATE";
             this.gColDateTime.Name = "gColDateTime";
+            this.gColDateTime.OptionsColumn.AllowEdit = false;
+            this.gColDateTime.OptionsColumn.ReadOnly = true;
             this.gColDateTime.Visible = true;
             this.gColDateTime.VisibleIndex = 0;
+            this.gColDateTime.Width = 160;
             // 
             // gColEvent
             // 
             this.gColEvent.Caption = "Event";
             this.gColEvent.FieldName = "EVENT";
             this.gColEvent.Name = "gColEvent";
+            this.gColEvent.OptionsColumn.AllowEdit = false;
+            this.gColEvent.OptionsColumn.ReadOnly = true;
             this.gColEvent.Visible = true;
             this.gColEvent.VisibleIndex = 1;
+            this.gColEvent.Width = 173;
             // 
             // gColDescripcion
             // 
             this.gColDescripcion.Caption = "Description";
             this.gColDescripcion.FieldName = "DESCRIPTION";
             this.gColDescripcion.Name = "gColDescripcion";
+            this.gColDescripcion.OptionsColumn.AllowEdit = false;
+            this.gColDescripcion.OptionsColumn.ReadOnly = true;
             this.gColDescripcion.Visible = true;
             this.gColDescripcion.VisibleIndex = 2;
+            this.gColDescripcion.Width = 489;
             // 
             // tableLayoutPanel2
             // 
@@ -1121,10 +1122,11 @@
             // 
             // label1
             // 
+            this.label1.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Tahoma", 9F);
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(3, 0);
+            this.label1.Location = new System.Drawing.Point(29, 5);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(99, 14);
             this.label1.TabIndex = 0;
@@ -1137,51 +1139,28 @@
             0,
             0,
             0,
-            131072});
+            0});
             this.txtPercent.Location = new System.Drawing.Point(160, 3);
             this.txtPercent.Name = "txtPercent";
+            this.txtPercent.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.txtPercent.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.Default;
+            this.txtPercent.Properties.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
             this.txtPercent.Properties.Mask.BeepOnError = true;
             this.txtPercent.Properties.Mask.EditMask = "p";
-            this.txtPercent.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.Numeric;
-            this.txtPercent.Size = new System.Drawing.Size(55, 20);
+            this.txtPercent.Properties.Mask.UseMaskAsDisplayFormat = true;
+            this.txtPercent.Properties.MaxValue = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.txtPercent.Size = new System.Drawing.Size(91, 20);
             this.txtPercent.TabIndex = 1;
             this.txtPercent.ToolTip = "OEM Percentage";
-            // 
-            // tsBotton
-            // 
-            this.tsBotton.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ProgressBar,
-            this.toolStripSeparator1,
-            this.labelProgress,
-            this.toolStripSeparator2});
-            this.tsBotton.Location = new System.Drawing.Point(5, 675);
-            this.tsBotton.Name = "tsBotton";
-            this.tsBotton.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.tsBotton.Size = new System.Drawing.Size(894, 25);
-            this.tsBotton.TabIndex = 3;
-            this.tsBotton.Text = "toolStrip1";
-            // 
-            // ProgressBar
-            // 
-            this.ProgressBar.Name = "ProgressBar";
-            this.ProgressBar.Size = new System.Drawing.Size(100, 22);
-            this.ProgressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
-            // 
-            // labelProgress
-            // 
-            this.labelProgress.Name = "labelProgress";
-            this.labelProgress.Size = new System.Drawing.Size(86, 22);
-            this.labelProgress.Text = "toolStripLabel1";
-            // 
-            // toolStripSeparator2
-            // 
-            this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
             // MainForm
             // 
@@ -1245,8 +1224,6 @@
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtPercent.Properties)).EndInit();
-            this.tsBotton.ResumeLayout(false);
-            this.tsBotton.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1274,7 +1251,6 @@
         private System.Windows.Forms.TableLayoutPanel TableMainContent;
         private DevExpress.XtraBars.Navigation.TileBarGroup tileBarGroup7;
         private DevExpress.XtraBars.Navigation.TileBarItem tbLoad;
-        private System.Windows.Forms.ToolStrip tsBotton;
         private DevExpress.XtraBars.Navigation.TabPane PanelPrincipal;
         private DevExpress.XtraBars.Navigation.TabNavigationPage tpTypeDevice;
         private DevExpress.XtraGrid.GridControl dgvTypeDevices;
@@ -1315,7 +1291,6 @@
         private DevExpress.XtraBars.Navigation.TileBarItem tbCalculate;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label label1;
-        private DevExpress.XtraEditors.TextEdit txtPercent;
         private DevExpress.XtraGrid.GridControl dgvEstimado;
         private DevExpress.XtraGrid.Views.Grid.GridView gvEstimado;
         private DevExpress.XtraGrid.GridControl dgvEstimadoDetail;
@@ -1323,10 +1298,6 @@
         private DevExpress.XtraBars.Navigation.TabPane tabPane1;
         private DevExpress.XtraBars.Navigation.TabNavigationPage All;
         private DevExpress.XtraBars.Navigation.TabNavigationPage Version;
-        private System.Windows.Forms.ToolStripProgressBar ProgressBar;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripLabel labelProgress;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private DevExpress.XtraGrid.Columns.GridColumn Type;
         private DevExpress.XtraGrid.Columns.GridColumn Model;
         private DevExpress.XtraGrid.Columns.GridColumn sVersion;
@@ -1351,5 +1322,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gColModel;
         private DevExpress.XtraGrid.Columns.GridColumn gColPlan;
         private DevExpress.XtraGrid.Columns.GridColumn gColMissing;
+        private DevExpress.XtraEditors.SpinEdit txtPercent;
     }
 }
