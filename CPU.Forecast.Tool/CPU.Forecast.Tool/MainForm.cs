@@ -14,6 +14,7 @@ using System.ComponentModel;
 using static CPU.Forecast.Tool.Clases;
 using DevExpress.XtraSplashScreen;
 using System.IO;
+using DevExpress.XtraEditors.Repository;
 
 namespace CPU.Forecast.Tool
 {
@@ -37,8 +38,14 @@ namespace CPU.Forecast.Tool
         Clases.Forecast clsTransacc;
         bool Cerrar = false;
 
+        PersistentRepository PersistentRepository1;
+        RepositoryItemLookUpEdit RepModel;
+
         //Lista versiones por plan
         List<VersionPlan> listVersionPlan;
+
+        //se usa para el combo de modelos
+        List<ModelLook> listaModel;
 
         public MainForm()
         {
@@ -59,7 +66,7 @@ namespace CPU.Forecast.Tool
 
         private void toolStripButton1_Click(object sender, System.EventArgs e)
         {
-
+           
         }
 
         private void tileBar1_Click(object sender, System.EventArgs e)
@@ -112,6 +119,47 @@ namespace CPU.Forecast.Tool
             CargarGrid();
 
             clsTransacc.LoadDatosTabla(dtTypeDevices, dtComponents, dtMaximunCost, dtPlan);
+
+            // se inicializa el lookupedit de modelos
+            listaModel = new List<ModelLook>();
+            RepModel = new RepositoryItemLookUpEdit();
+
+            foreach (DataRow item in dtTypeDevices.Rows)
+            {
+                if (item.RowState == DataRowState.Deleted)
+                {
+
+                }
+            }
+
+            listaModel = (from DataRow row in dtTypeDevices.Rows
+
+                                          select new ModelLook
+                                          {
+                                              Type = row[Clases.constantes.TYPE_DEVICE].ToString(),
+                                              Model = row[Clases.constantes.MODEL].ToString(),
+                                              Description = row[Clases.constantes.DESCRIPTION].ToString()
+                                          }
+                                 ).ToList();
+
+            listaModel = listaModel.GroupBy(x => x.Model).Select(h => h.First()).ToList();
+
+            RepModel.DataSource = listaModel;
+            RepModel.ValueMember = "Model";
+            RepModel.DisplayMember = "Model";
+
+            RepModel.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+
+            RepModel.DropDownRows = listaModel.Count();
+
+            RepModel.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.AutoComplete;
+            // Specify the column against which an incremental search is performed in SearchMode.AutoComplete and SearchMode.OnlyInPopup modes
+            RepModel.AutoSearchColumnIndex = 1;
+
+            PersistentRepository1 = new PersistentRepository();
+
+            PersistentRepository1.Items.Add(RepModel);
+
         }
 
         private void tbTypeDevices_ItemClick(object sender, TileItemEventArgs e)
@@ -192,6 +240,7 @@ namespace CPU.Forecast.Tool
                 gvPlan.DeleteRow(gvPlan.FocusedRowHandle);
                 
             }
+            AcceptChanges();
         }
 
         private void btnUpdate_ItemClick(object sender, TileItemEventArgs e)
@@ -293,6 +342,7 @@ namespace CPU.Forecast.Tool
 
             if (bOk)
             {
+                AcceptChanges();
                 bOk = calcularCosto();
             }
 
@@ -304,9 +354,58 @@ namespace CPU.Forecast.Tool
             exportar();
         }
 
+        private void gvMaximun_CustomRowCellEditForEditing(object sender, CustomRowCellEditEventArgs e)
+        {
+            if (e.Column.FieldName == "MODEL")
+            {
+
+                MostrarComboModel(e);
+            }
+        }
+
+
         #endregion Eventos
 
         #region Funciones
+
+
+        private void AcceptChanges()
+        {
+            dtTypeDevices.AcceptChanges();
+            dtMaximunCost.AcceptChanges();
+            dtComponents.AcceptChanges();
+            dtPlan.AcceptChanges();
+        }
+
+        private void MostrarComboModel(CustomRowCellEditEventArgs e)
+        {
+            List<ModelLook> listaModel = (from DataRow row in dtTypeDevices.Rows
+
+                                          select new ModelLook
+                                          {
+                                              Type = row[Clases.constantes.TYPE_DEVICE].ToString(),
+                                              Model = row[Clases.constantes.MODEL].ToString(),
+                                              Description = row[Clases.constantes.DESCRIPTION].ToString()
+                                          }
+                                 ).ToList();
+
+            listaModel = listaModel.GroupBy(x => x.Model).Select(h => h.First()).ToList();
+
+            RepModel.DataSource = listaModel;
+            RepModel.ValueMember = "Model";
+            RepModel.DisplayMember = "Model";
+
+            RepModel.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
+
+            RepModel.DropDownRows = listaModel.Count();
+
+            RepModel.SearchMode = DevExpress.XtraEditors.Controls.SearchMode.AutoComplete;
+            // Specify the column against which an incremental search is performed in SearchMode.AutoComplete and SearchMode.OnlyInPopup modes
+            RepModel.AutoSearchColumnIndex = 1;
+
+
+            e.RepositoryItem = RepModel;
+        }
 
         private void CargarGrid()
         {
@@ -967,22 +1066,30 @@ namespace CPU.Forecast.Tool
                     dtEstimadoDetalle.Merge(convertir.ToDataTable(item.ListaDetalle));
                 }
 
-                dgvEstimadoDetail.DataSource = dtEstimadoDetalle;
+                try
+                {
 
-                dtEstimate.TableName = "ESTIMATED";
-                dtEstimadoDetalle.TableName = "ESTIMATEDDETAILS";
-                dtSet = new DataSet("ESTIMATED");
-                dtSet.Tables.Add(dtEstimate);
-                dtSet.Tables.Add(dtEstimadoDetalle);
 
-                DataRelation dtRelation;
-                DataColumn custCol = dtSet.Tables["ESTIMATED"].Columns["Version"];
-                DataColumn orderCol = dtSet.Tables["ESTIMATEDDETAILS"].Columns["Version"];
-                dtRelation = new DataRelation("Version", custCol, orderCol);
-                dtSet.Tables["ESTIMATEDDETAILS"].ParentRelations.Add(dtRelation);
-               
-                dgvEstimado.DataSource = dtSet.Tables["ESTIMATED"];
+                    dgvEstimadoDetail.DataSource = dtEstimadoDetalle;
 
+                    dtEstimate.TableName = "ESTIMATED";
+                    dtEstimadoDetalle.TableName = "ESTIMATEDDETAILS";
+                    dtSet = new DataSet("ESTIMATED");
+                    dtSet.Tables.Add(dtEstimate);
+                    dtSet.Tables.Add(dtEstimadoDetalle);
+
+                    DataRelation dtRelation;
+                    DataColumn custCol = dtSet.Tables["ESTIMATED"].Columns["Version"];
+                    DataColumn orderCol = dtSet.Tables["ESTIMATEDDETAILS"].Columns["Version"];
+                    dtRelation = new DataRelation("Version", custCol, orderCol);
+                    dtSet.Tables["ESTIMATEDDETAILS"].ParentRelations.Add(dtRelation);
+
+                    dgvEstimado.DataSource = dtSet.Tables["ESTIMATED"];
+                }
+                catch (Exception)
+                {
+                    
+                }
                 tbExport.Enabled = true;
                 
             }
@@ -1052,8 +1159,18 @@ namespace CPU.Forecast.Tool
         }
 
 
+
+
+
         #endregion Funciones
 
-    
+        private void gvPlan_CustomRowCellEditForEditing(object sender, CustomRowCellEditEventArgs e)
+        {
+            if (e.Column.FieldName == "MODEL")
+            {
+
+                MostrarComboModel(e);
+            }
+        }
     }
 }
