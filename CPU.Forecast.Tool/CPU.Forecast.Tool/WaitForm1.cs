@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using DevExpress.XtraWaitForm;
+using DevExpress.LookAndFeel;
 
 namespace CPU.Forecast.Tool
 {
@@ -15,6 +16,7 @@ namespace CPU.Forecast.Tool
         {
             InitializeComponent();
             this.progressPanel1.AutoHeight = true;
+           
         }
 
         #region Overrides
@@ -38,6 +40,21 @@ namespace CPU.Forecast.Tool
 
         public enum WaitFormCommand
         {
+        }
+
+        UserLookAndFeel lookAndFeel;
+        protected override DevExpress.LookAndFeel.UserLookAndFeel TargetLookAndFeel
+        {
+            get
+            {
+                if (lookAndFeel == null)
+                {
+                    lookAndFeel = new UserLookAndFeel(this);
+                    lookAndFeel.UseDefaultLookAndFeel = false;
+                    lookAndFeel.SkinName = "Flat";
+                }
+                return lookAndFeel;
+            }
         }
     }
 }

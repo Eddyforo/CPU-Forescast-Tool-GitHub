@@ -363,6 +363,14 @@ namespace CPU.Forecast.Tool
             }
         }
 
+        private void gvPlan_CustomRowCellEditForEditing(object sender, CustomRowCellEditEventArgs e)
+        {
+            if (e.Column.FieldName == "MODEL")
+            {
+
+                MostrarComboModel(e);
+            }
+        }
 
         #endregion Eventos
 
@@ -394,7 +402,7 @@ namespace CPU.Forecast.Tool
             RepModel.DataSource = listaModel;
             RepModel.ValueMember = "Model";
             RepModel.DisplayMember = "Model";
-
+            RepModel.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
             RepModel.BestFitMode = DevExpress.XtraEditors.Controls.BestFitMode.BestFitResizePopup;
 
             RepModel.DropDownRows = listaModel.Count();
@@ -768,7 +776,8 @@ namespace CPU.Forecast.Tool
                                         //Resta el componente que acaba de agregar a la lista de componentes padre
                                         listaComponents.Where(w => w.SPartCode == lCompoPerParts[i].SPartCode).ToList()
                                                     .ForEach(k => k.NStock -= nContEstimada);
-                                        
+
+                                        bNoHaySufComponentes = false;
                                         //En el caso que ya cantidad estimada sea igual que la necesaria, ya no hay que calcular nada y se sale.
                                         break;
                                     }
@@ -808,6 +817,8 @@ namespace CPU.Forecast.Tool
                                                     .ForEach(k => k.NStock -= detalle.iCant);
                                     }
 
+                                    bNoHaySufComponentes = false;
+
                                     bEstimaCompParcial = false;
                                 }
                                 else if (bEstimaCompParcial)
@@ -823,7 +834,7 @@ namespace CPU.Forecast.Tool
 
                                 dtEventViewer.Rows.Add(DateTime.Now, "Component doesn't exist", "The component " + lPartPerModel.Part + " doesn't exist Component doesn't exist or has too few to estimate the plan.");
                                 //hacer si no existe el componente en el stock
-                                break;  
+                               // break;  
                             }
                         }// fin del foreach de las parts que ocupa por modelo
 
@@ -1094,9 +1105,9 @@ namespace CPU.Forecast.Tool
 
                     dgvEstimado.DataSource = dtSet.Tables["ESTIMATED"];
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    
+                    dgvEstimado.DataSource = dtEstimate;
                 }
                 tbExport.Enabled = true;
                 
@@ -1172,13 +1183,6 @@ namespace CPU.Forecast.Tool
 
         #endregion Funciones
 
-        private void gvPlan_CustomRowCellEditForEditing(object sender, CustomRowCellEditEventArgs e)
-        {
-            if (e.Column.FieldName == "MODEL")
-            {
-
-                MostrarComboModel(e);
-            }
-        }
+       
     }
 }

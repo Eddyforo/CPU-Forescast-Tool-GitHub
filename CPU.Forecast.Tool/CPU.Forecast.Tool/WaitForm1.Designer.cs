@@ -43,14 +43,18 @@
             this.progressPanel1.AppearanceCaption.Options.UseFont = true;
             this.progressPanel1.AppearanceDescription.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F);
             this.progressPanel1.AppearanceDescription.Options.UseFont = true;
+            this.progressPanel1.AutoHeight = true;
+            this.progressPanel1.AutoWidth = true;
             this.progressPanel1.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.progressPanel1.Description = "We are working...";
             this.progressPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.progressPanel1.ImageHorzOffset = 20;
-            this.progressPanel1.Location = new System.Drawing.Point(0, 7);
-            this.progressPanel1.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
+            this.progressPanel1.Location = new System.Drawing.Point(0, 4);
+            this.progressPanel1.LookAndFeel.Style = DevExpress.LookAndFeel.LookAndFeelStyle.UltraFlat;
+            this.progressPanel1.LookAndFeel.UseDefaultLookAndFeel = false;
+            this.progressPanel1.Margin = new System.Windows.Forms.Padding(0);
             this.progressPanel1.Name = "progressPanel1";
-            this.progressPanel1.Size = new System.Drawing.Size(203, 72);
+            this.progressPanel1.Size = new System.Drawing.Size(193, 86);
             this.progressPanel1.TabIndex = 0;
             this.progressPanel1.Text = "progressPanel1";
             this.progressPanel1.WaitAnimationType = DevExpress.Utils.Animation.WaitingAnimatorType.Line;
@@ -71,16 +75,16 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 58F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(203, 144);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(193, 152);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Image = global::CPU.Forecast.Tool.Properties.Resources.IngramTrasparente;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 85);
+            this.pictureBox1.Location = new System.Drawing.Point(3, 93);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(197, 52);
+            this.pictureBox1.Size = new System.Drawing.Size(187, 52);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
@@ -90,7 +94,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(203, 144);
+            this.BackColor = System.Drawing.SystemColors.Control;
+            this.ClientSize = new System.Drawing.Size(193, 152);
             this.Controls.Add(this.tableLayoutPanel1);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.SystemColors.Control;

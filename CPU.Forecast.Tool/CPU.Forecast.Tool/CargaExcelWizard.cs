@@ -294,23 +294,38 @@ namespace CPU.Forecast.Tool
                 dtCargarExcel.Columns[ListaAsociacion[i].NombreCargador].SetOrdinal(ListaAsociacion[i].Ordinal);
             }
 
+
+            if (dtCargarExcel.Rows.Count > 0)
+            {
+                if (Clases.EnumTablas.TYPE_DEVICES == Clases.sTablasLoad)
+                {
+                    MainForm.dtTypeDevices.Rows.Clear();
+                }
+                if (Clases.EnumTablas.COMPONENTS == Clases.sTablasLoad)
+                {
+                    MainForm.dtComponents.Rows.Clear();
+                }
+            }
+
             foreach (DataRow item in dtCargarExcel.Rows)
             {
-                
+
 
                 try
                 {
                     if (Clases.EnumTablas.TYPE_DEVICES == Clases.sTablasLoad)
                     {
+
                         string type = item[Clases.constantes.TYPE_DEVICE].ToString();
                         string description = item[Clases.constantes.DESCRIPTION].ToString();
                         string part = item[Clases.constantes.PART].ToString();
-                        int quantity = Convert.ToInt16( item[Clases.constantes.QUANTITY]);
+                        int quantity = Convert.ToInt16(item[Clases.constantes.QUANTITY]);
                         string model = item[Clases.constantes.MODEL].ToString();
                         MainForm.dtTypeDevices.Rows.Add(type, description, model, part, quantity);
                     }
                     else if (Clases.EnumTablas.COMPONENTS == Clases.sTablasLoad)
                     {
+
                         string partCode = item[Clases.constantes.PART_CODE].ToString();
                         string description = item[Clases.constantes.DESCRIPTION].ToString();
                         decimal cost = Convert.ToDecimal(item[Clases.constantes.COST]);
