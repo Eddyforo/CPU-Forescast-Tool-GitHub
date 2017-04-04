@@ -240,7 +240,7 @@ namespace CPU.Forecast.Tool
                 gvPlan.DeleteRow(gvPlan.FocusedRowHandle);
                 
             }
-            AcceptChanges();
+           // AcceptChanges();
         }
 
         private void btnUpdate_ItemClick(object sender, TileItemEventArgs e)
@@ -926,6 +926,8 @@ namespace CPU.Forecast.Tool
                                                 //se suma la cantidad que falta para llegar al porcentaje de OEM
                                                 nCantidadfaltaOEM += nContEstimada;
                                                 nCantTotalPartOEM += nContEstimada;
+
+                                                bNoHaySufComponentes = false;
                                                 //En el caso que ya cantidad estimada sea igual que la necesaria, ya no hay que calcular nada y se sale.
                                                 break;
                                             }
@@ -947,6 +949,7 @@ namespace CPU.Forecast.Tool
 
                                                 //se comienza a estimar componentes parciales por que no hay en el stock
                                                 bEstimaCompParcial = true;
+                                                
 
                                             }
                                         }
@@ -972,6 +975,7 @@ namespace CPU.Forecast.Tool
                                                 //se Suma la cantidad que falta para llegar al porcentaje de OEM
                                                 nCantidadfaltaOEM += nContEstimada;
                                             }
+                                            bNoHaySufComponentes = false;
 
                                             bEstimaCompParcial = false;
                                         }
@@ -985,11 +989,11 @@ namespace CPU.Forecast.Tool
                                     else
                                     {
                                         bNoHaySufComponentes = true;
-                                        dtEventViewer.Rows.Add(DateTime.Now, "OEM Percent", "There isn't enough components in order to reach la OEM percent");
+                                        dtEventViewer.Rows.Add(DateTime.Now, "OEM Percent Part", "There isn't enough components" + sMainTypeDevice.Part + " in order to reach la OEM percent");
 
                                         unaVersionPlan.ListaDetalle.Add(item);
                                         //hacer si no existe el componente en el stock
-                                        break;
+                                       // break;
                                     }
 
                                     #endregion
@@ -1002,7 +1006,11 @@ namespace CPU.Forecast.Tool
                                 }
 
                             }// fin del recorrido lVersionDetalleR
+                            if (nCantidadfaltaOEM < 0)
+                            {
+                                dtEventViewer.Rows.Add(DateTime.Now, "OEM Percent", "There isn't enough components in order to reach la OEM percent");
 
+                            }
 
                         } //if para saber si cumplimos con el OEM
 

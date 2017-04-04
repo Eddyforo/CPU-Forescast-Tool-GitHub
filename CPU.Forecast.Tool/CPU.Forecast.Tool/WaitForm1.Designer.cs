@@ -50,7 +50,7 @@
             this.progressPanel1.Location = new System.Drawing.Point(0, 7);
             this.progressPanel1.Margin = new System.Windows.Forms.Padding(0, 3, 0, 3);
             this.progressPanel1.Name = "progressPanel1";
-            this.progressPanel1.Size = new System.Drawing.Size(203, 55);
+            this.progressPanel1.Size = new System.Drawing.Size(203, 72);
             this.progressPanel1.TabIndex = 0;
             this.progressPanel1.Text = "progressPanel1";
             this.progressPanel1.WaitAnimationType = DevExpress.Utils.Animation.WaitingAnimatorType.Line;
@@ -71,14 +71,14 @@
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 58F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(203, 127);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(203, 144);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pictureBox1.Image = global::CPU.Forecast.Tool.Properties.Resources.IngramTrasparente;
-            this.pictureBox1.Location = new System.Drawing.Point(3, 68);
+            this.pictureBox1.Location = new System.Drawing.Point(3, 85);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(197, 52);
             this.pictureBox1.TabIndex = 1;
@@ -90,9 +90,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.ClientSize = new System.Drawing.Size(203, 127);
+            this.ClientSize = new System.Drawing.Size(203, 144);
             this.Controls.Add(this.tableLayoutPanel1);
             this.DoubleBuffered = true;
+            this.ForeColor = System.Drawing.SystemColors.Control;
+            this.InactiveGlowColor = System.Drawing.Color.Transparent;
             this.Name = "WaitForm1";
             this.Text = "Form1";
             this.tableLayoutPanel1.ResumeLayout(false);
