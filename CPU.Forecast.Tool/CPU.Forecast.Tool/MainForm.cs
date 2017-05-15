@@ -124,13 +124,13 @@ namespace CPU.Forecast.Tool
             listaModel = new List<ModelLook>();
             RepModel = new RepositoryItemLookUpEdit();
 
-            foreach (DataRow item in dtTypeDevices.Rows)
-            {
-                if (item.RowState == DataRowState.Deleted)
-                {
+            //foreach (DataRow item in dtTypeDevices.Rows)
+            //{
+            //    if (item.RowState == DataRowState.Deleted)
+            //    {
 
-                }
-            }
+            //    }
+            //}
 
             listaModel = (from DataRow row in dtTypeDevices.Rows
 
@@ -1087,7 +1087,16 @@ namespace CPU.Forecast.Tool
 
                 try
                 {
+                    List<COGModel> listCOGModel = new List<COGModel>();
 
+                    listCOGModel = listVersionPlan.GroupBy(l => l.Model).Select(cl => new COGModel {
+                        Model = cl.First().Model,
+                        COG = cl.Sum( z => z.TotalCOG)
+                    }).ToList();
+
+                    //llemos el grid de cog por modelos
+                    DataTable dtCOG = convertir.ToDataTable(listCOGModel);
+                    dgvCOG.DataSource = dtCOG;
 
                     dgvEstimadoDetail.DataSource = dtEstimadoDetalle;
 
@@ -1104,6 +1113,8 @@ namespace CPU.Forecast.Tool
                     dtSet.Tables["ESTIMATEDDETAILS"].ParentRelations.Add(dtRelation);
 
                     dgvEstimado.DataSource = dtSet.Tables["ESTIMATED"];
+
+
                 }
                 catch (Exception ex)
                 {

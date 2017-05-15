@@ -425,8 +425,18 @@ namespace CPU.Forecast.Tool
             public int iCant;
             public decimal dCosto;
         }
-        
-       
+
+        /// <summary>
+        /// Para cargar el cog por modelo
+        /// </summary>
+        public class COGModel
+        {
+            private string sModel;
+            private decimal nCOG;
+
+            public string Model { get => sModel; set => sModel = value; }
+            public decimal COG { get => nCOG; set => nCOG = value; }
+        }
 
         public class Forecast
         {
