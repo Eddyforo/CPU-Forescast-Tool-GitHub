@@ -1091,7 +1091,8 @@ namespace CPU.Forecast.Tool
 
                     listCOGModel = listVersionPlan.GroupBy(l => l.Model).Select(cl => new COGModel {
                         Model = cl.First().Model,
-                        COG = cl.Sum( z => z.TotalCOG)
+                        COG = cl.Sum( z => z.TotalCOG / z.PlanAmount),
+                        Cantidad = cl.Sum( d => d.PlanAmount)
                     }).ToList();
 
                     //llemos el grid de cog por modelos

@@ -39,7 +39,6 @@ D:\Fonseca\Documentacion de Proyectos y casos\CPU-Forecast-Tool-github\CPU.Forec
 D:\Fonseca\Documentacion de Proyectos y casos\CPU-Forecast-Tool-github\CPU.Forecast.Tool\CPU.Forecast.Tool\Binarios\x86\es\DevExpress.Pdf.v15.2.Core.resources.dll
 D:\Fonseca\Documentacion de Proyectos y casos\CPU-Forecast-Tool-github\CPU.Forecast.Tool\CPU.Forecast.Tool\Binarios\x86\ja\DevExpress.Pdf.v15.2.Core.resources.dll
 D:\Fonseca\Documentacion de Proyectos y casos\CPU-Forecast-Tool-github\CPU.Forecast.Tool\CPU.Forecast.Tool\Binarios\x86\ru\DevExpress.Pdf.v15.2.Core.resources.dll
-D:\Fonseca\Documentacion de Proyectos y casos\CPU-Forecast-Tool-github\CPU.Forecast.Tool\CPU.Forecast.Tool\obj\x86\Debug\CPU.Forecast.Tool.csprojResolveAssemblyReference.cache
 D:\Fonseca\Documentacion de Proyectos y casos\CPU-Forecast-Tool-github\CPU.Forecast.Tool\CPU.Forecast.Tool\obj\x86\Debug\CPU.Forecast.Tool.CargaExcelWizard.resources
 D:\Fonseca\Documentacion de Proyectos y casos\CPU-Forecast-Tool-github\CPU.Forecast.Tool\CPU.Forecast.Tool\obj\x86\Debug\CPU.Forecast.Tool.MainForm.resources
 D:\Fonseca\Documentacion de Proyectos y casos\CPU-Forecast-Tool-github\CPU.Forecast.Tool\CPU.Forecast.Tool\obj\x86\Debug\CPU.Forecast.Tool.Properties.Resources.resources
@@ -49,3 +48,4 @@ D:\Fonseca\Documentacion de Proyectos y casos\CPU-Forecast-Tool-github\CPU.Forec
 D:\Fonseca\Documentacion de Proyectos y casos\CPU-Forecast-Tool-github\CPU.Forecast.Tool\CPU.Forecast.Tool\obj\x86\Debug\CPU.Forecast.Tool.exe.licenses
 D:\Fonseca\Documentacion de Proyectos y casos\CPU-Forecast-Tool-github\CPU.Forecast.Tool\CPU.Forecast.Tool\obj\x86\Debug\CPU.Forecast.Tool.exe
 D:\Fonseca\Documentacion de Proyectos y casos\CPU-Forecast-Tool-github\CPU.Forecast.Tool\CPU.Forecast.Tool\obj\x86\Debug\CPU.Forecast.Tool.pdb
+D:\Fonseca\Documentacion de Proyectos y casos\CPU-Forecast-Tool-github\CPU.Forecast.Tool\CPU.Forecast.Tool\obj\x86\Debug\CPU.Forecast.Tool.csprojResolveAssemblyReference.cache

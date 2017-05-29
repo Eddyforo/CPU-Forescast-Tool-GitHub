@@ -433,9 +433,11 @@ namespace CPU.Forecast.Tool
         {
             private string sModel;
             private decimal nCOG;
+            private decimal nCantidad;
 
             public string Model { get => sModel; set => sModel = value; }
             public decimal COG { get => nCOG; set => nCOG = value; }
+            public decimal Cantidad { get => nCantidad; set => nCantidad = value; }
         }
 
         public class Forecast
