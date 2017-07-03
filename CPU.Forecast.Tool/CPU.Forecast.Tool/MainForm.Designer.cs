@@ -142,6 +142,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtPercent = new DevExpress.XtraEditors.SpinEdit();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.colOEM = new DevExpress.XtraGrid.Columns.GridColumn();
             this.TableMainContent.SuspendLayout();
             this.tsTopMain.SuspendLayout();
             this.PanelPrincipal.SuspendLayout();
@@ -506,7 +507,7 @@
             this.tpMenorCosto});
             this.PanelPrincipal.RegularSize = new System.Drawing.Size(888, 411);
             this.PanelPrincipal.SelectedPage = this.tpPlans;
-            this.PanelPrincipal.SelectedPageIndex = 4;
+            this.PanelPrincipal.SelectedPageIndex = 3;
             this.PanelPrincipal.Size = new System.Drawing.Size(888, 411);
             this.PanelPrincipal.TabIndex = 1;
             this.PanelPrincipal.Text = "tabPane1";
@@ -770,7 +771,8 @@
             // 
             this.gvPlan.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.colModelPlan,
-            this.colPlan});
+            this.colPlan,
+            this.colOEM});
             this.gvPlan.GridControl = this.dgvPlan;
             this.gvPlan.Name = "gvPlan";
             this.gvPlan.CustomRowCellEditForEditing += new DevExpress.XtraGrid.Views.Grid.CustomRowCellEditEventHandler(this.gvPlan_CustomRowCellEditForEditing);
@@ -1249,6 +1251,14 @@
             this.txtPercent.TabIndex = 1;
             this.txtPercent.ToolTip = "OEM Percentage";
             // 
+            // colOEM
+            // 
+            this.colOEM.Caption = "colOEM";
+            this.colOEM.FieldName = "OEM";
+            this.colOEM.Name = "colOEM";
+            this.colOEM.Visible = true;
+            this.colOEM.VisibleIndex = 2;
+            // 
             // MainForm
             // 
             this.ActiveGlowColor = System.Drawing.Color.White;
@@ -1421,5 +1431,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn colModelCOG;
         private DevExpress.XtraGrid.Columns.GridColumn colCOGM;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private DevExpress.XtraGrid.Columns.GridColumn colOEM;
     }
 }

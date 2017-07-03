@@ -183,6 +183,7 @@ namespace CPU.Forecast.Tool
         {
             private string sModel;
             private int nPlan;
+            private decimal nOEM;
 
 
             public string SModel
@@ -210,6 +211,8 @@ namespace CPU.Forecast.Tool
                     nPlan = value;
                 }
             }
+
+            public decimal NOEM { get => nOEM; set => nOEM = value; }
         }
 
         public class DetalleVersionPlan
@@ -635,7 +638,7 @@ namespace CPU.Forecast.Tool
                     dtPlan.Clear();
                     using (var cmd = DataConnect.Conn.CreateCommand())
                     {
-                        cmd.CommandText = " SELECT MODEL, PLANS FROM PLANS ";
+                        cmd.CommandText = " SELECT MODEL, PLANS, OEM FROM PLANS ";
                         //cmd.ExecuteNonQuery();
 
                         SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -767,6 +770,7 @@ namespace CPU.Forecast.Tool
 
             public const string PLANS = "PLANS";
             public const string MAX_COST = "MAX_COST";
+            public const string OEM = "OEM";
 
 
         }

@@ -498,6 +498,7 @@ namespace CPU.Forecast.Tool
 
             dtPlan.Columns.Add(new DataColumn("MODEL", typeof(string)));
             dtPlan.Columns.Add(new DataColumn("PLANS", typeof(Int32)));
+            dtPlan.Columns.Add(new DataColumn("OEM", typeof(Decimal)));
 
             return dtPlan;
         }
@@ -633,7 +634,8 @@ namespace CPU.Forecast.Tool
                                select new Clases.Plan
                                {
                                    SModel = row[Clases.constantes.MODEL].ToString(),
-                                   NPlan = (int)row[Clases.constantes.PLANS]
+                                   NPlan = (int)row[Clases.constantes.PLANS],
+                                   NOEM = (decimal)row[Clases.constantes.OEM]
                                }).ToList();
 
 
