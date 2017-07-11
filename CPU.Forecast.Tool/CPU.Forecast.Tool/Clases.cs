@@ -301,6 +301,10 @@ namespace CPU.Forecast.Tool
             private int nCantidadPlan;
             private decimal nCOG;
             private decimal nTotalCOG;
+            /// <summary>
+            /// Es la cantidad que se necesita del plan
+            /// </summary>
+            public decimal nTotalPlan;
             private List<DetalleVersionPlan> listaDetalle;
 
             public VersionPlan(int nPrmVersion)

@@ -585,7 +585,7 @@ namespace CPU.Forecast.Tool
             bool bVersionNueva = false;
 
             ///
-            decimal nPercent = Convert.ToDecimal( txtPercent.EditValue);
+            decimal nPercent = 0;// Convert.ToDecimal( txtPercent.EditValue);
             decimal nCantTotalPart = 0;
             decimal nCantPartPorPorcen = 0; // la cantidad de partes necesarias para cumplir con el porcentaje definido
             int nVersion = 0;
@@ -737,8 +737,8 @@ namespace CPU.Forecast.Tool
                         nCantTotalPart = (from Clases.TypeDevices i in lTypePerModel
                                           select i.Quantity).Sum();
 
-                        //Es la cantidad que tenemos  que cumplir de componentes 
-                        nCantPartPorPorcen = nCantTotalPart * nPercent;
+                        //Es la cantidad que tenemos  que cumplir de componentes OEM por modelo
+                        nCantPartPorPorcen = nCantTotalPart * lPlanActual.NOEM;
 
                         nCantPartPorPorcen = nCantPartPorPorcen == 0 ? 1 : nCantPartPorPorcen;
 
@@ -773,6 +773,7 @@ namespace CPU.Forecast.Tool
                                         //Se agrega el componente al detalle de la version
                                         unaVersionPlan.Model = lPartPerModel.Model;
                                         unaVersionPlan.Type = lPartPerModel.Type_devices;
+                                        unaVersionPlan.nTotalPlan = lPlanActual.NPlan;
                                         unaVersionPlan.addDetalle(lCompoPerParts[i].SPartCode, nContEstimada, lCompoPerParts[i].NCost);
                                          
                                         //Resta el componente que acaba de agregar a la lista de componentes padre
@@ -926,6 +927,7 @@ namespace CPU.Forecast.Tool
                                                 //Se agrega el componente al detalle de la version
                                                 unaVersionPlan.Model = sMainTypeDevice.Model;
                                                 unaVersionPlan.Type =  sMainTypeDevice.Type_devices;
+                                                unaVersionPlan.nTotalPlan = lPlanActual.NPlan;
                                                 unaVersionPlan.addDetalle(lCompoPerParts[i].SPartCode, nContEstimada, lCompoPerParts[i].NCost);
 
                                                 //primero sumamos el componente que estamos sustituyendo
@@ -975,6 +977,7 @@ namespace CPU.Forecast.Tool
                                                 unaVersionPlan.Model = sMainTypeDevice.Model;
                                                 unaVersionPlan.Type = sMainTypeDevice.Type_devices;
                                                 unaVersionPlan.addDetalle(detalle.sParte, detalle.iCant, detalle.dCosto);
+                                                unaVersionPlan.nTotalPlan = lPlanActual.NPlan;
 
                                                 //primero sumamos el componente que estamos sustituyendo
                                                 listaComponents.Where(w => w.SPartCode == item.Part).ToList()
@@ -1094,7 +1097,7 @@ namespace CPU.Forecast.Tool
                     listCOGModel = listVersionPlan.GroupBy(l => l.Model).Select(cl => new COGModel {
                         Model = cl.First().Model,
                         COG = cl.Sum( z => z.TotalCOG / z.PlanAmount),
-                        Cantidad = cl.Sum( d => d.PlanAmount)
+                        Cantidad = cl.First().nTotalPlan
                     }).ToList();
 
                     //llemos el grid de cog por modelos
