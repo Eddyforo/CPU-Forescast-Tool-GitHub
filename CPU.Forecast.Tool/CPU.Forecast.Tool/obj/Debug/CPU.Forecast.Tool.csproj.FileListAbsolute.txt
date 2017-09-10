@@ -90,3 +90,4 @@ D:\Fonseca\Documentacion de Proyectos y casos\CPU-Forecast-Tool-github\CPU.Forec
 D:\Fonseca\Documentacion de Proyectos y casos\CPU-Forecast-Tool-github\CPU.Forecast.Tool\CPU.Forecast.Tool\Binarios\AnyCPU\ja\DevExpress.Pdf.v15.2.Core.resources.dll
 D:\Fonseca\Documentacion de Proyectos y casos\CPU-Forecast-Tool-github\CPU.Forecast.Tool\CPU.Forecast.Tool\Binarios\AnyCPU\ru\DevExpress.Pdf.v15.2.Core.resources.dll
 D:\Fonseca\Documentacion de Proyectos y casos\CPU-Forecast-Tool-github\CPU.Forecast.Tool\CPU.Forecast.Tool\obj\Debug\CPU.Forecast.Tool.csprojResolveAssemblyReference.cache
+D:\Fonseca\Documentacion de Proyectos y casos\CPU-Forecast-Tool-github\CPU.Forecast.Tool\CPU.Forecast.Tool\obj\Debug\CPU.Forecast.Tool.csproj.CoreCompileInputs.cache

@@ -486,7 +486,7 @@ namespace CPU.Forecast.Tool
             dtComponents.Columns.Add(new DataColumn("COST", typeof(decimal)));
             dtComponents.Columns.Add(new DataColumn("STOCK", typeof(Int32)));
 
-            dtComponents.Columns["PART_CODE"].Unique = true;
+           // dtComponents.Columns["PART_CODE"].Unique = true;
 
             return dtComponents;
         }
@@ -1005,7 +1005,7 @@ namespace CPU.Forecast.Tool
                                     else
                                     {
                                         bNoHaySufComponentes = true;
-                                        dtEventViewer.Rows.Add(DateTime.Now, "OEM Percent Part", "There isn't enough components" + sMainTypeDevice.Part + " in order to reach la OEM percent");
+                                        dtEventViewer.Rows.Add(DateTime.Now, "OEM Percent Part", "There isn't enough components " + sMainTypeDevice.Part + " in order to reach the OEM percent");
 
                                         unaVersionPlan.ListaDetalle.Add(item);
                                         //hacer si no existe el componente en el stock

@@ -319,19 +319,31 @@ namespace CPU.Forecast.Tool
                         string type = item[Clases.constantes.TYPE_DEVICE].ToString();
                         string description = item[Clases.constantes.DESCRIPTION].ToString();
                         string part = item[Clases.constantes.PART].ToString();
-                        int quantity = Convert.ToInt16(item[Clases.constantes.QUANTITY]);
+                        int quantity = 0;
+                        int.TryParse(item[Clases.constantes.QUANTITY].ToString(), out quantity);
+                        
+                        
                         string model = item[Clases.constantes.MODEL].ToString();
-                        MainForm.dtTypeDevices.Rows.Add(type, description, model, part, quantity);
+                        if (!string.IsNullOrWhiteSpace(type) && !string.IsNullOrWhiteSpace(description) && !string.IsNullOrWhiteSpace(model) && !string.IsNullOrWhiteSpace(part) && quantity !=0)
+                        {
+                            MainForm.dtTypeDevices.Rows.Add(type, description, model, part, quantity);
+                        }
+                       
                     }
                     else if (Clases.EnumTablas.COMPONENTS == Clases.sTablasLoad)
                     {
 
                         string partCode = item[Clases.constantes.PART_CODE].ToString();
                         string description = item[Clases.constantes.DESCRIPTION].ToString();
-                        decimal cost = Convert.ToDecimal(item[Clases.constantes.COST]);
+                        decimal cost=0;
+                        decimal.TryParse(item[Clases.constantes.COST].ToString(), out cost);
                         string stock = item[Clases.constantes.STOCK].ToString();
 
-                        MainForm.dtComponents.Rows.Add(partCode, description, cost, stock);
+                        if (!string.IsNullOrWhiteSpace(partCode) && !string.IsNullOrWhiteSpace(description) && !string.IsNullOrWhiteSpace(stock)  && cost != 0)
+                        {
+                            MainForm.dtComponents.Rows.Add(partCode, description, cost, stock);
+                        }
+                        
                     }
                 }
                 catch (ConstraintException ee)
@@ -340,7 +352,7 @@ namespace CPU.Forecast.Tool
                 }
                 catch (Exception ex)
                 {
-                    Error.addMensaje("Error loading data", ex.Message, true);
+                    Error.addMensaje(ex.Message, "Error loading data" , true);
                 }
 
             }
